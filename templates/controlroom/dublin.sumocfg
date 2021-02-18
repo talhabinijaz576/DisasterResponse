@@ -1,0 +1,12 @@
+<configuration>
+
+<input>
+<net-file value="dublin.net.xml"/>
+<route-files value="dublin.rou.xml"/>
+</input>
+<time>
+<begin value="0"/>
+<end vaue="2000"/>
+</time>
+
+</configuration>

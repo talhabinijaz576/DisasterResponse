@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="AnimatedMarker.js"></script>
+<script src="leaflet-routing-machine.js"></script>
+<style>
+#mapid { height: 580px; }
+</style>
+<style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="disaster-data">
+<table style="width:100%">
+<tr>
+<td>
+<style type="text/css">
+    option.red {background-color: #ff0000; font-weight: bold; font-size: 12px;}
+	option.blue {background-color: #0000ff; font-weight: bold; font-size: 12px;}
+	option.grey {background-color: #808080; font-weight: bold; font-size: 12px;}
+	option.skyblue {background-color: #87ceeb; font-weight: bold; font-size: 12px;}
+    
+    </style>
+
+    <select name=disaster-type id="disaster-type">
+	<option >Select </option>
+    <option class="red" value="Fire" >Fire </option>
+    <option class="blue" value="Floods">Floods</option>
+	<option class="grey" value="Earthquakes">Earthquakes</option>
+	<option class="skyblue" value="Tsunamis">Tsunamis</option>
+    </select>
+</td>
+<td>
+<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+<p>Value: <span id="demo"></span></p>
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script>
+</td>
+</tr>
+</table>
+</div>
+<div id="mapid"></div>
+<script>
+var southWest = L.latLng(53.335117, -6.311886),
+    northEast = L.latLng(53.364321, -6.182281),
+	bounds = L.latLngBounds(southWest, northEast);
+var mymap = L.map('mapid',{maxBounds: bounds,   // Then add it here..
+    maxZoom: 19,
+    minZoom: 14}).setView([53.3498, -6.2603], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+      }).addTo(mymap);
+
+var southWest = L.latLng(53.335117, -6.311886),
+    northEast = L.latLng(53.364321, -6.182281),
+	bounds = L.latLngBounds(southWest, northEast);
+
+//mymap.setMaxBounds(bounds);
+
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [40, 20],
+        shadowSize:   [0, 0],
+        iconAnchor:   [0, 0],
+        shadowAnchor: [0, 0],
+        popupAnchor:  [-3, -76]
+    }
+});
+
+var greenIcon = new LeafIcon({iconUrl: 'car2.jpg'});
+var earthquake = new LeafIcon({iconUrl: 'earthquake.jpg'});
+var fire = new LeafIcon({iconUrl: 'fire.png'});
+var flood = new LeafIcon({iconUrl: 'flood.png'});
+var tsunami = new LeafIcon({iconUrl: 'tsunami.jpg'});
+L.icon = function (options) {
+    return new L.Icon(options);
+};
+
+L.marker([53.3498, -6.2603], {icon: greenIcon}).addTo(mymap).bindPopup("I am a green leaf.");
+
+mymap.on("click", function(e){
+var markericon = greenIcon;
+if(document.getElementById("disaster-type").value == "Fire")
+markericon = fire;
+if(document.getElementById("disaster-type").value == "Floods")
+markericon = flood;
+if(document.getElementById("disaster-type").value == "Earthquakes")
+markericon = earthquake;
+if(document.getElementById("disaster-type").value == "Tsunamis")
+markericon = tsunami;
+        var mp = new L.Marker([e.latlng.lat, e.latlng.lng], {icon: markericon}).addTo(mymap);
+        alert(mp.getLatLng());
+ });
+
+var line = L.polyline([[53.3598, -6.2303],[53.3798, -6.2203],[53.3998, -6.2103]]);
+var animatedMarker = L.animatedMarker(line.getLatLngs());
+
+mymap.addLayer(animatedMarker);
+
+L.Routing.Plan({
+    waypoints: [
+        L.latLng(53.3598, -6.2303),
+        L.latLng(53.3998, -6.2103)
+    ]
+}).addTo(mymap);
+
+</script>
+</body>
+</html>

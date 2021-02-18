@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from pprint import pprint
 from django.utils import timezone
+from helperClasses.simulationClass.getVehicles import Routes
+import logging,json
 
 def getDefaultContext(request):
     context = {}
@@ -33,4 +35,28 @@ def ControlRoomHomeView(request):
 
 
     response = render(request, template_name = html_template, context=context)
+    return response
+
+logger = logging.getLogger(__name__)
+routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+route = Routes(routesPath)
+
+@login_required(login_url="/accounts/login/")
+def StartSimulation(request):
+    html_template = "controlroom/controlroom.html"
+    context = getDefaultContext(request)
+
+    if (request.GET):
+        pprint(request.GET)
+        if("startSimulation" in request.GET):
+            logger.info('got the vehicle request')
+            vehicleInfo = route.getVehicleInformation()
+            returnList = []
+            for i in vehicleInfo:
+                returnList.append(vehicleInfo[i].toJson())
+            response = json.dumps({"status":"ok","routes":returnList})
+            pprint('inside get')
+            return HttpResponse(response, content_type="application/json")
+        # GET LOGIC GOES HERE
+    response = render(request, template_name=html_template, context=context)
     return response
