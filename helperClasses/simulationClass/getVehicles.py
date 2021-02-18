@@ -1,10 +1,13 @@
 from helperClasses.simulationClass.vehicle import Vehicle
+from helperClasses.simulationClass.getRoadsInformation import RoadInformation
 import pandas as pd
+from geopy.geocoders import Nominatim
+
 class Routes:
     def __init__(self,routes=None):
         self.routes = {}
         if routes is None:
-            pass
+            self.restart = 0
         else:
             dataFrameObj = pd.read_csv(routes,sep=',')
             #dataFrameObj['routeId'] = dataFrameObj['shape_id'].str.split('.',expand=True)[0]
@@ -18,10 +21,13 @@ class Routes:
                 if routeID not in self.routes:
                     self.routes[routeID] = []
                 self.routes[routeID].append([lat,long])
+            self.restart = len(self.routes[routeID])
             pass
         self.vehicles = {}
         self.idx = 0 # index of start array
-        self.restart = len(self.routes[routeID])
+        self.roadInformation = RoadInformation()
+        self.roadInformation.extractHashMap()
+        self._geolocator = Nominatim(user_agent="geoapiExercises")
     def getVehicleInformation(self):
         for routeKey in self.routes:
             locationToUse = self.routes[routeKey][self.idx]
@@ -38,7 +44,41 @@ class Routes:
     def getRoutes(self):
         return self.routes
 
+    def getStreetCongestion(self):
+        """
+        get the street name congestion
+        to get it first call
+        getVehicleInformation()
+        then call getStreetCongestion()
+        """
+        roadDensity = {}
+        for routeKey in self.vehicles:
+            vehicleObj = self.vehicles[routeKey]
+            currentLocation = vehicleObj.getLocation()
+            positionToQry = "{},{}".format(currentLocation[0],currentLocation[1])
+            location = self._geolocator.reverse(positionToQry)
+            if 'road' in location.raw['address']:
+                roadName = location.raw['address']['road']
+            else:
+                roadName = location.raw['address']['city_district']
+
+            if roadName not in roadDensity:
+                roadDensity[roadName] =0
+            roadDensity[roadName] +=1
+        for roadName in roadDensity:
+            lanes, length = self.roadInformation.getRoadInformation(roadName)
+            oldDensity = roadDensity[roadName]
+            if type(lanes) == list:
+                lanes = lanes[0]
+            newDensity = oldDensity/float(float(lanes)*float(length))
+            roadDensity[roadName] = newDensity
+        return roadDensity
+
 if __name__ == '__main__':
-    pathofCSv = '/helperClasses/simulationClass/shapes.txt'
-    #pathofCSv = 'C:/Users/Kaushik/Desktop/DisasterResponse/helperClasses/simulationClass/shapes.txt'
+    baseDir = '/home/yoda/ML/DisasterResponse'
+    pathofCSv = baseDir+'/helperClasses/simulationClass/shapes.txt'
+
     r = Routes(pathofCSv)
+    _ = r.getVehicleInformation()
+    streetCongestion = r.getStreetCongestion()
+    pass
