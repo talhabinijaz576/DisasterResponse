@@ -1,4 +1,5 @@
 from helperClasses.simulationClass.vehicle import Vehicle
+from helperClasses.simulationClass.getRoadsInformation import RoadInformation
 import pandas as pd
 from geopy.geocoders import Nominatim
 
@@ -23,7 +24,8 @@ class Routes:
             pass
         self.vehicles = {}
         self.idx = 0 # index of start array
-
+        self.roadInformation = RoadInformation()
+        self.roadInformation.extractHashMap()
         self._geolocator = Nominatim(user_agent="geoapiExercises")
     def getVehicleInformation(self):
         for routeKey in self.routes:
@@ -58,9 +60,17 @@ class Routes:
                 roadName = location.raw['address']['road']
             else:
                 roadName = location.raw['address']['city_district']
+
             if roadName not in roadDensity:
                 roadDensity[roadName] =0
             roadDensity[roadName] +=1
+        for roadName in roadDensity:
+            lanes, length = self.roadInformation.getRoadInformation(roadName)
+            oldDensity = roadDensity[roadName]
+            if type(lanes) == list:
+                lanes = lanes[0]
+            newDensity = oldDensity/float(float(lanes)*float(length))
+            roadDensity[roadName] = newDensity
         return roadDensity
 
 if __name__ == '__main__':
