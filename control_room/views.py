@@ -38,7 +38,9 @@ def ControlRoomHomeView(request):
     return response
 
 logger = logging.getLogger(__name__)
-routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+#routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+routesPath = 'shapes.txt'
+#routesPath = 'C:/Users/Kaushik/Desktop/DisasterResponse/helperClasses/simulationClass/shapes.txt'
 route = Routes(routesPath)
 
 @login_required(login_url="/accounts/login/")

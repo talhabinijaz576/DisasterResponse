@@ -7,7 +7,8 @@ class Routes:
             pass
         else:
             dataFrameObj = pd.read_csv(routes,sep=',')
-            dataFrameObj['routeId'] = dataFrameObj['shape_id'].str.split('.',expand=True)[0]
+            #dataFrameObj['routeId'] = dataFrameObj['shape_id'].str.split('.',expand=True)[0]
+            dataFrameObj['routeId'] = dataFrameObj['shape_id']
             # dataFrameObj = dataFrameObj.assign(routId=lambda x: (x['shape_id'].split('.')[0]))
             self._df = dataFrameObj
             for idx,row in self._df.iterrows():
@@ -38,5 +39,6 @@ class Routes:
         return self.routes
 
 if __name__ == '__main__':
-    pathofCSv = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+    pathofCSv = '/helperClasses/simulationClass/shapes.txt'
+    #pathofCSv = 'C:/Users/Kaushik/Desktop/DisasterResponse/helperClasses/simulationClass/shapes.txt'
     r = Routes(pathofCSv)
