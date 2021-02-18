@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<script src="{% static 'js/controlroom/controlroom.js' %}"></script>
+
+<h3> hello you are in controlroom.html</h3>
+
+<br /> <br />
+
+<form id="demo_form" method="POST">   {% csrf_token %}
+    <input name="GET_CURRENT_DATE" hidden>
+    <button type="button" onclick="DemoFunction();">Get Date With Ajax</button>
+</form>
+
+<br />
+
+<label>
+    Current DateTime is: <b id="CurrentDateTime"></b>
+</label>
+
+
+{% endblock%}
