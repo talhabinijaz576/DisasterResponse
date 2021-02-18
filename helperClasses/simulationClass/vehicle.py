@@ -43,3 +43,6 @@ class Vehicle:
 
     def __str__(self):
         return self._id
+
+    def getLocation(self):
+        return self._currentLocation
