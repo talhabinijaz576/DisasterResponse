@@ -56,18 +56,14 @@ class ResponseSender:
 
     def continousMonitoring(self):
         #TODO : update this function later.
-        isSevere = True
-        while isSevere:
-            currentSeverity = self.monitorSeverity()
-            if currentSeverity is None:
-                # disaster ended send back all units
-                logger.info('reduced the severity below easy now returing')
-                isSevere = False
-            else:
-                if currentSeverity != self._severity:
-                    logger.info('helping worked now severity has reduced')
-                    self._severity = currentSeverity
-            time.sleep(30)
+        currentSeverity = self.monitorSeverity()
+        if currentSeverity is None:
+            # disaster ended send back all units
+            logger.info('reduced the severity below easy now returing')
+        else:
+            if currentSeverity != self._severity:
+                logger.info('helping worked now severity has reduced')
+                self._severity = currentSeverity
         return
 
     def resetAfterDisaster(self):
