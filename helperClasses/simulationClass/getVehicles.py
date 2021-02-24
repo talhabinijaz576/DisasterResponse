@@ -1,4 +1,4 @@
-from helperClasses.simulationClass.vehicle import Vehicle
+from helperClasses.responseFrame.responseClass.vehicle import Vehicle
 from helperClasses.simulationClass.getRoadsInformation import RoadInformation
 import pandas as pd
 from geopy.geocoders import Nominatim
