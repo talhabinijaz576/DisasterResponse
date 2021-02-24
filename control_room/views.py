@@ -43,11 +43,14 @@ routesPath = '/home/yoda/ML/DisasterResponse/helperClasses/simulationClass/shape
 #routesPath = 'C:/Users/Kaushik/Desktop/DisasterResponse/helperClasses/simulationClass/shapes.txt'
 route = Routes(routesPath)
 
+#TODO : initialise : SpawingStation objects from file SpawingStation.py
+
 @login_required(login_url="/accounts/login/")
 def StartSimulation(request):
     html_template = "controlroom/controlroom.html"
     context = getDefaultContext(request)
 
+    # add responseFramework object
     if (request.GET):
         pprint(request.GET)
         if("startSimulation" in request.GET):

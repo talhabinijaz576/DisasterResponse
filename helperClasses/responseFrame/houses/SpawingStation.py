@@ -38,8 +38,7 @@ class SpawingStation:
             lat,long = getLatAndLong('',location,self._locationpoint)
             latLongList = []
             for idx in range(0,numberofUnitsRequired):
-                self.sentunit()
-                unitToSend = self._spawningObjs[idx]
+                unitToSend = self._spawningObjs.pop(0) # always removing the first element
                 unitToSend.setDirection([lat,long])
                 latLongList.append(unitToSend)
             retJson = {'status':True,'units':latLongList,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
@@ -47,21 +46,13 @@ class SpawingStation:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
         return retJson
 
-    def sentunit(self):
-        """
-        when we send a unit out just reduce the number
-        Returns:
-
-        """
-        self._numberOfspawns -=1
-
-    def unitBack(self):
+    def unitBack(self,vehicleObj):
         """
         when we get back a unit just increase the amount
         Returns:
 
         """
-        self._numberOfspawns +=1
+        self._spawningObjs.append(vehicleObj)
 
     def unitLeft(self):
         """
@@ -69,7 +60,7 @@ class SpawingStation:
         Returns:
 
         """
-        return self._numberOfspawns
+        return len(self._spawningObjs)
 
     def __str__(self):
         return self._type
