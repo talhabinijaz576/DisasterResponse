@@ -22,12 +22,13 @@ class SpawingStation:
         self._numberOfspawns = len(spawningObjects)
         logger.info("initialising the spawning station for type {}".format(name))
 
-    def recieveInfo(self,location,numberofUnitsRequired,**kwargs):
+    def recieveInfo(self,location,numberofUnitsRequired,direction,**kwargs):
         """
         function which should be called by the simulation software to send the responses to the location
         Args:
             severity: how bad is the disaster
             location: location coords of the disaster
+            direction: list of points which our vehicle can use to navigate throught the city.
             **kwargs:
 
         Returns:
@@ -35,13 +36,14 @@ class SpawingStation:
         """
         if self.unitLeft() > numberofUnitsRequired:
             #TODO : update lat long according to new trafic simulation
-            lat,long = getLatAndLong('',location,self._locationpoint)
-            latLongList = []
+            # lat,long = getLatAndLong('',location,self._locationpoint)
+            unitsToSend = {}
             for idx in range(0,numberofUnitsRequired):
                 unitToSend = self._spawningObjs.pop(0) # always removing the first element
-                unitToSend.setDirection([lat,long])
-                latLongList.append(unitToSend)
-            retJson = {'status':True,'units':latLongList,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
+                unitToSend.setNewLocation(self._locationpoint)
+                unitToSend.setDirection(direction)
+                unitsToSend[str(unitToSend)]= unitToSend
+            retJson = {'status':True,'units':unitsToSend,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
         else:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
         return retJson

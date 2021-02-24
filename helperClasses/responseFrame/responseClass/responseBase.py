@@ -6,6 +6,7 @@ logger = logging.getLogger(__name__)
 class Response:
 
     def __init__(self,name,location,direction=None):
+
         self._type = name
         self._point = location
         self._direction = direction

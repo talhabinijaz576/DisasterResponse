@@ -7,10 +7,11 @@ class Vehicle:
 
     def __init__(self,id,typeOfVehicle,currentLocation=None):
         self._type = typeOfVehicle
-        self._id = id
+        self._id = id # id can be "time+type+numberinlist+locationofStn"
         self._currentLocation = currentLocation
         self._previousLocation = None
-
+        self._direction = None # special variables only used for the vehicles which are firetruck or police
+        # cars or ambulances
     def setNewLocation(self,location):
         """
         set the new location of the vehicle
@@ -46,3 +47,9 @@ class Vehicle:
 
     def getLocation(self):
         return self._currentLocation
+
+    def setDirection(self,direction):
+        """
+        :param direction: list of points this vehicle will use to navigate through the city.
+        """
+        self._direction = direction
