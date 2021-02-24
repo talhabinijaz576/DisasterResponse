@@ -4,8 +4,9 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from pprint import pprint
 from django.utils import timezone
-from helperClasses.simulationClass.getVehicles import Routes
-import logging,json
+#from helperClasses.simulationClass.getVehicles import Routes
+from control_room.models import Road, Shape
+import logging, json
 
 def getDefaultContext(request):
     context = {}
@@ -37,11 +38,11 @@ def ControlRoomHomeView(request):
     response = render(request, template_name = html_template, context=context)
     return response
 
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 #routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
-routesPath = 'shapes.txt'
+#routesPath = 'shapes.txt'
 #routesPath = 'C:/Users/Kaushik/Desktop/DisasterResponse/helperClasses/simulationClass/shapes.txt'
-route = Routes(routesPath)
+#route = Routes(routesPath)
 
 @login_required(login_url="/accounts/login/")
 def StartSimulation(request):

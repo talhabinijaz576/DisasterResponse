@@ -1,0 +1,1056 @@
+,name,length,oneway,lanes,maxspeed
+0,Abbey Street Lower,335.11999999999995,True,2,30
+1,Aberdeen Street,299.874,False,2,50
+2,Albert Court East,192.302,False,3,30
+3,Albert Place East,144.59799999999998,False,2,30
+4,Aldborough Court,183.454,False,1,30
+5,Allingham Street,182.674,False,3,30
+6,Almeida Avenue,86.922,False,3,30
+7,Almeida Terrace,47.038,False,2,50
+8,Amiens Street,1400.2689999999998,True,4,50
+9,Anglesea Row,228.722,False,2,50
+10,Annaly Road,889.5840000000001,False,2,50
+11,Annamoe Drive,998.684,False,2,50
+12,Annamoe Park,555.2099999999999,False,,
+13,Annamoe Road,1170.94,True,2,50
+14,Annamoe Terrace,514.2800000000001,False,,
+15,Anne Street North,290.43000000000006,False,2,50
+16,Anne Street South,142.69799999999998,False,,
+17,Anne's Lane,160.88599999999997,False,1,30
+18,Annesley Avenue,316.14199999999994,False,1,30
+19,Annesley Close,208.624,False,2,30
+20,Annesley Place,372.281,True,3,30
+21,Arbour Hill,1314.2680000000003,False,3,30
+22,Arbour Place,159.623,True,2,30
+23,Arbour Terrace,146.14600000000002,False,4,30
+24,Ard Righ Place,85.99,False,1,30
+25,Ard Righ Road,379.09000000000003,False,2,30
+26,Ardee Street,560.6920000000001,False,,
+27,Ardilaun Road,255.08800000000002,False,2,30
+28,Ardmore Avenue,144.34,False,2,30
+29,Arklow Street,270.81,False,2,30
+30,Arnott Street,201.32999999999998,True,2,30
+31,Arran Quay,324.70799999999997,True,2,30
+32,Arran Street East,272.1,True,,
+33,Arran Street West,55.439,True,2,30
+34,Arranmore Avenue,207.696,False,,
+35,Ash Street,112.64,False,2,30
+36,Ashford Cottages,70.73,False,,
+37,Ashford Place,98.578,False,,
+38,Ashford Street,276.826,False,,
+39,Aston Place,92.96600000000001,True,3,30
+40,Aston Quay,240.287,True,1,30
+41,Auburn Street,335.10200000000003,False,2,30
+42,Aughrim Place,260.26599999999996,False,,
+43,Aughrim Street,1058.6419999999998,False,2,30
+44,Aungier Street,691.3100000000001,False,4,50
+45,Ave Maria Road,298.53,False,2,50
+46,Avondale Avenue,143.61299999999997,False,2,50
+47,Avondale Road,313.256,False,4,50
+48,Bachelors Walk,293.925,True,4,50
+49,Back Lane,243.202,False,4,50
+50,Baggot Street Lower,1349.186,True,2,30
+51,Balfe Street,155.63400000000001,False,,
+52,Ballybough Avenue,108.824,False,2,50
+53,Ballybough Road,893.9799999999998,False,2,50
+54,Basin Street Lower,374.1939999999999,False,,
+55,Basin Street Upper,568.3380000000001,False,2,50
+56,Bass Place,178.522,False,2,50
+57,Bayview Avenue,275.839,True,2,50
+58,Beaver Close,54.784,False,,
+59,Beaver Street,235.88799999999998,False,4,50
+60,Bedford Row,70.964,True,3,30
+61,Bella Avenue,64.656,False,2,30
+62,Bella Place,90.116,False,3,30
+63,Bella Street,210.18999999999997,False,2,30
+64,Bellman's Walk,223.7,False,3,30
+65,Belvedere Avenue,206.264,False,3,30
+66,Belvedere Court,269.962,False,2,30
+67,Belvedere Place,465.738,True,4,30
+68,Belvidere Court,24.663,True,1,30
+69,Belvidere Road,412.866,False,4,30
+70,Ben Edair Road,437.648,False,2,30
+71,Benburb Street,341.841,True,2,30
+72,Beresford Place,435.04599999999994,True,4,30
+73,Beresford Street,467.34999999999997,False,2,30
+74,Berkeley Place,75.216,False,2,50
+75,Berkeley Road,813.0659999999999,False,2,50
+76,Berkeley Street,94.37,False,2,50
+77,Binns Bridge,74.68199999999999,False,2,30
+78,Bishop Street,204.98999999999998,True,2,50
+79,Black Street,182.478,False,2,50
+80,Blackhall Court,317.048,False,2,30
+81,Blackhall Place,548.391,True,2,50
+82,Blackhall Street,164.37,True,2,30
+83,Blackhorse Avenue,1225.446,False,2,30
+84,Blackhorse Grove,597.5399999999998,False,2,30
+85,Blackpitts,739.7259999999999,False,3,30
+86,Blaquiere Bridge,226.79000000000002,False,,
+87,Blessington Court,415.06600000000003,False,,
+88,Blessington Place,163.236,False,,
+89,Blessington Street,433.793,True,3,50
+90,Bolton Street,471.842,False,2,50
+91,Bond Street,116.69300000000001,False,2,50
+92,Bonham Street,427.83400000000006,False,2,50
+93,Bow Bridge,806.94,False,3,50
+94,Bow Lane East,147.183,True,2,50
+95,Bow Street,454.752,False,3,50
+96,Boyne Street,524.154,False,,
+97,Brabazon Place,183.776,False,2,30
+98,Brabazon Square,103.69,False,2,30
+99,Brabazon Street,109.63,False,2,30
+100,Bradogue Court,20.012,False,2,30
+101,Braithwaite Street,297.816,False,2,30
+102,Brandon Terrace,132.60399999999998,False,2,30
+103,Bregia Road,196.68200000000002,False,2,30
+104,Brickfield Lane,324.188,False,2,50
+105,Bride Close,139.054,False,2,30
+106,Bride Road,172.202,True,2,50
+107,Bride Street,753.2540000000001,True,2,30
+108,Bridge Street Lower,289.339,True,2,30
+109,Bridge Street Upper,322.41200000000003,True,1,30
+110,Bridge of Dublin,116.61000000000001,False,2,30
+111,Bridgefoot Street,575.343,True,2,50
+112,Broadstone,307.976,False,2,50
+113,Broadstone Avenue,162.246,False,1,30
+114,Brodir Row,100.37,False,1,30
+115,Brookfield Road,656.027,True,2,30
+116,Brookfield Street,266.528,False,2,30
+117,Brown Street,230.094,False,2,30
+118,Brown Street South,487.126,False,,
+119,Brunswick Street North,598.599,True,3,30
+120,Buckingham Street Lower,216.38299999999998,True,2,50
+121,Buckingham Street Upper,246.31499999999997,True,,
+122,Bull Alley Street,145.374,True,,
+123,Burgess Lane,99.987,True,,
+124,Burgh Quay,196.35399999999998,True,1,30
+125,Butt Bridge,88.34200000000001,True,3,30
+126,Byrne's Lane,300.924,False,3,30
+127,Cabra Drive,994.37,False,4,50
+128,Cabra Grove,220.81799999999998,False,2,30
+129,Cabra Park,789.6019999999999,False,2,30
+130,Cabra Road,2813.0280000000002,False,2,30
+131,Camden Row,400.36400000000003,True,2,30
+132,Camden Street Lower,615.01,True,4,50
+133,Cameron Square,385.12800000000004,False,2,50
+134,Cameron Street,294.462,False,3,50
+135,Campbell's Court,118.45000000000002,False,2,30
+136,Campbell's Row,130.776,False,2,50
+137,Canon Lillis Avenue,361.50800000000004,False,,
+138,Capel Street,579.519,True,,
+139,Caragh Road,378.76,False,,
+140,Cardiff Lane,445.76,False,3,50
+141,Carlingford Parade,109.326,False,2,30
+142,Carmans Hall,488.75199999999995,False,2,30
+143,Carnew Street,290.28999999999996,False,,
+144,Carnlough Road,637.452,False,2,30
+145,Carrick Terrace,220.93,False,2,30
+146,Castle Street,209.39100000000002,True,2,30
+147,Castle Terrace,83.786,False,3,50
+148,Cathal Brugha Street,504.196,False,1,30
+149,Cathedral Lane,197.446,False,3,50
+150,Cathedral Street,132.776,True,2,30
+151,Cathedral View Court,255.82599999999996,False,2,30
+152,Catherine Street,209.052,False,2,30
+153,Catherine's Lane North,132.3,False,2,30
+154,Cavalry Row,330.704,False,,
+155,Cavendish Row,282.74899999999997,True,,
+156,Ceannt Fort,344.39799999999997,False,3,50
+157,Chamber Street,338.178,False,3,50
+158,Champions' Avenue,348.05999999999995,False,3,50
+159,Chancery Lane,182.62,True,1,30
+160,Chancery Place,133.28500000000003,True,2,30
+161,Chancery Street,158.376,True,2,30
+162,Charlemont Parade,111.032,False,2,30
+163,Charles Lane,264.35,False,2,30
+164,Charles Street West,165.244,True,2,30
+165,Charleville Avenue,278.299,True,2,30
+166,Charleville Mall,445.58799999999997,False,,
+167,Charleville Road,503.12600000000003,False,,
+168,Charlotte Way,168.743,True,2,50
+169,Chatham Lane,60.24,True,2,50
+170,Chatham Row,62.312,True,,
+171,Chatham Street,137.548,False,3,50
+172,Cherrymount Park,295.487,True,4,50
+173,Chesterfield Avenue,1084.8719999999998,False,3,50
+174,Christchurch Place,294.579,True,4,30
+175,Christchurch Square,18.832,False,3,30
+176,Church Avenue,180.962,False,,
+177,Church Avenue South,589.9920000000001,False,,
+178,Church Lane,18.411,True,3,30
+179,Church Lane South,141.024,False,3,50
+180,Church Street,986.134,False,,
+181,Church Street Upper,779.011,True,,
+182,Church Terrace,159.162,False,,
+183,City Quay,384.51300000000003,True,,
+184,Clanbrassil Street Lower,683.097,True,2,50
+185,Clanbrassil Terrace,151.561,True,2,30
+186,Clare Street,277.55,False,3,30
+187,Clarence Mangan Road,802.0160000000001,True,3,30
+188,Clarence Mangan Square,66.886,False,3,30
+189,Clarence Place Great,332.108,False,1,30
+190,Clarendon Row,103.42600000000002,False,3,30
+191,Clarendon Street,339.82300000000004,True,3,30
+192,Clarke's Terrace,220.108,False,3,30
+193,Clinch Court,206.086,False,3,30
+194,Clonliffe Avenue,1188.016,False,,
+195,Clonliffe Gardens,523.624,False,,
+196,Clonliffe Road,2062.5159999999996,False,2,30
+197,Clonmel Street,148.26799999999997,False,,
+198,Clonmore Road,274.39599999999996,False,,
+199,Coburg Place,241.982,False,2,30
+200,Coke Lane,111.638,False,2,50
+201,Coleraine Street,338.808,False,2,50
+202,College Green,530.887,True,2,50
+203,College Street,157.153,True,,
+204,Commons Street,662.056,False,2,50
+205,Connaught Parade,266.73400000000004,False,2,50
+206,Connaught Street,1341.498,False,2,50
+207,Constitution Hill,221.18599999999998,False,3,50
+208,Conyngham Road,203.238,False,3,50
+209,Cook Street,628.534,True,2,30
+210,Coolevin Road,184.614,False,,
+211,Coombe Court,132.168,False,,
+212,Cope Street,246.532,True,2,30
+213,Cork Hill,83.61800000000001,False,2,30
+214,Cork Street,1549.632,False,2,30
+215,Corn Exchange Place,73.147,True,2,30
+216,Cornmarket,227.52500000000003,True,2,30
+217,Courtney Place,242.894,False,2,30
+218,Cow Parlour,60.753,True,2,30
+219,Cowper Street,427.084,False,2,30
+220,Crampton Quay,51.485,True,2,30
+221,Crane Street,125.685,True,2,30
+222,Creighton Street,370.18000000000006,True,2,30
+223,Crinan Strand,316.266,False,2,30
+224,Crosstick Alley,38.816,False,2,30
+225,Cuala Road,192.652,False,,
+226,Cuckoo Lane,63.923,True,2,30
+227,Cuffe Lane,209.12,False,,
+228,Cuffe Street,420.274,True,,
+229,Cumberland Street North,274.98,False,2,30
+230,Curzon Street,115.95000000000002,False,2,30
+231,Custom House Quay,988.161,True,2,30
+232,D'Olier Street,157.555,True,2,30
+233,Dalymount,253.13400000000001,False,2,50
+234,Dame Court,182.506,False,2,50
+235,Dame Lane,144.201,True,2,30
+236,Dame Street,637.7220000000001,False,2,50
+237,Daniel Street,312.534,False,2,30
+238,Darley's Terrace,303.512,False,2,50
+239,Davis Place,117.168,False,2,50
+240,Dawson Street,472.73299999999995,True,2,30
+241,De Burgh Road,92.52600000000001,False,2,30
+242,De Valera Place,134.006,False,2,30
+243,Dean Street,77.826,False,1,50
+244,Dean Swift Square,197.382,False,2,50
+245,Denzille Lane,439.35400000000004,False,3,50
+246,Derrynane Court,10.57,False,2,50
+247,Derrynane Parade,195.462,True,1,50
+248,Desmond Street,100.81899999999999,True,1,50
+249,Deverell Place,93.61599999999999,False,1,50
+250,Digges Lane,118.647,True,2,50
+251,Digges Street Upper,198.75600000000003,False,2,50
+252,Dillon Place South,99.914,False,2,50
+253,Distillery Road,291.284,False,3,50
+254,Dolphin Road,1292.924,False,3,50
+255,Dolphin's Barn Street,519.966,True,2,50
+256,Dominick Lane,316.24,False,2,30
+257,Dominick Street Lower,326.289,True,2,50
+258,Dominick Street Upper,671.8380000000001,False,2,50
+259,Donelan Avenue,340.72,False,2,50
+260,Donore Avenue,863.176,False,2,50
+261,Donore Road,287.224,False,1,30
+262,Donore Terrace,103.628,False,1,30
+263,Donovan's Lane,85.012,True,2,30
+264,Doon Avenue,101.358,False,2,30
+265,Dorset Street Lower,1025.4440000000002,True,1,30
+266,Dorset Street Upper,1181.861,True,2,30
+267,Dowling's Court,145.882,False,3,50
+268,Dowth Avenue,618.7120000000001,False,,
+269,Drumalee Avenue,98.364,False,3,50
+270,Drumalee Court,267.168,False,,
+271,Drumalee Drive,123.34800000000001,False,,
+272,Drumalee Grove,174.39799999999997,False,,
+273,Drumalee Park,207.10999999999999,False,,
+274,Drumalee Road,788.4739999999999,False,,
+275,Drumcliffe Road,223.47000000000003,False,2,50
+276,Drumcondra Park,259.786,False,,
+277,Drumcondra Road Lower,529.7990000000001,True,2,50
+278,Drury Street,218.731,True,4,50
+279,Duke Lane Upper,95.425,True,2,50
+280,Duke Street,139.156,False,4,50
+281,Dunard Avenue,156.486,False,2,50
+282,Dunard Court,211.852,False,4,50
+283,Dunard Drive,502.3159999999999,False,,
+284,Dunard Road,948.06,False,2,30
+285,Dunard Walk,162.136,False,2,30
+286,Dunne Street,298.012,False,2,30
+287,Earl Street South,200.126,True,4,50
+288,Earls Court,135.436,False,4,50
+289,Earlsfort Terrace,273.52700000000004,True,,
+290,Eastmoreland Lane,320.588,True,4,50
+291,Eastmoreland Place,143.67000000000002,False,2,50
+292,Ebenezer Terrace,285.512,False,2,50
+293,Eblana Villas,176.204,False,,
+294,Eccles Court,78.52199999999999,False,4,50
+295,Eccles Place,245.498,False,4,50
+296,Eccles Street,871.614,False,2,30
+297,Echlin Street,234.44,False,4,50
+298,Eden Quay,347.895,True,4,50
+299,Elizabeth Street,365.494,False,,
+300,Ellesmere Avenue,676.552,False,1,30
+301,Ellis Quay,242.007,True,1,30
+302,Ellis Street,102.928,True,2,50
+303,Ely Place,171.965,True,4,50
+304,Ely Place Upper,98.686,False,2,50
+305,Emerald Square,311.168,False,2,50
+306,Emerald Street,217.85399999999998,False,2,30
+307,Emerald Terrace,87.376,False,2,50
+308,Emmet Street,132.702,True,2,30
+309,Emorville Avenue,123.79599999999999,False,2,30
+310,Empress Place,165.135,True,2,30
+311,Enaville Avenue,166.748,False,2,30
+312,Enaville Road,122.86,False,2,30
+313,Engine Alley,71.711,True,2,50
+314,Enniskerry Road,199.04999999999998,False,2,30
+315,Erne Place,295.616,False,2,50
+316,Erne Place Little,127.482,False,2,30
+317,Erne Place Lower,189.088,False,2,30
+318,Erne Street Lower,372.20799999999997,False,2,30
+319,Erne Street Upper,462.17199999999997,False,2,30
+320,Erne Terrace (Front),233.064,False,2,30
+321,Erne Terrace (Rear),112.44999999999999,True,2,30
+322,Erris Road,370.276,False,2,30
+323,Essex Gate,53.872,True,2,30
+324,Essex Quay,158.183,True,2,30
+325,Essex Street East,226.565,True,2,30
+326,Essex Street West,109.149,True,2,30
+327,Eugene Street,420.26,False,2,30
+328,Eustace Street,172.712,True,2,30
+329,Everton Avenue,137.86200000000002,False,2,30
+330,Ewington Lane,300.65999999999997,False,2,30
+331,Exchange Court,71.29599999999999,False,2,30
+332,Exchange Place,260.03999999999996,False,2,30
+333,Exchange Street Lower,139.135,True,2,30
+334,Exchange Street Upper,81.186,True,3,50
+335,Exchequer Street,158.66899999999998,True,2,30
+336,Fade Street,77.418,True,2,30
+337,Fairview Close,167.902,False,2,30
+338,Fairview Strand,250.026,False,2,30
+339,Father Matthew Square,120.01,False,2,30
+340,Fenian Street,651.853,True,2,50
+341,Ferryman's Crossing,317.598,False,2,50
+342,Fertullagh Road,193.884,False,,
+343,Findlater Place,115.054,False,2,50
+344,Findlater Street,250.19600000000003,False,3,30
+345,Fingal Street,251.168,False,3,50
+346,Fingall Place,229.71599999999998,False,1,30
+347,Finn Street,287.038,False,3,50
+348,First Avenue,154.11599999999999,False,2,50
+349,Fishamble Street,369.21999999999997,False,4,50
+350,Fitzgibbon Street,383.634,False,4,50
+351,Fitzroy Avenue,800.146,False,1,30
+352,Fitzwilliam Place,154.55,False,2,50
+353,Fitzwilliam Place North,64.812,False,2,50
+354,Fitzwilliam Square East,207.636,False,2,50
+355,Fitzwilliam Square North,336.03999999999996,False,2,30
+356,Fitzwilliam Square South,329.93399999999997,False,2,50
+357,Fitzwilliam Square West,101.434,True,2,50
+358,Fitzwilliam Street Lower,375.86799999999994,False,2,50
+359,Fitzwilliam Street Upper,360.09799999999996,False,,
+360,Fleet Street,312.42499999999995,True,4,50
+361,Foley Street,335.40099999999995,True,2,50
+362,Fontenoy Street,464.89,False,3,30
+363,Forbes Lane,219.482,False,3,50
+364,Foster Place,169.08999999999997,False,1,30
+365,Foster Place North,62.85,False,3,50
+366,Foster Terrace,373.12600000000003,False,2,30
+367,Fourth Avenue,107.154,False,3,50
+368,Francis Street,468.91700000000003,True,,
+369,Frank Sherwin Bridge,72.971,True,3,50
+370,Frankfort Cottages,417.53,False,3,50
+371,Frederick Court,195.368,False,2,30
+372,Frenchman's Lane,87.67999999999999,True,3,50
+373,Friary Avenue,53.158,True,3,50
+374,Friary Court,53.131,True,2,30
+375,Friary Grove,198.562,False,2,50
+376,Fumbally Lane,144.632,True,2,50
+377,Gaelic Street,103.42,False,3,30
+378,Galmoy Road,194.726,False,2,30
+379,Garda Terrace,189.59199999999998,False,3,50
+380,Garden Lane,151.508,False,,
+381,Gardiner Place,331.654,False,,
+382,Gardiner Street Lower,1119.91,True,3,50
+383,Gardiner Street Middle,355.022,False,,
+384,Gardiner Street Upper,645.192,False,,
+385,Geoffrey Keating Road,252.84999999999997,False,,
+386,George's Hill,191.59199999999998,False,,
+387,George's Lane,127.643,True,4,50
+388,George's Place,289.91999999999996,False,,
+389,George's Quay,293.626,True,4,50
+390,Geraldine Street,445.844,False,3,50
+391,Gilbert Road,270.938,False,2,50
+392,Glenard Avenue,99.174,False,4,50
+393,Glenbeigh Park,317.946,False,,
+394,Glenbeigh Road,831.89,False,,
+395,Glencar Road,103.44200000000001,False,2,30
+396,Glengariff Crescent,33.25,False,3,50
+397,Glengarriff Parade,385.175,True,2,50
+398,Glenmalure Park,170.392,False,2,30
+399,Glenmore Road,155.468,False,2,50
+400,Gloucester Place Lower,91.448,False,2,50
+401,Gloucester Place North,189.24199999999996,False,2,50
+402,Gloucester Street South,375.528,False,2,30
+403,Glovers Alley,182.486,False,2,50
+404,Godfrey Place,73.12,False,2,50
+405,Golden Lane,348.08799999999997,False,2,30
+406,Goldsmith Street,487.85800000000006,True,2,50
+407,Grafton Street,235.87099999999998,True,2,50
+408,Graham Court,273.624,False,2,30
+409,Graham's Row,91.05799999999999,False,2,30
+410,Granby Row,117.11600000000001,True,2,30
+411,Grand Canal Place,600.986,False,2,30
+412,Grand Canal Street Lower,257.52,False,2,30
+413,Grangegorman Lower,1208.5680000000002,False,2,30
+414,Grangegorman Upper,724.3400000000001,True,2,50
+415,Grant's Row,359.87199999999996,False,2,50
+416,Grantham Street,437.328,False,2,30
+417,Grattan Bridge,83.026,True,,
+418,Grattan Court East,281.66200000000003,False,,
+419,Grattan Parade,225.322,False,,
+420,Grattan Place,82.554,False,2,30
+421,Grattan Street,351.188,False,2,30
+422,Gray Square,78.77799999999999,False,2,30
+423,Gray Street,150.741,True,2,30
+424,Great Charles Street North,619.342,True,2,30
+425,Great Denmark Street,442.34,False,2,30
+426,Great Strand Street,319.421,True,,
+427,Great Western Avenue,69.55799999999999,True,2,30
+428,Great Western Square,855.5360000000001,False,2,30
+429,Great Western Villas,341.326,False,2,30
+430,Greek Street,180.011,True,2,30
+431,Green Street,173.98700000000002,True,2,30
+432,Greenore Court,130.851,True,2,30
+433,Greenore Terrace,113.17399999999999,False,2,30
+434,Greenville Avenue,519.216,False,2,30
+435,Greenville Parade,469.952,False,2,30
+436,Grenville Street,290.744,False,2,30
+437,Guild Street,685.306,False,,
+438,Guildford Place,211.858,False,2,30
+439,Haddington Lane,302.40999999999997,False,2,30
+440,Haddington Road,392.06,False,2,30
+441,Halliday Road,326.33399999999995,False,2,30
+442,Halliday Square,413.6120000000001,False,2,30
+443,Halston Street,411.755,True,2,30
+444,Hamilton Street,281.922,False,2,30
+445,Hammond Lane,126.365,True,2,30
+446,Hampton Green,336.37,False,2,30
+447,Hampton Square,37.276,False,2,30
+448,Hanbury Lane,178.171,True,2,30
+449,Hanover Lane,42.768,False,2,30
+450,Hanover Square,49.8,False,2,30
+451,Hanover Street East,801.522,False,2,30
+452,Hanover Street West,117.99900000000001,True,,
+453,Harbourmaster Place,464.1550000000002,False,2,30
+454,Harcourt Street,443.9390000000001,True,2,30
+455,Hardwicke Place,191.744,False,2,50
+456,Hardwicke Street,276.3599999999999,False,2,30
+457,Harman Street,128.834,False,2,30
+458,Harmony Row,206.28599999999997,False,2,50
+459,Harold Road,319.494,False,3,50
+460,Haroldville Avenue,291.64,False,3,50
+461,Harty Place,373.354,False,2,50
+462,Hatch Street Lower,483.164,False,2,50
+463,Hatch Street Upper,581.192,False,3,50
+464,Hawkins Street,182.71,True,2,30
+465,Haymarket,175.816,False,2,30
+466,Healy Street,63.098,False,2,30
+467,Hendrick Lane,56.914,True,2,50
+468,Hendrick Place,78.592,False,2,30
+469,Hendrick Street,143.797,True,2,50
+470,Henrietta Street,337.688,False,2,50
+471,Herbert Place,607.5740000000001,False,2,30
+472,Herbert Street,498.462,False,2,50
+473,Herberton Park,383.554,False,2,30
+474,Herberton Road,586.7860000000001,False,2,50
+475,Herberton Street,168.86599999999999,False,2,50
+476,Heuston Station,89.548,False,2,30
+477,Hewardine Terrace,82.298,False,1,50
+478,Heytesbury Street,493.46999999999997,False,1,50
+479,Hibernian Avenue,101.46,False,2,30
+480,High Street,426.81499999999994,True,2,30
+481,Hill Street,559.742,False,2,30
+482,Hogan Avenue,211.29399999999998,True,2,30
+483,Hogan Place,352.63800000000003,False,2,30
+484,Holles Place,70.78399999999999,False,2,30
+485,Holles Row,124.324,True,2,30
+486,Holles Street,361.544,False,2,30
+487,Holycross Avenue,183.64999999999998,False,2,30
+488,Huband Bridge,88.78,False,2,30
+489,Hume Street,126.44699999999997,True,2,30
+490,Huxley Crescent,148.482,False,2,30
+491,Hyacinth Street,127.826,False,2,30
+492,Imaal Road,301.73800000000006,False,2,30
+493,Infirmary Road,1016.438,False,2,30
+494,Ingram Road,179.588,False,2,30
+495,Innisfallen Parade,687.798,False,2,30
+496,Inns Quay,263.773,True,2,30
+497,Irwin Court,182.43,False,2,30
+498,Irwin Street,155.64800000000002,False,2,30
+499,Island Street,473.17600000000004,False,,
+500,Island Villa,99.104,False,2,30
+501,Ivar Street,323.872,False,2,30
+502,James Joyce Bridge,110.71,False,2,30
+503,James Joyce Street,520.7710000000001,True,2,30
+504,James Street,1681.0459999999998,True,2,30
+505,James Street East,219.204,True,2,50
+506,James's Place East,289.15,False,2,50
+507,Jerome Connor Place,168.168,False,2,30
+508,Jervis Street,380.14700000000005,True,2,50
+509,John Dillon Street,401.0779999999999,False,2,50
+510,John Field Road,206.99400000000003,False,1,30
+511,John Street North,129.368,False,2,30
+512,John Street South,385.51199999999994,False,2,50
+513,John Street West,293.956,False,2,50
+514,John's Lane West,320.89199999999994,False,2,30
+515,Johnson's Place,101.37199999999999,True,2,30
+516,Jones's Road,324.284,False,2,50
+517,Josephine Avenue,92.766,False,2,50
+518,Kenmare Parade,151.44,False,2,30
+519,Kevin Street Lower,573.736,True,2,30
+520,Kevin Street Upper,588.207,True,2,30
+521,Kildare Street,624.3639999999999,True,2,30
+522,Killarney Avenue,129.828,False,,
+523,Killarney Parade,265.27,False,,
+524,Killarney Street,204.07700000000003,True,,
+525,Kinahan Street,330.718,False,2,30
+526,King's Inn's Street,264.233,True,,
+527,King's Inns Court,80.406,False,2,30
+528,Kings Avenue,228.73400000000004,False,2,30
+529,Kingston Lodge,258.344,False,2,30
+530,Kirwan Street,289.123,True,,
+531,Kirwan Street Cottages,586.994,False,1,30
+532,Lamb Alley,322.84400000000005,False,1,30
+533,Langrishe Place,129.094,False,,
+534,Leeson Street Lower,236.907,True,1,30
+535,Leinster Street South,138.867,True,2,30
+536,Leix Road,962.264,False,2,30
+537,Leo Avenue,73.682,False,2,30
+538,Leo Street,315.394,False,1,30
+539,Leslie's Buildings,116.922,False,2,30
+540,Liberty House,344.142,False,2,30
+541,Liberty Square,68.644,False,2,30
+542,Liffey Street Lower,147.41599999999997,True,2,30
+543,Liffey Street Upper,175.154,False,,
+544,Liffey Street West,177.57800000000003,False,2,30
+545,Lime Street,356.638,False,2,30
+546,Lincoln Lane,384.01500000000004,True,,
+547,Lincoln Place,169.127,True,2,30
+548,Linenhall Parade,171.77800000000002,False,2,30
+549,Linenhall Street,144.924,False,,
+550,Linenhall Terrace,252.40000000000003,False,2,30
+551,Lisburn Street,159.63,False,2,30
+552,Little Britain Street,307.26800000000003,False,,
+553,Little Green Street,103.956,True,2,30
+554,Little Strand Street,149.68699999999995,True,2,30
+555,Litton Lane,71.725,True,2,30
+556,Loftus Lane,192.852,True,2,30
+557,Loftus lane,56.544000000000004,False,2,30
+558,Lombard Court,225.14,False,2,30
+559,Lombard Street East,346.847,True,2,30
+560,Lombard Street West,699.9600000000002,False,2,30
+561,Long Lane,300.837,True,2,30
+562,Long Lane Close,109.378,False,2,30
+563,Long's Place,386.524,False,2,30
+564,Longford Street Great,126.343,True,2,30
+565,Longford Street Little,73.094,True,2,30
+566,Lord Edward Street,311.092,False,2,30
+567,Loreto Road,187.534,False,,
+568,Lorne Terrace,158.132,False,2,30
+569,Lourdes Road,296.482,False,2,30
+570,Love Lane,284.042,False,3,30
+571,Love Lane East,121.018,False,,
+572,Luke Street,356.702,False,,
+573,Lurgan Street,136.092,False,1,30
+574,Mabel Street,238.96800000000002,False,2,30
+575,Macken Street,1024.646,True,2,30
+576,Madden Road,237.478,False,2,30
+577,Madison Road,173.614,False,2,30
+578,Magennis Square,191.494,True,2,30
+579,Malachi Road,261.274,False,2,30
+580,Mallin Avenue,218.7,False,2,30
+581,Malpas Place,65.528,False,2,30
+582,Malpas Street,245.68400000000003,False,2,30
+583,Malpas Terrace,108.402,False,2,30
+584,Manor Place,835.7819999999999,False,2,30
+585,Manor Street,792.1299999999999,False,2,30
+586,Marion Villas,136.128,False,2,30
+587,Mark Street,130.322,True,2,30
+588,Mark's Alley West,238.18,False,2,30
+589,Mark's Lane,171.85399999999998,True,2,30
+590,Market Street South,243.286,True,2,30
+591,Marlborough Court,118.08000000000001,False,1,50
+592,Marlborough Mews,342.212,False,1,50
+593,Marlborough Place,103.07999999999998,False,2,30
+594,Marlborough Road,315.61,False,2,30
+595,Marlborough Street,738.2740000000001,True,2,30
+596,Marne Villas,160.172,False,2,30
+597,Marrowbone Lane,1364.4580000000003,False,1,30
+598,Marrowbone Lane Close,142.95800000000003,False,2,30
+599,Mary Street,94.02600000000001,True,2,30
+600,Mary Street Little,109.256,True,2,30
+601,Mary's Abbey,129.18,True,2,30
+602,Mary's Lane,585.6640000000001,False,2,30
+603,Matt Talbot Memorial Bridge,347.551,True,2,30
+604,Maxwell Street,183.792,False,1,30
+605,May Lane,132.395,True,2,30
+606,May Street,189.118,False,2,30
+607,Mayfield Road,220.89600000000002,False,2,30
+608,Mayor Street Lower,909.7529999999998,True,2,30
+609,Mc Mahon Street,88.24399999999999,True,,
+610,McDowell Avenue,191.558,False,,
+611,McKee Park,312.784,False,,
+612,Meade's Terrace,77.408,True,2,30
+613,Meath Place,345.07399999999996,False,2,30
+614,Meath Square,181.486,False,1,30
+615,Meath Street,341.444,True,,
+616,Meetinghouse Lane,104.854,False,,
+617,Mellows Bridge,56.304,True,1,30
+618,Memorial Road,216.816,True,1,30
+619,Mercer Street,417.889,True,1,30
+620,Merchant's Quay,296.427,True,,
+621,Merrion Row,120.777,True,1,30
+622,Merrion Square East,351.49,False,2,30
+623,Merrion Square North,680.056,False,2,30
+624,Merrion Square South,669.72,False,,
+625,Merrion Square West,358.548,False,1,30
+626,Merrion Street Lower,120.618,True,1,30
+627,Merrion Street Upper,415.912,False,2,30
+628,Merton Park,97.596,True,2,30
+629,Mespil Road,312.62600000000003,False,2,30
+630,Middle Abbey Street,274.828,True,2,30
+631,Military Road,608.016,False,2,30
+632,Mill Lane,149.32,False,2,30
+633,Mill Street,460.44000000000005,False,2,30
+634,Moira Road,288.206,False,2,30
+635,Molesworth Street,323.113,True,2,30
+636,Monck Place,329.796,False,2,30
+637,Montague Court,76.464,False,2,30
+638,Montague Lane,197.67000000000002,False,2,30
+639,Montague Street,144.64700000000002,True,2,30
+640,Montpelier Court,16.432,False,3,50
+641,Montpelier Gardens,772.818,False,2,30
+642,Montpelier Hill,671.396,False,2,50
+643,Montpelier Park,662.3079999999999,False,2,50
+644,Montpellier Drive,341.078,False,1,30
+645,Moore Street,124.41,False,,
+646,Morning Star Avenue,474.688,False,,
+647,Morning Star Road,671.432,False,,
+648,Moss Street,85.497,True,,
+649,Mount Brown,489.528,False,,
+650,Mount Street Crescent,287.14500000000004,True,,
+651,Mount Street Lower,875.7640000000001,False,,
+652,Mount Street Upper,539.888,False,,
+653,Mount Temple Road,408.16799999999995,False,1,30
+654,Mountjoy Parade,171.37,False,,
+655,Mountjoy Square East,457.72799999999995,False,1,30
+656,Mountjoy Square North,316.752,False,,
+657,Mountjoy Square South,315.49,False,,
+658,Mountjoy Square West,297.21799999999996,False,,
+659,Mountjoy Street,757.9539999999998,False,,
+660,Mountjoy Street Middle,216.19199999999998,True,,
+661,Mountshannon Road,431.13200000000006,False,,
+662,Muckross Parade,151.682,False,,
+663,Mullinahack,77.426,False,,
+664,Munster Street,196.97500000000002,True,,
+665,Murtagh Road,306.02,False,,
+666,Myrtle Street,170.88,False,,
+667,Nassau Street,233.92399999999998,True,,
+668,Navan Road,556.97,True,,
+669,Nelson Street,162.046,True,1,30
+670,New Bride Street,437.39200000000005,False,,
+671,New Church Street,169.152,False,,
+672,New Ireland Road,1281.396,False,2,30
+673,New Row South,236.86999999999998,True,2,50
+674,New Street Gardens,316.156,False,2,30
+675,New Street North,149.68200000000002,False,2,30
+676,New Street South,584.763,True,2,30
+677,Newcomen Avenue,212.506,False,2,30
+678,Newcomen Bridge,92.792,False,2,30
+679,Newgrange Road,709.7940000000001,False,2,30
+680,Newmarket,447.5640000000001,True,1,30
+681,Newmarket Street,408.215,False,1,30
+682,Newport Street,234.34199999999998,True,1,30
+683,Niall Street,368.49,False,1,30
+684,Nicholas Avenue,81.41,True,2,30
+685,Nicholas Street,362.308,True,1,30
+686,Noel Purcell Walk,90.142,True,2,30
+687,Norfolk Road,471.47799999999995,False,1,30
+688,Norseman Place,374.626,False,2,50
+689,North Circular Road,7016.539999999998,True,1,30
+690,North Frederick Street,300.244,False,2,50
+691,North Great Clarence Street,344.5799999999999,False,2,50
+692,North Great George's Street,506.09499999999997,True,2,50
+693,North King Street,1147.1640000000002,True,2,50
+694,North Lotts,450.346,False,1,30
+695,North Richmond Street,263.86,False,2,50
+696,North Strand Road,1283.9550000000004,True,2,50
+697,North Wall Quay,689.224,False,2,30
+698,Nortons Avenue,171.202,False,2,30
+699,Nottingham Street,354.35,False,2,30
+700,O'Carolan Road,243.8,False,1,30
+701,O'Connell Avenue,254.404,False,2,30
+702,O'Connell Bridge,150.001,True,2,30
+703,O'Connell Street Lower,899.1690000000001,True,2,50
+704,O'Connell Street Upper,250.33099999999996,True,2,50
+705,O'Curry Avenue,317.564,False,2,30
+706,O'Curry Road,527.4820000000001,False,2,30
+707,O'Devaney Gardens,1097.634,False,2,30
+708,O'Donovan Road,252.28199999999998,False,2,30
+709,O'Donovan Rossa Bridge,63.817,True,2,30
+710,O'Quinn Avenue,154.78199999999998,False,1,30
+711,O'Reilly Avenue,241.08400000000006,False,1,30
+712,O'Sullivan Avenue,198.358,False,1,30
+713,Offaly Road,818.132,False,2,30
+714,Olaf Road,224.014,False,,
+715,Old Cabra Road,1712.2920000000004,True,3,30
+716,Old Kilmainham,494.778,False,1,30
+717,Old Mill Court,38.762,False,1,30
+718,Oliver Bond Street,489.14,False,1,30
+719,Orchard Road,383.8,False,1,30
+720,Oriel Hall,123.238,False,1,30
+721,Oriel Street Lower,549.162,False,1,30
+722,Oriel Street Upper,402.60200000000003,False,1,30
+723,Ormond Quay Lower,315.691,True,1,30
+724,Ormond Quay Upper,259.949,True,1,30
+725,Ormond Square,596.3720000000001,False,1,30
+726,Ormond Street,168.288,False,1,30
+727,Oscar Square,774.0469999999999,True,2,30
+728,Ossory Road,250.67,False,2,50
+729,Ostman Place,252.582,False,2,50
+730,Our Lady's Close,56.734,False,2,30
+731,Our Lady's Road,416.97,False,2,50
+732,Ovoca Road,424.586,False,2,50
+733,Owen's Avenue,154.05,False,2,50
+734,Oxmantown Lane,235.132,False,2,50
+735,Oxmantown Road,877.6400000000001,False,1,30
+736,Park View,307.898,False,,
+737,Parkgate Street,576.329,True,,
+738,Parliament Street,138.054,True,2,30
+739,Parnell Square East,57.47500000000001,True,2,50
+740,Parnell Square North,234.664,True,,
+741,Parnell Square West,259.026,True,,
+742,Parnell Street,1752.0480000000002,True,3,50
+743,Patrick Heeney Crescent,87.96099999999998,True,,
+744,Patrick Street,584.4309999999999,True,,
+745,Paul Street,216.55200000000002,False,2,50
+746,Pearse Grove,133.71999999999997,False,2,30
+747,Pearse Square,619.14,False,2,30
+748,Pearse Square West,29.416,False,2,30
+749,Pearse Street,1497.2090000000003,True,,
+750,Pembroke Street Lower,173.911,True,,
+751,Pembroke Street Upper,166.306,True,,
+752,Percy Place,718.6419999999999,False,,
+753,Peter Street,311.538,False,3,50
+754,Peter's Row,134.887,True,3,50
+755,Peterson's Court,101.534,False,2,30
+756,Petrie Road,199.76800000000003,False,2,30
+757,Phibsborough,370.437,False,2,30
+758,Phibsborough Avenue,178.622,False,,
+759,Phibsborough Road,2107.1420000000003,False,,
+760,Phoenix Court,148.804,False,,
+761,Phoenix Manor,30.194,False,,
+762,Phoenix Street North,92.159,True,,
+763,Pim Street,303.536,False,,
+764,Pimlico,511.076,False,3,50
+765,Pimlico Cottages,74.138,False,3,50
+766,Pinehurst,724.94,False,2,30
+767,Pleasants Street,237.97199999999998,True,1,30
+768,Poolbeg Street,212.269,True,2,30
+769,Poole Street,180.08,False,2,50
+770,Poplar Row,484.4,False,,
+771,Portland Close,95.17599999999999,False,2,30
+772,Portland Court,88.03200000000001,False,2,30
+773,Portland Place,468.57800000000003,False,2,30
+774,Portland Row,655.7900000000001,False,2,30
+775,Portland Street North,446.31399999999996,False,2,30
+776,Portmahon Drive,225.23,False,1,30
+777,Power's Court,289.31600000000003,False,1,30
+778,Power's Square,68.952,False,2,30
+779,Powerscourt,104.924,True,2,30
+780,Prebend Street,66.584,False,2,30
+781,Preston Street,112.718,False,2,30
+782,Price's Lane,105.477,True,2,30
+783,Primrose Avenue,280.624,False,2,30
+784,Primrose Street,266.40399999999994,False,2,30
+785,Prince's Street North,309.948,False,,
+786,Prince's Street South,161.647,True,2,30
+787,Prussia Street,998.5360000000001,False,2,30
+788,Quarry Road,1154.068,False,2,30
+789,Queen Street,359.62999999999994,True,,
+790,Railway Street,866.5639999999999,False,,
+791,Rainsford Avenue,96.54,False,1,30
+792,Rainsford Street,277.016,False,2,30
+793,Rathdown Road,827.9199999999998,False,2,30
+794,Rathdown Square,32.686,False,3,30
+795,Ratoath Road,308.968,False,3,30
+796,Red Cow Lane,181.146,False,,
+797,Redmonds Hill,176.35399999999998,False,3,30
+798,Reginald Square,93.258,False,3,30
+799,Reginald Street,135.80700000000002,True,1,30
+800,Reilly's Avenue,167.45600000000002,False,2,30
+801,Reuben Avenue,168.528,False,1,30
+802,Reuben Street,1002.44,False,,
+803,Reuben Walk,596.684,False,1,30
+804,Rialto Buildings,307.552,False,1,30
+805,Rialto Cottages,1268.008,False,1,30
+806,Rialto Drive,176.076,False,3,30
+807,Rialto Street,507.3240000000001,False,3,30
+808,Richmond Avenue,149.974,False,2,30
+809,Richmond Cottages,179.414,False,1,30
+810,Richmond Cottages North,135.41700000000003,True,,
+811,Richmond Cresant,32.056,False,,
+812,Richmond Crescent,76.616,False,,
+813,Richmond Parade,95.652,False,,
+814,Richmond Road,257.564,False,2,30
+815,Robert Emmet Close,248.65800000000002,False,1,30
+816,Robert Street,359.85699999999997,False,2,30
+817,Robinson's Court,143.328,False,2,30
+818,Rory O'More Bridge,55.448,True,,
+819,Rosedale Terrace,103.19999999999999,False,,
+820,Rosemount Road,202.73399999999998,False,,
+821,Ross Road,143.003,True,2,30
+822,Ross Street,273.142,False,,
+823,Rostrevor Court,121.596,False,1,30
+824,Rostrevor Terrace,85.218,False,1,30
+825,Royal Canal Bank,1475.19,True,2,30
+826,Royal Canal Terrace,360.778,False,2,30
+827,Royse Road,200.678,False,1,30
+828,Russell Avenue,603.138,False,1,30
+829,Russell Street,665.248,False,1,30
+830,Rutland Cottages,159.452,False,1,30
+831,Rutland Court,244.29399999999998,False,1,30
+832,Rutland Place North,352.11400000000003,False,1,30
+833,Rutland Street Lower,415.89,False,1,30
+834,Rutledge Terrace,271.786,False,,
+835,Ryder's Row,96.61500000000001,True,4,50
+836,Sackville Avenue,339.578,False,4,50
+837,Sackville Gardens,140.038,False,,
+838,Sackville Place,131.713,True,2,30
+839,Saint Andrew Street,171.32999999999998,True,2,30
+840,Saint Anthony's Road,651.132,False,2,30
+841,Saint Benedict's Gardens,191.99,False,,
+842,Saint Bricin's Park,510.09000000000003,False,2,50
+843,Saint David's Terrace,93.643,True,2,50
+844,Saint Georges Avenue,238.71800000000002,False,3,50
+845,Saint Ignatius Avenue,123.564,False,1,30
+846,Saint Ignatius Road,694.868,False,2,50
+847,Saint James' Avenue,396.50199999999995,False,2,50
+848,Saint James's Avenue,65.94,True,2,50
+849,Saint Joseph's Parade,395.36599999999993,False,2,50
+850,Saint Joseph's Place,480.944,False,3,50
+851,Saint Joseph's Road,286.534,False,2,50
+852,Saint Joseph's Street,199.892,False,2,30
+853,Saint Joseph's Terrace,68.656,False,,
+854,Saint Josephs Avenue,253.48000000000002,False,2,50
+855,Saint Josephs Place,180.88800000000003,False,1,30
+856,Saint Kevin's Cottages,368.53600000000006,False,3,50
+857,Saint Kevin's Parade,356.84799999999996,True,,
+858,Saint Laurance Place,73.61,False,,
+859,Saint Laurence Place East,180.264,False,,
+860,Saint Margaret's Avenue,264.68399999999997,False,4,50
+861,Saint Margaret's Terrace,183.52,False,2,50
+862,Saint Mary's Avenue North,87.494,False,2,50
+863,Saint Mary's Place,63.262,True,3,50
+864,Saint Mary's Place North,155.868,True,2,30
+865,Saint Mary's Terrace,342.454,False,2,30
+866,Saint Michael's Place,64.792,False,2,30
+867,Saint Michan's Street,133.439,True,2,30
+868,Saint Patrick's Avenue,127.422,False,2,30
+869,Saint Patrick's Place,66.414,False,2,30
+870,Saint Patrick's Terrace,147.776,False,,
+871,Saint Peter's Road,506.964,False,2,30
+872,Saint Peter's Square,61.8,False,,
+873,Saint Thomas' Road,679.2760000000001,False,3,50
+874,Saint Vincent Street North,147.69,False,3,50
+875,Samuel Beckett Bridge,375.502,True,2,30
+876,Sandford Gardens,226.428,False,2,30
+877,Sandford Park,92.008,False,1,30
+878,Sandwith Street Lower,263.9,True,2,30
+879,Sandwith Street Upper,478.7579999999999,False,2,30
+880,Sarsfield Quay,92.903,True,2,30
+881,Sarsfield Street,177.462,False,2,30
+882,School Street,287.726,False,2,30
+883,Sean Mac Dermott Street Upper,206.31,False,,
+884,Sean MacDermott Street Lower,870.22,False,2,50
+885,Sean O'Casey Avenue,308.532,False,2,50
+886,Second Avenue,136.108,False,1,30
+887,Setanta Place,125.566,True,1,30
+888,Seville Place,1168.1080000000002,False,1,30
+889,Seville Terrace,283.72,False,1,30
+890,Shamrock Cottages,109.068,False,1,30
+891,Shamrock Place,75.75,False,1,30
+892,Shamrock Street,163.83,False,1,30
+893,Shamrock Terrace,247.03199999999998,False,1,30
+894,Shandon Road,156.05200000000002,False,1,30
+895,Shannon Terrace,104.562,False,2,30
+896,Shaw Street,120.999,True,2,30
+897,Shea's Court,259.23199999999997,False,1,30
+898,Sheriff Street Lower,1345.2119999999998,False,1,30
+899,Sherrard Avenue,185.862,False,1,30
+900,Sherrard Court,67.914,False,1,30
+901,Sherrard Street Lower,370.75800000000004,False,1,30
+902,Sherrard Street Upper,161.855,True,1,30
+903,Ship Street Great,574.086,False,1,30
+904,Sigurd Road,277.058,False,2,30
+905,Simmons Place,86.778,False,2,30
+906,Sir John Rogerson's Quay,569.399,True,2,30
+907,Sitric Place,70.996,False,2,30
+908,Sitric Road,426.67599999999993,False,2,30
+909,Slade Row,271.18399999999997,False,2,30
+910,Smithfield,276.604,True,2,30
+911,Smithfield Terrace,86.094,True,2,30
+912,South Circular Road,2108.906,False,3,30
+913,South Cumberland Street,371.234,True,2,30
+914,South Frederick Street,166.19400000000002,True,4,50
+915,South Great George's Street,635.406,False,4,50
+916,Spitalfields,310.06,False,1,30
+917,Spring Garden Lane,105.86200000000001,True,,
+918,Spring Garden Street,540.451,True,2,30
+919,St Anne's Road,384.683,True,1,30
+920,St Audeon's Terrace,124.33,False,2,30
+921,St Augustine Street,331.483,True,,
+922,St Brigid's Road Lower,254.634,False,,
+923,St James' Walk,1396.2920000000001,False,,
+924,St John's Road West,807.8719999999998,True,,
+925,St John's Street,137.756,False,,
+926,St Kevin's Avenue,171.03400000000002,False,2,30
+927,St Luke's Avenue,683.28,False,3,30
+928,St Michael's Hill,65.428,True,,
+929,St Michael's Terrace,109.28,False,3,30
+930,St Michaels Close,206.32800000000003,False,3,30
+931,St Nicholas Place,112.84,False,3,30
+932,St Patrick's Road,342.882,False,3,30
+933,St Teresa's Gardens,414.10400000000004,False,1,30
+934,St. Andrew's Court,150.23600000000002,False,2,30
+935,St. Francis Square,48.02,False,2,30
+936,St. Patrick's Close,202.12900000000002,True,1,30
+937,St. Peter's Court,140.322,False,2,30
+938,St. Stephen's Green,2077.907,True,4,30
+939,Stable Lane,180.824,False,4,30
+940,Stanhope Street,96.734,False,2,30
+941,Stanley Street,81.332,False,,
+942,Steeven's Lane,437.496,False,,
+943,Stephen Street Lower,155.239,True,,
+944,Stephen Street Upper,166.763,True,,
+945,Stephen's Lane,508.86,False,,
+946,Stephen's Place,467.9959999999999,False,3,50
+947,Stirrup Lane,142.42000000000002,False,3,50
+948,Stoneybatter,231.648,False,3,50
+949,Store Street,327.25699999999995,True,3,50
+950,Strandville Avenue,314.49199999999996,False,3,50
+951,Strandville Place,48.366,False,2,50
+952,Sugar House Lane,167.01,False,3,50
+953,Sullivan Street,123.418,False,,
+954,Summer Place,113.16,False,,
+955,Summer Street North,339.26199999999994,False,2,50
+956,Summer Street South,326.758,False,2,50
+957,Summerhill,1138.554,True,2,30
+958,Summerhill Parade,455.69599999999997,False,2,50
+959,Summerhill Place,279.68,False,2,50
+960,Susan Terrace,294.322,False,,
+961,Susanville Road,324.80600000000004,False,2,50
+962,Sweeney's Terrace,89.62,False,3,50
+963,Swift's Alley,339.072,False,,
+964,Swift's Row,62.678,True,2,30
+965,Swilly Road,600.6000000000001,False,,
+966,Swords Street,260.31,False,,
+967,Sycamore Street,110.37099999999998,True,,
+968,Synge Street,274.844,False,2,30
+969,Synnott Place,121.54599999999999,False,2,30
+970,Synnott Row,238.168,False,2,50
+971,Taaffe's Place,82.096,False,2,30
+972,Talbot Place,227.786,False,2,50
+973,Talbot Street,563.965,True,2,30
+974,Tara Street,255.292,True,2,30
+975,Taylor's Lane,113.516,False,2,50
+976,Temple Bar,103.063,True,2,50
+977,Temple Cottages,411.01000000000005,False,2,50
+978,Temple Court,379.40799999999996,False,2,50
+979,Temple Lane North,246.666,False,1,30
+980,Temple Street North,357.654,False,2,30
+981,Temple Street West,241.746,True,2,30
+982,Terrace Place,108.698,False,2,50
+983,The Coombe,955.1280000000002,False,2,50
+984,Third Avenue,121.49199999999999,False,2,30
+985,Thomas Court,200.471,True,2,30
+986,Thomas Davis Street,97.298,True,2,30
+987,Thomas Street,1180.5600000000002,False,2,30
+988,Thomson Cottages,127.798,False,3,50
+989,Thor Place,311.16200000000003,False,3,50
+990,Tolka Road,639.97,False,2,30
+991,Townsend Street,697.252,True,1,30
+992,Trinity Street,92.694,True,2,50
+993,Tyrrell Place,60.446,False,1,30
+994,Ulster Street,153.86599999999999,False,2,50
+995,Ulster Terrace,299.11199999999997,False,2,50
+996,Upper Abbey Street,309.398,True,1,30
+997,Upper Cross Road,484.202,False,1,30
+998,Usher Street,374.563,True,,
+999,Usher's Island,243.16499999999996,True,1,30
+1000,Usher's Quay,324.711,True,2,50
+1001,Valentia Parade,242.304,False,2,50
+1002,Vernon Street,115.277,True,3,50
+1003,Verschoyle Court,616.8480000000001,False,2,50
+1004,Vicar Street,202.654,False,3,50
+1005,Victoria Quay,538.0659999999999,True,3,50
+1006,Viking Place,135.7,False,2,50
+1007,Viking Road,310.772,False,2,50
+1008,Villa Park,119.694,False,1,30
+1009,Ward's Hill,142.684,False,2,50
+1010,Warrenmount Place,115.054,False,2,50
+1011,Warrington Lane,239.81799999999998,False,,
+1012,Warrington Place,387.596,False,1,30
+1013,Waterloo Avenue,231.07,False,2,50
+1014,Watkins Square,159.87,False,2,50
+1015,Watling Street,343.1,True,2,50
+1016,Weavers Close,70.846,False,2,50
+1017,Weavers Street,244.07500000000002,False,2,50
+1018,Weavers' Square,105.934,False,2,50
+1019,Wellesley Place,156.624,False,2,50
+1020,Wellington Quay,344.882,True,2,50
+1021,Wellington Street Lower,336.626,False,2,50
+1022,Wellington Street Upper,322.488,False,2,30
+1023,Werburgh Street,200.46099999999998,True,2,50
+1024,Western Way,723.237,True,2,50
+1025,Westland Court,81.262,False,2,30
+1026,Westland Row,521.518,True,2,50
+1027,Westmoreland Street,233.198,True,2,50
+1028,Wexford Street,292.408,True,1,50
+1029,Whitefriar Place,92.13300000000001,True,2,50
+1030,Whitefriar Street,344.62,False,2,50
+1031,Whitworth Avenue,82.09799999999998,False,2,30
+1032,Whitworth Parade,85.28999999999999,False,2,50
+1033,Whitworth Place,129.977,True,,
+1034,Whitworth Road,1288.5390000000002,True,2,50
+1035,Wiilson's Place,85.658,False,2,50
+1036,Wille Bermingham Place,150.70800000000003,False,4,50
+1037,William Street North,354.609,True,2,50
+1038,William Street South,222.736,True,4,50
+1039,William's Place Lower,65.524,False,2,50
+1040,William's Place Upper,65.062,False,2,50
+1041,Williams Place South,419.814,False,,
+1042,Wilson's Terrace,85.46199999999999,False,2,30
+1043,Wilton Place,216.593,True,4,50
+1044,Wilton Terrace,268.06,False,2,30
+1045,Windmill Lane,361.43600000000004,False,4,50
+1046,Winetavern Street,161.321,True,,
+1047,Wolfe Tone Quay,508.014,True,,
+1048,Wolfe Tone Street,400.534,True,,
+1049,Wood Lane,59.26,True,,
+1050,Wood Quay,142.48,True,,
+1051,Wormwood Gate,92.72800000000001,False,,
+1052,Xavier Avenue,148.758,False,2,30
+1053,Yarnhall Street,305.46,False,1,30
+1054,York Street,420.41700000000003,True,2,30
