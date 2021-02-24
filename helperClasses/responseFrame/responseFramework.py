@@ -55,6 +55,7 @@ class ResponseSender:
         return unitsSend
 
     def continousMonitoring(self):
+        #TODO : update this function later.
         isSevere = True
         while isSevere:
             currentSeverity = self.monitorSeverity()
