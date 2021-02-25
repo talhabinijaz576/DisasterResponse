@@ -7,7 +7,7 @@ from pprint import pprint
 from django.utils import timezone
 from helperClasses.simulationClass.getVehicles import Routes
 from control_room.models import Road, Shape, Disaster
-import logging, json
+import logging,json
 
 def getDefaultContext(request):
     context = {}
@@ -40,10 +40,11 @@ def ControlRoomHomeView(request):
     return response
 
 #logger = logging.getLogger(__name__)
-#routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
-routesPath = 'shapes.txt'
-#routesPath = 'C:/Users/Kaushik/Desktop/DisasterResponse/helperClasses/simulationClass/shapes.txt'
+routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+# routesPath = 'shapes.txt'
 route = Routes(routesPath)
+
+#TODO : initialise : SpawingStation objects from file SpawingStation.py
 
 @login_required(login_url="/accounts/login/")
 def StartSimulation(request):
@@ -53,20 +54,20 @@ def StartSimulation(request):
     if (request.POST):
         returnJson = {}
         try:
-            pprint('inside post')
-            dataFromFrontEnd = json.loads(request.body)
-            intensity = dataFromFrontEnd['intensity']
-            casualities = dataFromFrontEnd['casualities']
-            lattitude = dataFromFrontEnd['location']['lat']
-            longitude = dataFromFrontEnd['location']['long']
-            address = dataFromFrontEnd['location']['name']
-            typeofDisaster = dataFromFrontEnd['type']
-            adnnInfo = dataFromFrontEnd['additionalInfo']
-            pprint(request)
-            # disasterObject = Disaster(latitude=lattitude,longitude=longitude,intensity=intensity,
-            #                                          type=typeofDisaster,stAddress=address,additionalInfo=adnnInfo,
-            #                                          casualities=casualities,isActive=True)
-            # disasterObject.save()
+            pprint('Got the post request for the disaster')
+            dataFromFrontEnd = dict(request.POST.items())
+            intensity = dataFromFrontEnd['intensityvalue']
+            casualities = dataFromFrontEnd['casualtiesvalue']
+            lattitude = dataFromFrontEnd['lat']
+            longitude = dataFromFrontEnd['long']
+            address = dataFromFrontEnd['loc']
+            typeofDisaster = dataFromFrontEnd['disaster-type']
+            adnnInfo = ''
+            pprint('Starting disaster type {} with intensity {} at {}:{}'.format(typeofDisaster,lattitude,longitude,intensity))
+            disasterObject = Disaster(latitude=lattitude,longitude=longitude,intensity=intensity,
+                                                     type=typeofDisaster,stAddress=address,additionalInfo=adnnInfo,
+                                                     casualities=casualities,isActive=True)
+            disasterObject.save()
             returnJson['status'] = 'ok'
             returnJson['error']  = 'None'
         except Exception as e:
