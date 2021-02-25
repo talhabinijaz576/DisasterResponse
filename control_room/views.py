@@ -39,10 +39,11 @@ def ControlRoomHomeView(request):
     response = render(request, template_name = html_template, context=context)
     return response
 
+
 #logger = logging.getLogger(__name__)
-routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+#routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
 # routesPath = 'shapes.txt'
-route = Routes(routesPath)
+#route = Routes(routesPath)
 
 #TODO : initialise : SpawingStation objects from file SpawingStation.py
 

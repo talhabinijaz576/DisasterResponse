@@ -33,15 +33,6 @@ class PoliceStation(models.Model):
     capacity = models.IntegerField()
     vehicles_available = models.IntegerField()
 
-class Hospital(models.Model):
-
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(unique = False, max_length = 50, default='')
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    capacity = models.IntegerField()
-    vehicles_available = models.IntegerField()
-
 
 class Road(models.Model):
 

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import osmnx as ox
+import networkx as nx
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'foo_auth',
     'simulation',
     'control_room',
@@ -145,3 +148,8 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'foo_auth.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+
+north, west, south, east = 53.363870, -6.303802, 53.333346, -6.240316
+G = ox.graph_from_bbox(north, south, east, west, network_type = 'drive')  
