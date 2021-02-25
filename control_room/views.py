@@ -92,7 +92,17 @@ def StartSimulation(request):
                                                           type = disasterObj['type'],stationMap=stationMap,severity=
                                                           disasterObj['intensity'])
                 returnList.extend(responseMap[idOfObj].sendResponse())
-                responseMap[idOfObj].monitorSeverity()
+                currentSeverity = responseMap[idOfObj].monitorSeverity()
+                responseObj = responseMap[idOfObj]
+                if currentSeverity is None:
+                    listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
+                    returnList.extend(listOfunits)
+                if currentSeverity != disasterObj['intensity']:
+                    disasterObj.intensity = currentSeverity
+                    listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
+                    # call back some police cars
+                    returnList.extend(listOfunits)
+
             vehicleInfo = route.getVehicleInformation()
             for i in vehicleInfo:
                 returnList.append(vehicleInfo[i].toJson())

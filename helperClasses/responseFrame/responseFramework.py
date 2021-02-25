@@ -32,6 +32,9 @@ class ResponseSender:
         self._timeElapsed = None
         self._startTime = None
         self.startTime()
+        self.unitsSend = None
+        self._spawingRecorder = {}
+        self._direction = None
 
     def sendResponse(self,direction):
         if self._startTime is None:
@@ -42,7 +45,15 @@ class ResponseSender:
         unitsSend = []
         for responseObj in self._stationMap:
             if responseObj.unitLeft() >0:
-                retJson = responseObj.recieveInfo(direction,numResponseRequired)
+                retJson = responseObj.recieveInfo(direction,numResponseRequired) # dictionary of vehicles with there path
+                self._direction = direction
+                type, locationStr = responseObj._type ,responseObj.locStr()
+                if type not in self._spawingRecorder:
+                    self._spawingRecorder[type] = {}
+                if locationStr not in self._spawingRecorder[type]:
+                    self._spawingRecorder[type] = {locationStr:{'working':[]}}
+
+                self._spawingRecorder[type][locationStr]['working'].append(retJson['units'])
                 logger.info('sent {} units from {}'.format(numResponseRequired-retJson['numUnitsLeft'],responseObj))
                 if retJson['status']:
                     unitsSend.extend(retJson['units'])
@@ -51,9 +62,53 @@ class ResponseSender:
                     else:
                         numResponseRequired = retJson['numUnitsLeft']
         logger.info('sent all units now monitoring the disaster and waiting for it to end,')
-
+        self.unitsSend = unitsSend
         return unitsSend
 
+    def sendBackUnits(self,severity=None,spawningObjs=None,direction=None):
+        """
+        this function is called when the severity of the disaster is reduced or its is being completly mitigated
+        severity : new severity of the disaster
+        spawningObjs: new sorted list of police station, if None previously used list is used.
+        direction: way back to stn
+        """
+        if direction is None:
+            direction = self._direction
+
+        if severity is not None:
+            oldNumResponseRequired = self.severitymap[self._severity]
+            newNumresponseRequired = self.severitymap[severity]
+            numUnitsToSendBack = oldNumResponseRequired-newNumresponseRequired
+        else:
+            numUnitsToSendBack = self.severitymap[severity]
+
+        if spawningObjs is None:
+            spawingStnObjs = self._stationMap
+        else:
+            spawingStnObjs = spawningObjs
+
+        unitsSentBack = 0
+        sentAllUnits = False
+        listOfUnits = []
+        for responseObj in spawingStnObjs:
+            if sentAllUnits:
+                break
+            type, locationStr = responseObj._type, responseObj.locStr()
+            if type in self._spawingRecorder and locationStr in self._spawingRecorder[type]:
+                units = self._spawingRecorder[type][locationStr]['working']
+                if 'workdone' not in self._spawingRecorder[type][locationStr]:
+                    self._spawingRecorder[type][locationStr]['workdone'] = []
+                for unit in units:
+                    if sentAllUnits:
+                        break
+                    unit.setDirection(direction) # sending the unit back
+                    self._spawingRecorder[type][locationStr]['workdone'].append(unit)
+                    unitsSentBack +=1
+                    if unitsSentBack == numUnitsToSendBack:
+                        sentAllUnits = True
+                    listOfUnits.append(unit)
+
+        return listOfUnits
     def continousMonitoring(self):
         #TODO : update this function later.
         currentSeverity = self.monitorSeverity()
