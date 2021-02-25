@@ -53,15 +53,6 @@ def StartSimulation(request):
     if (request.POST):
         returnJson = {}
         try:
-            # {'ajax': 'True',
-            #  'casualtiesvalue': '2',
-            #  'csrfmiddlewaretoken': 'aH5UEvYzjhTX3P3uTtvYqFBnyZWQJmafNrtBKVkwc7rzHaELo2c9UtTocg9pnZhZ',
-            #  'disaster-type': 'Fire',
-            #  'intensityvalue': '2',
-            #  'lat': '53.402832392123806',
-            #  'loc': '',
-            #  'long': '-6.282033920288087'}
-
             pprint('Got the post request for the disaster')
             dataFromFrontEnd = dict(request.POST.items())
             intensity = dataFromFrontEnd['intensityvalue']
@@ -70,12 +61,12 @@ def StartSimulation(request):
             longitude = dataFromFrontEnd['long']
             address = dataFromFrontEnd['loc']
             typeofDisaster = dataFromFrontEnd['disaster-type']
-            # adnnInfo = dataFromFrontEnd['additionalInfo']
+            adnnInfo = ''
             pprint('Starting disaster type {} with intensity {} at {}:{}'.format(typeofDisaster,lattitude,longitude,intensity))
-            # disasterObject = Disaster(latitude=lattitude,longitude=longitude,intensity=intensity,
-            #                                          type=typeofDisaster,stAddress=address,additionalInfo=adnnInfo,
-            #                                          casualities=casualities,isActive=True)
-            # disasterObject.save()
+            disasterObject = Disaster(latitude=lattitude,longitude=longitude,intensity=intensity,
+                                                     type=typeofDisaster,stAddress=address,additionalInfo=adnnInfo,
+                                                     casualities=casualities,isActive=True)
+            disasterObject.save()
             returnJson['status'] = 'ok'
             returnJson['error']  = 'None'
         except Exception as e:
