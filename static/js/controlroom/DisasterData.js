@@ -17,12 +17,11 @@ function setIntensitySlider() {
 }
 
 function addDisaster(){
-
-    var mp = new L.Marker([document.getElementById("lat").value, document.getElementById("long").value], {icon: fire}).addTo(mymap);
     SubmitFormAJAX("disaster-data-form", postdisaster);
 }
 
-function postdisaster()
+function postdisaster(resp)
 {
-    
+    if(resp.status == "ok")
+        var mp = new L.Marker([document.getElementById("lat").value, document.getElementById("long").value], {icon: fire}).addTo(mymap);
 }
