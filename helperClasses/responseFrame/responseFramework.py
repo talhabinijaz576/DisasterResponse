@@ -106,7 +106,7 @@ class ResponseSender:
                     unitsSentBack +=1
                     if unitsSentBack == numUnitsToSendBack:
                         sentAllUnits = True
-                    listOfUnits.append(unit)
+                    listOfUnits.append(unit.toJson())
 
         return listOfUnits
     def continousMonitoring(self):

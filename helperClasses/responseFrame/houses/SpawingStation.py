@@ -42,7 +42,7 @@ class SpawingStation:
                 unitToSend = self._spawningObjs.pop(0) # always removing the first element
                 unitToSend.setNewLocation(self._locationpoint)
                 unitToSend.setDirection(direction)
-                unitsToSend[str(unitToSend)]= unitToSend
+                unitsToSend[str(unitToSend)]= unitToSend.toJson()
             retJson = {'status':True,'units':unitsToSend,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
         else:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
