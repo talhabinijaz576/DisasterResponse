@@ -61,5 +61,14 @@ class Shape(models.Model):
     longitude = models.FloatField()
     #models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
+class Disaster(models.Model):
 
-
+    id = models.AutoField(primary_key=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    intensity = models.FloatField()
+    type = models.CharField(unique = False, max_length = 50, default='')
+    stAddress = models.CharField(unique = False, max_length = 50, default='')
+    additionalInfo = models.CharField(unique = False, max_length = 50, default='')
+    casualities = models.IntegerField()
+    isActive = models.BooleanField(blank=True, null=True)

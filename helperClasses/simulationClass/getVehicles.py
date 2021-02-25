@@ -75,10 +75,13 @@ class Routes:
         return roadDensity
 
 if __name__ == '__main__':
+    import json
     baseDir = '/home/yoda/ML/DisasterResponse'
     pathofCSv = baseDir+'/helperClasses/simulationClass/shapes.txt'
 
     r = Routes(pathofCSv)
     _ = r.getVehicleInformation()
     streetCongestion = r.getStreetCongestion()
+    with open("sample.json", "w") as outfile:
+        json.dump(streetCongestion, outfile)
     pass
