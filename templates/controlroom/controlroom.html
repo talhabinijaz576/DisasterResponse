@@ -74,6 +74,7 @@
 <body onload="traffic_simulate();">
   <div id="disaster-data">
     <form id="disaster-data-form" method="POST">
+      {% csrf_token %}
       <fieldset>
         <legend>Disaster Data</legend>
         <table style="width:100%">

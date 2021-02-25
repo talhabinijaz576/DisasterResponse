@@ -53,6 +53,7 @@ def StartSimulation(request):
     if (request.POST):
         returnJson = {}
         try:
+            pprint('inside post')
             dataFromFrontEnd = json.loads(request.body)
             intensity = dataFromFrontEnd['intensity']
             casualities = dataFromFrontEnd['casualities']
@@ -69,6 +70,7 @@ def StartSimulation(request):
             returnJson['status'] = 'ok'
             returnJson['error']  = 'None'
         except Exception as e:
+            pprint('error {}'.format(e))
             returnJson['status'] = 'error'
             returnJson['error']  = str(e)
         response = json.dumps(returnJson)
