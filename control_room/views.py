@@ -41,9 +41,9 @@ def ControlRoomHomeView(request):
 
 
 #logger = logging.getLogger(__name__)
-#routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
 # routesPath = 'shapes.txt'
-#route = Routes(routesPath)
+route = Routes(routesPath)
 
 #TODO : initialise : SpawingStation objects from file SpawingStation.py
 
