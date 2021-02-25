@@ -28,6 +28,7 @@ class Routes:
         self.roadInformation = RoadInformation()
         self.roadInformation.extractHashMap()
         self._geolocator = Nominatim(user_agent="geoapiExercises")
+
     def getVehicleInformation(self):
         for routeKey in self.routes:
             locationToUse = self.routes[routeKey][self.idx]

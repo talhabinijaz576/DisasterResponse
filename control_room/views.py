@@ -84,6 +84,7 @@ def StartSimulation(request):
             # logger.info('got the vehicle request')
             disasterObjs = Disaster.objects.filter(isActive=True)
             returnList = []
+
             for disasterObj in disasterObjs:
                 idOfObj = disasterObj['id']
                 stationMap = None #TODO ask talha for this
