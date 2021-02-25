@@ -7,7 +7,7 @@ from pprint import pprint
 from django.utils import timezone
 from helperClasses.simulationClass.getVehicles import Routes
 from control_room.models import Road, Shape, Disaster
-import logging, json
+import logging,json
 
 def getDefaultContext(request):
     context = {}
@@ -53,16 +53,25 @@ def StartSimulation(request):
     if (request.POST):
         returnJson = {}
         try:
-            pprint('inside post')
-            dataFromFrontEnd = json.loads(request.body)
-            intensity = dataFromFrontEnd['intensity']
-            casualities = dataFromFrontEnd['casualities']
-            lattitude = dataFromFrontEnd['location']['lat']
-            longitude = dataFromFrontEnd['location']['long']
-            address = dataFromFrontEnd['location']['name']
-            typeofDisaster = dataFromFrontEnd['type']
-            adnnInfo = dataFromFrontEnd['additionalInfo']
-            pprint(request)
+            # {'ajax': 'True',
+            #  'casualtiesvalue': '2',
+            #  'csrfmiddlewaretoken': 'aH5UEvYzjhTX3P3uTtvYqFBnyZWQJmafNrtBKVkwc7rzHaELo2c9UtTocg9pnZhZ',
+            #  'disaster-type': 'Fire',
+            #  'intensityvalue': '2',
+            #  'lat': '53.402832392123806',
+            #  'loc': '',
+            #  'long': '-6.282033920288087'}
+
+            pprint('Got the post request for the disaster')
+            dataFromFrontEnd = dict(request.POST.items())
+            intensity = dataFromFrontEnd['intensityvalue']
+            casualities = dataFromFrontEnd['casualtiesvalue']
+            lattitude = dataFromFrontEnd['lat']
+            longitude = dataFromFrontEnd['long']
+            address = dataFromFrontEnd['loc']
+            typeofDisaster = dataFromFrontEnd['disaster-type']
+            # adnnInfo = dataFromFrontEnd['additionalInfo']
+            pprint('Starting disaster type {} with intensity {} at {}:{}'.format(typeofDisaster,lattitude,longitude,intensity))
             # disasterObject = Disaster(latitude=lattitude,longitude=longitude,intensity=intensity,
             #                                          type=typeofDisaster,stAddress=address,additionalInfo=adnnInfo,
             #                                          casualities=casualities,isActive=True)
