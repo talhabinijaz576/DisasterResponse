@@ -22,7 +22,7 @@ class SpawingStation:
         self._numberOfspawns = len(spawningObjects)
         logger.info("initialising the spawning station for type {}".format(name))
 
-    def recieveInfo(self,location,numberofUnitsRequired,direction,**kwargs):
+    def recieveInfo(self,numberofUnitsRequired,direction,**kwargs):
         """
         function which should be called by the simulation software to send the responses to the location
         Args:

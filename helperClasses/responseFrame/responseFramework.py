@@ -33,7 +33,7 @@ class ResponseSender:
         self._startTime = None
         self.startTime()
 
-    def sendResponse(self):
+    def sendResponse(self,direction):
         if self._startTime is None:
             self.startTime()
 
@@ -42,7 +42,7 @@ class ResponseSender:
         unitsSend = []
         for responseObj in self._stationMap:
             if responseObj.unitLeft() >0:
-                retJson = responseObj.recieveInfo(self._severity,self._location,numResponseRequired)
+                retJson = responseObj.recieveInfo(direction,numResponseRequired)
                 logger.info('sent {} units from {}'.format(numResponseRequired-retJson['numUnitsLeft'],responseObj))
                 if retJson['status']:
                     unitsSend.extend(retJson['units'])
