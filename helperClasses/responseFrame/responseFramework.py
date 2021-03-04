@@ -53,12 +53,12 @@ class ResponseSender:
                     if type not in self._spawingRecorder:
                         self._spawingRecorder[type] = {}
                     if locationStr not in self._spawingRecorder[type]:
-                        self._spawingRecorder[type] = {locationStr:{'working':[]}}
+                        self._spawingRecorder[type] = {locationStr:{'driving':[]}}
                     # logger.info('units in objecets {}'.format(retJson['units']))
                     for unitObj in retJson['units']:
-                        self._spawingRecorder[type][locationStr]['working'].append(retJson['units'][unitObj])
+                        self._spawingRecorder[type][locationStr]['driving'].append(retJson['units'][unitObj])
                     self._spawingRecorder[type][locationStr]['prevLocationPtr'] = 0
-                    logger.info('sent {} units from {}'.format(len(self._spawingRecorder[type][locationStr]['working']),responseObj))
+                    logger.info('sent {} units from {}'.format(len(self._spawingRecorder[type][locationStr]['driving']),responseObj))
                     if retJson['status']:
                         for unitObj in retJson['units']:
                             unitsSend.append(retJson['units'][unitObj])
@@ -67,22 +67,24 @@ class ResponseSender:
                         else:
                             numResponseRequired = retJson['numUnitsLeft']
             else:
-                workingunits = self._spawingRecorder[type][locationStr]['working']
+                drivingunits = self._spawingRecorder[type][locationStr]['driving']
                 self._spawingRecorder[type][locationStr]['prevLocationPtr'] +=1
 
                 currentLocationPtr = self._spawingRecorder[type][locationStr]['prevLocationPtr']
                 if currentLocationPtr == len(direction):
                     # vehicle has reached the destination
+                    self._spawingRecorder[type][locationStr]["working"] = self._spawingRecorder[type][locationStr]['driving']
+                    self._spawingRecorder[type][locationStr]["working"] = []
                     pass
                 else:
                     # unitsSend = []
-                    for workingunit in workingunits:
+                    for drivingunit in drivingunits:
                         # unitInformation = workingunits[workingunit]
-                        logger.info("updating information for unit {}".format(workingunit))
+                        logger.info("updating information for unit {}".format(drivingunit))
                         currentLoc = direction[currentLocationPtr]
-                        workingunit['previousLocation'] = workingunit['currentLocation']
-                        workingunit['currentLocation'] = currentLoc
-                        unitsSend.append(workingunit)
+                        drivingunit['previousLocation'] = drivingunit['currentLocation']
+                        drivingunit['currentLocation'] = currentLoc
+                        unitsSend.append(drivingunit)
                     logger.info("units send {}".format(unitsSend))
         # logger.info('sent all units now monitoring the disaster and waiting for it to end,')
         self.unitsSend = unitsSend
@@ -178,6 +180,11 @@ class ResponseSender:
         timeElapsedMins = self._timeElapsed/60
         currentSeverity = self._severity
         numReachedResponses = self._numResponsereached
+        for responseObj in self._stationMap:
+            type, locationStr = responseObj._type, responseObj.locStr()
+            responseWorkerState = self._spawingRecorder[type][locationStr]
+            if "working" in responseWorkerState:
+                numReachedResponses += len(responseWorkerState["working"])
         numResponseRequired = self.severitymap[self._severity]
         percResponseReached = (numReachedResponses/numResponseRequired)*100 # this is the efficiency of the system
         extraMinsRequired = ((100-percResponseReached)*self._fullTimeEfficiency)/100
