@@ -8,7 +8,7 @@ class SpawingStation:
     """
     This class can be used as a sole entity which can act as a hospital or as a police station.
     """
-    def __init__(self,name,startingLocation,spawningObjects):
+    def __init__(self,name,startingLocation,spawningObjects,direction=None):
         """
         initialise the spawing station,
         Args:
@@ -20,9 +20,10 @@ class SpawingStation:
         self._locationpoint = startingLocation
         self._spawningObjs = spawningObjects
         self._numberOfspawns = len(spawningObjects)
+        self._direction = direction
         logger.info("initialising the spawning station for type {}".format(name))
 
-    def recieveInfo(self,numberofUnitsRequired,direction,**kwargs):
+    def recieveInfo(self,numberofUnitsRequired,direction=None,**kwargs):
         """
         function which should be called by the simulation software to send the responses to the location
         Args:
@@ -34,15 +35,24 @@ class SpawingStation:
         Returns:
 
         """
+        if direction is not None:
+            self._direction = direction
+
+        direction = self._direction
+        logger.info("In station {} having {} units required units {}".format(
+            self._type,self.unitLeft(),numberofUnitsRequired
+        ))
         if self.unitLeft() > numberofUnitsRequired:
             #TODO : update lat long according to new trafic simulation
             # lat,long = getLatAndLong('',location,self._locationpoint)
             unitsToSend = {}
             for idx in range(0,numberofUnitsRequired):
                 unitToSend = self._spawningObjs.pop(0) # always removing the first element
+                logger.info("unit to send {}".format(unitsToSend))
                 unitToSend.setNewLocation(self._locationpoint)
                 unitToSend.setDirection(direction)
                 unitsToSend[str(unitToSend)]= unitToSend.toJson()
+
             retJson = {'status':True,'units':unitsToSend,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
         else:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}

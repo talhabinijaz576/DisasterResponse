@@ -36,7 +36,7 @@ class ResponseSender:
         self._spawingRecorder = {}
         self._direction = None
 
-    def sendResponse(self,direction):
+    def sendResponse(self):
         if self._startTime is None:
             self.startTime()
 
@@ -44,25 +44,49 @@ class ResponseSender:
         logger.info('Sending the units')
         unitsSend = []
         for responseObj in self._stationMap:
-            if responseObj.unitLeft() >0:
-                retJson = responseObj.recieveInfo(direction,numResponseRequired) # dictionary of vehicles with there path
-                self._direction = direction
-                type, locationStr = responseObj._type ,responseObj.locStr()
-                if type not in self._spawingRecorder:
-                    self._spawingRecorder[type] = {}
-                if locationStr not in self._spawingRecorder[type]:
-                    self._spawingRecorder[type] = {locationStr:{'working':[]}}
+            direction = responseObj._direction
+            type, locationStr = responseObj._type, responseObj.locStr()
+            if self.unitsSend is None:
+                if responseObj.unitLeft() >0:
+                    retJson = responseObj.recieveInfo(numResponseRequired,direction) # dictionary of vehicles with there path
 
-                self._spawingRecorder[type][locationStr]['working'].append(retJson['units'])
-                logger.info('sent {} units from {}'.format(numResponseRequired-retJson['numUnitsLeft'],responseObj))
-                if retJson['status']:
-                    unitsSend.extend(retJson['units'])
-                    if retJson['numUnitsLeft'] == 0:
-                        break
-                    else:
-                        numResponseRequired = retJson['numUnitsLeft']
-        logger.info('sent all units now monitoring the disaster and waiting for it to end,')
+                    if type not in self._spawingRecorder:
+                        self._spawingRecorder[type] = {}
+                    if locationStr not in self._spawingRecorder[type]:
+                        self._spawingRecorder[type] = {locationStr:{'working':[]}}
+                    # logger.info('units in objecets {}'.format(retJson['units']))
+                    for unitObj in retJson['units']:
+                        self._spawingRecorder[type][locationStr]['working'].append(retJson['units'][unitObj])
+                    self._spawingRecorder[type][locationStr]['prevLocationPtr'] = 0
+                    logger.info('sent {} units from {}'.format(len(self._spawingRecorder[type][locationStr]['working']),responseObj))
+                    if retJson['status']:
+                        for unitObj in retJson['units']:
+                            unitsSend.append(retJson['units'][unitObj])
+                        if retJson['numUnitsLeft'] == 0:
+                            break
+                        else:
+                            numResponseRequired = retJson['numUnitsLeft']
+            else:
+                workingunits = self._spawingRecorder[type][locationStr]['working']
+                self._spawingRecorder[type][locationStr]['prevLocationPtr'] +=1
+
+                currentLocationPtr = self._spawingRecorder[type][locationStr]['prevLocationPtr']
+                if currentLocationPtr == len(direction):
+                    # vehicle has reached the destination
+                    pass
+                else:
+                    # unitsSend = []
+                    for workingunit in workingunits:
+                        # unitInformation = workingunits[workingunit]
+                        logger.info("updating information for unit {}".format(workingunit))
+                        currentLoc = direction[currentLocationPtr]
+                        workingunit['previousLocation'] = workingunit['currentLocation']
+                        workingunit['currentLocation'] = currentLoc
+                        unitsSend.append(workingunit)
+                    logger.info("units send {}".format(unitsSend))
+        # logger.info('sent all units now monitoring the disaster and waiting for it to end,')
         self.unitsSend = unitsSend
+        # logger.info(unitsSend)
         return unitsSend
 
     def sendBackUnits(self,severity=None,spawningObjs=None,direction=None):
@@ -72,9 +96,6 @@ class ResponseSender:
         spawningObjs: new sorted list of police station, if None previously used list is used.
         direction: way back to stn
         """
-        if direction is None:
-            direction = self._direction
-
         if severity is not None:
             oldNumResponseRequired = self.severitymap[self._severity]
             newNumresponseRequired = self.severitymap[severity]
@@ -94,14 +115,19 @@ class ResponseSender:
             if sentAllUnits:
                 break
             type, locationStr = responseObj._type, responseObj.locStr()
+            if direction is None:
+                directiontoWork = responseObj._direction[::-1]
+            else:
+                directiontoWork = direction
             if type in self._spawingRecorder and locationStr in self._spawingRecorder[type]:
                 units = self._spawingRecorder[type][locationStr]['working']
                 if 'workdone' not in self._spawingRecorder[type][locationStr]:
                     self._spawingRecorder[type][locationStr]['workdone'] = []
                 for unit in units:
+                    print(unit)
                     if sentAllUnits:
                         break
-                    unit.setDirection(direction) # sending the unit back
+                    unit.setDirection(directiontoWork) # sending the unit back
                     self._spawingRecorder[type][locationStr]['workdone'].append(unit)
                     unitsSentBack +=1
                     if unitsSentBack == numUnitsToSendBack:
