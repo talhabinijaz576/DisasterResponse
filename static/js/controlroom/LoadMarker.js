@@ -25,3 +25,12 @@ var tsunami = new LeafIcon({ iconUrl: 'tsunami.jpg' });
 L.icon = function (options) {
     return new L.Icon(options);
 };
+
+var cssIcon = L.divIcon({
+    // Specify a class name we can refer to in CSS.
+    className: 'css-icon',
+    html: '<div class="gps_ring"></div>'
+    // Set marker width and height
+    ,iconSize: [22,22]
+    // ,iconAnchor: [11,11]
+  });
