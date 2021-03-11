@@ -13,6 +13,8 @@ from control_room.models import Road, Shape, Disaster
 from simulation.simulation import CityMap, DisasterSimulation
 import logging,json
 
+logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s] - %(message)s', level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 def getDefaultContext(request):
     context = {}
     return context
@@ -63,6 +65,7 @@ def getObjectsFromDb(dispatchCenters):
         name = objects['name']
         capacity = objects['n_vehicles']
         route = objects['route']
+        logger.info("route for location {} is {}".format(location,route))
         if "firestation" in name.lower():
             listOfVehicles = [Firetruck(name="{}:{}".format(location,i),location=None) for i in range(capacity)]
         elif "hospital" in name.lower():
@@ -91,7 +94,7 @@ def StartSimulation(request):
             address = dataFromFrontEnd['loc']
             typeofDisaster = dataFromFrontEnd['disaster-type']
             adnnInfo = ''
-            pprint('Starting disaster type {} with intensity {} at {}:{}'.format(typeofDisaster,lattitude,longitude,intensity))
+            logger.info('Starting disaster type {} with intensity {} at {}:{}'.format(typeofDisaster,lattitude,longitude,intensity))
             disasterObject = Disaster(latitude=lattitude,longitude=longitude,intensity=intensity,
                                                      type=typeofDisaster,stAddress=address,additionalInfo=adnnInfo,
                                                      casualities=casualities,isActive=True)
@@ -117,32 +120,45 @@ def StartSimulation(request):
                 lat = disasterObj.latitude
                 long = disasterObj.longitude
                 disaster_coordinates = (lat, long)
-                # type = disasterObj['type']
-                # intensity = disasterObj['intensity']
-
                 city_map = CityMap(settings.G, police_stations_coordinates, hospitals_coordinates,
                                    firestations_coordinates)
                 sim = DisasterSimulation(city_map, disaster_coordinates)
                 data = sim.run(policecars=10, firetrucks=10, ambulances=10)
                 idOfObj = disasterObj.id
-                stationMap = getObjectsFromDb(dispatchCenters=data['dispatch_centers'])
+                intensity = disasterObj.intensity
+                currentSeverity = "easy"
+                if 4 > intensity <= 7 :
+                    currentSeverity = "medium"
+                elif intensity > 7:
+                    currentSeverity = "hard"
+
                 if idOfObj not in responseMap:
-                    #TODO intensity to severity map
+                    stationMap = getObjectsFromDb(dispatchCenters=data['dispatch_centers'])
+                    logger.info("Adding new disaster")
                     responseMap[idOfObj] = ResponseSender(location=(disasterObj.latitude,disasterObj.longitude),
-                                                          type = disasterObj.type,stationMap=stationMap)
+                                                          type = disasterObj.type,stationMap=stationMap,severity=currentSeverity)
+
                 returnList.extend(responseMap[idOfObj].sendResponse())
-                pprint("monitoring responses now")
-                currentSeverity = responseMap[idOfObj].monitorSeverity()
+                logger.info("monitoring responses now")
+                updatedCurrentSeverity = responseMap[idOfObj].monitorSeverity()
                 responseObj = responseMap[idOfObj]
                 if currentSeverity is None:
                     listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
                     returnList.extend(listOfunits)
-                #TODO uncomment this once the intensity and severity map is built properly
-                # if currentSeverity != disasterObj.intensity:
-                #     disasterObj.intensity = currentSeverity
-                #     listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
-                #     # call back some police cars
-                #     returnList.extend(listOfunits)
+                if updatedCurrentSeverity != currentSeverity:
+                    logger.info("****!severity changed!*** from {} to {}".format(currentSeverity,updatedCurrentSeverity))
+                    if currentSeverity == "easy":
+                        upIntensity = 1
+                    elif currentSeverity == "medium":
+                        upIntensity = 5
+                    else:
+                        upIntensity = 8
+                    disasterObj.intensity = upIntensity
+                    # disasterObj.save()
+                    responseObj.setReverseDirection(currentSeverity, None, None)
+                    # call back some police cars
+                drivingBackList = responseObj.returnToStation()
+                returnList.extend(drivingBackList)
             pprint(returnList)
             vehicleInfo = route.getVehicleInformation()
             for i in vehicleInfo:

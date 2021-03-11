@@ -79,5 +79,8 @@ class SpawingStation:
 
     def locStr(self):
         return '{}:{}'.format(self._locationpoint[0],self._locationpoint[1])
+
+    def setDirection(self, direction):
+        self._direction = direction
     # def recieveUnitsBack(self,numUnits,direction):
     #     for
