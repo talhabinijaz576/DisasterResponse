@@ -8,6 +8,10 @@ logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname
 logger = logging.getLogger(__name__)
 
 class ResponseSender:
+    """
+    This class is the heart of our application, as this class mangaes how the vehicles move around the city, montiors if
+    there is a disaster, if there is send the relevant support and diverge traffic, and also monitor the severity of the disaster
+    """
 
     def __init__(self,location,type,stationMap,severity='medium'):
         """

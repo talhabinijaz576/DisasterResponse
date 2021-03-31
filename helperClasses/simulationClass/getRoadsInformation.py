@@ -1,10 +1,14 @@
 import osmnx as ox
-import networkx as nx
-import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
 
 class RoadInformation:
+    """
+    This class is used to give the road information to the backend django server
+    >>> rI = RoadInformation() # intialise the object with the default variables
+    >>> rI.getRoadInformation("RandomRoad") # should return 1,1
+    (1, 1)
+    """
     def __init__(self,north=53.363870,west=-6.303802,south=53.333346,east=-6.240316):
         self._north = north
         self._west = west
@@ -34,7 +38,16 @@ class RoadInformation:
         self._hashMap = hashMap
 
     def getRoadInformation(self,nameOfRoad):
-        if nameOfRoad in self._hashMap:
+        """
+        >>> rI.getRoadInformation("RandomRoad") # should return 1,1
+        (1, 1)
+        """
+        exist = getattr(self,'_hashMap',None)
+        if (exist is not None) and (nameOfRoad in self._hashMap):
             return self._hashMap[nameOfRoad]['lanes'],self._hashMap[nameOfRoad]['length']
         else:
             return 1,1
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(extraglobs={'rI': RoadInformation()},verbose=True)

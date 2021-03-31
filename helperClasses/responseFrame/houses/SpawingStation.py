@@ -7,6 +7,18 @@ logger = logging.getLogger(__name__)
 class SpawingStation:
     """
     This class can be used as a sole entity which can act as a hospital or as a police station.
+    Below are the test cases for the class which should pass without fail !
+    >>> from helperClasses.responseFrame.responseClass.responseClasses import Firetruck
+    >>> location = (53.345863, -6.254423)
+    >>> capacity = 5
+    >>> listOfVehicles = [Firetruck(name="{}:{}".format(location,i),location=None) for i in range(capacity)]
+    >>> sStn = SpawingStation("Firestation1",startingLocation=location,spawningObjects=listOfVehicles)
+    >>> sStn.unitLeft()
+    5
+    >>> sStn.recieveInfo(8)
+    {'status': False, 'units': [], 'numUnitsLeft': 8}
+    >>> sStn.recieveInfo(4)
+    {'status': True, 'units': {'(53.345863, -6.254423):0': {'id': '(53.345863, -6.254423):0', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}, '(53.345863, -6.254423):1': {'id': '(53.345863, -6.254423):1', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}, '(53.345863, -6.254423):2': {'id': '(53.345863, -6.254423):2', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}, '(53.345863, -6.254423):3': {'id': '(53.345863, -6.254423):3', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}}, 'numUnitsLeft': -1}
     """
     def __init__(self,name,startingLocation,spawningObjects,direction=None):
         """
@@ -84,3 +96,7 @@ class SpawingStation:
         self._direction = direction
     # def recieveUnitsBack(self,numUnits,direction):
     #     for
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(verbose=True)
