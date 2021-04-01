@@ -8,11 +8,12 @@ from helperClasses.simulationClass.getVehicles import Routes
 from helperClasses.responseFrame.responseFramework import ResponseSender
 from helperClasses.responseFrame.houses.SpawingStation import SpawingStation
 from helperClasses.responseFrame.responseClass.responseClasses import *
+from helperClasses.utils.utils import *
 from control_room.models import PoliceStation, Hospital, FireStation
 from control_room.models import Road, Shape, Disaster
 from simulation.simulation import CityMap, DisasterSimulation
 import logging,json
-
+import os
 logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s] - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 def getDefaultContext(request):
@@ -25,7 +26,7 @@ def getDefaultContext(request):
 def ControlRoomHomeView(request):
 
     html_template = "controlroom/controlroom.html"
-    context = getDefaultContext(request)
+    context = getDefaultContext("Simulation")
     
     if(request.POST):
         pprint(request.POST)
