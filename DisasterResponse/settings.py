@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'foo_auth',
     'simulation',
     'control_room',
-    'home'
+    'home',
+    'manager'
 ]
 
 MIDDLEWARE = [

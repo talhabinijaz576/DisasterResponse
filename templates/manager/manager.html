@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+
+<div class="modal" id="deleteConfirmationModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form method="POST" enctype="multipart/form-data" id="DeleteProcessConfirmation"> {% csrf_token %}
+        <input type = "text" id="deleteConfirmationInput" hidden>
+        <div class="modal-body">
+          <span class="close " data-dismiss="modal" id="deleteConfirmationClose">&times;</span>
+          <p>Are you sure you want to delete the location?<p>
+        <!--</div>
+
+        <div class="modal-footer">-->
+          <center><button type="submit" name="", id="delete_confirmation_button" class="btn btn-outline-success">Delete</button></center>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="addAccessKeyModal" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form method="POST" enctype="multipart/form-data" id="access_key_form" name="access_key_form"> {% csrf_token %}
+
+        <input type="text" name="access_key_value" id="access_key_value" value="" hidden>
+        <input type="text" name="access_key_form" id="access_key_form" value="true" hidden>
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="modal-title" id ="accessKeyModalHeader">Add {{CenterType}}</h3>
+          <label style="color:red" id="AccessKeyErrorLabel"></label>
+          <span class="close " data-dismiss="modal" id="addAccessKeyClose">&times;</span>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group" id = "AccessKeyInfo">
+
+                <div class="col-md-12"  id = "AccessKeyNameDiv">
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Name</label>
+                        <input type="text" name="access_key_name" class="form-control" autocomplete="off" id="AccessKeyNameInput" value='asset_access_key'>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" name="save_access_key", id="save_access_key" class="btn btn-outline-success" onclick="SubmitAccessKeyForm();"> Create </button>
+        </div>
+      </form>
+    
+    </div>
+  </div>        
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" >
+
+                <div class="card-header card-header-primary table-div">
+                <h4 class="card-title table-title">{{CenterType}}</h4>
+                    <div>
+                      <button name="addAccessKeyTrigger", id="addAccessKeyTrigger" class="btn btn-white btn-round btn-just-icon btn-table">
+                          <i class="material-icons">add</i>
+                          <div class="ripple-container"></div>
+                      </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <th>Name</th>
+                        <th>Date Added</th>
+                        <th>Available</th>
+                        <th>Maximum Capacity</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        {% for record in records %}
+                            <tr>
+                            <td>{{record.0|truncatechars:45}}</td>
+                            <td>{{record.1}}</td>
+                            <td>{{record.2}}</td>
+                            <td>{{record.3}}</td>
+                            <td class="td-actions text-right">
+                                <div class="input-group no-border">
+                                    <button type="button" name="edit_asset" value="{{record.0}}" class="btn btn-link btn-sm" rel="tooltip" data-original-title="Edit Key" onclick = "ShowAccessKey('{{record.0}}', '{{record.1}}', '{{record.2}}')">
+                                        <i class="material-icons">edit</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                    <button type="button" name="delete_asset" value="{{record.0}}" class="btn btn-link btn-sm"  rel="tooltip" data-original-title="Delete Key" onclick="ConfirmDelete('delete_access_key','{{record.1}}')">
+                                        <i class="material-icons">delete</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </div>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                        
+                        </tbody>
+                    </table>
+
+                    </div>
+                    
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'js/manager/manager.js' %}"></script>
+      
+{% endblock %}

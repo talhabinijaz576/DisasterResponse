@@ -8,14 +8,12 @@ from helperClasses.simulationClass.getVehicles import Routes
 from helperClasses.responseFrame.responseFramework import ResponseSender
 from helperClasses.responseFrame.houses.SpawingStation import SpawingStation
 from helperClasses.responseFrame.responseClass.responseClasses import *
+from helperClasses.utils.utils import *
 from control_room.models import PoliceStation, Hospital, FireStation
 from control_room.models import Road, Shape, Disaster
 from simulation.simulation import CityMap, DisasterSimulation
 import logging,json
-
-def getDefaultContext(request):
-    context = {}
-    return context
+import os
 
 
 
@@ -23,7 +21,7 @@ def getDefaultContext(request):
 def ControlRoomHomeView(request):
 
     html_template = "controlroom/controlroom.html"
-    context = getDefaultContext(request)
+    context = getDefaultContext("Simulation")
     
     if(request.POST):
         pprint(request.POST)
@@ -45,15 +43,22 @@ def ControlRoomHomeView(request):
     return response
 
 #logger = logging.getLogger(__name__)
-routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
-# routesPath = 'shapes.txt'
-route = Routes(routesPath)
+try:
+    routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+    route = Routes(routesPath)
+except:
+    routesPath = os.path.join(settings.BASE_DIR, "shapes.txt")
+    route = Routes(routesPath)
+
 responseMap = {}
 #TODO : initialise : SpawingStation objects from file SpawingStation.py
 
-police_stations_coordinates = [[(p.latitude, p.longitude), p.name, p.capacity, p.vehicles_available] for p in PoliceStation.objects.all()]
-hospitals_coordinates = [[(h.latitude, h.longitude), h.name, h.capacity, h.vehicles_available] for h in Hospital.objects.all()]
-firestations_coordinates = [[(f.latitude, f.longitude), f.name, f.capacity, f.vehicles_available] for f in FireStation.objects.all()]
+try:
+    police_stations_coordinates = [[(p.latitude, p.longitude), p.name, p.capacity, p.vehicles_available] for p in PoliceStation.objects.all()]
+    hospitals_coordinates = [[(h.latitude, h.longitude), h.name, h.capacity, h.vehicles_available] for h in Hospital.objects.all()]
+    firestations_coordinates = [[(f.latitude, f.longitude), f.name, f.capacity, f.vehicles_available] for f in FireStation.objects.all()]
+except:
+    pass
 locationMap = {}
 
 def getObjectsFromDb(dispatchCenters):
@@ -77,7 +82,7 @@ def getObjectsFromDb(dispatchCenters):
 @login_required(login_url="/accounts/login/")
 def StartSimulation(request):
     html_template = "controlroom/controlroom.html"
-    context = getDefaultContext(request)
+    context = getDefaultContext("Simulation")
 
     if (request.POST):
         returnJson = {}
@@ -152,5 +157,7 @@ def StartSimulation(request):
             # pprint('inside get')
             return HttpResponse(response, content_type="application/json")
         # GET LOGIC GOES HERE
+
+
     response = render(request, template_name=html_template, context=context)
     return response
