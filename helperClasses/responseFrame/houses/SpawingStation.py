@@ -8,7 +8,11 @@ class SpawingStation:
     """
     This class can be used as a sole entity which can act as a hospital or as a police station.
     """
+<<<<<<< Updated upstream
     def __init__(self,name,startingLocation,spawningObjects,direction=None):
+=======
+    def __init__(self,name,startingLocation,spawningObjects):
+>>>>>>> Stashed changes
         """
         initialise the spawing station,
         Args:
@@ -20,10 +24,16 @@ class SpawingStation:
         self._locationpoint = startingLocation
         self._spawningObjs = spawningObjects
         self._numberOfspawns = len(spawningObjects)
+<<<<<<< Updated upstream
         self._direction = direction
         logger.info("initialising the spawning station for type {}".format(name))
 
     def recieveInfo(self,numberofUnitsRequired,direction=None,**kwargs):
+=======
+        logger.info("initialising the spawning station for type {}".format(name))
+
+    def recieveInfo(self,location,numberofUnitsRequired,direction,**kwargs):
+>>>>>>> Stashed changes
         """
         function which should be called by the simulation software to send the responses to the location
         Args:
@@ -35,6 +45,7 @@ class SpawingStation:
         Returns:
 
         """
+<<<<<<< Updated upstream
         if direction is not None:
             self._direction = direction
 
@@ -42,17 +53,25 @@ class SpawingStation:
         logger.info("In station {} having {} units required units {}".format(
             self._type,self.unitLeft(),numberofUnitsRequired
         ))
+=======
+>>>>>>> Stashed changes
         if self.unitLeft() > numberofUnitsRequired:
             #TODO : update lat long according to new trafic simulation
             # lat,long = getLatAndLong('',location,self._locationpoint)
             unitsToSend = {}
             for idx in range(0,numberofUnitsRequired):
                 unitToSend = self._spawningObjs.pop(0) # always removing the first element
+<<<<<<< Updated upstream
                 logger.info("unit to send {}".format(unitsToSend))
                 unitToSend.setNewLocation(self._locationpoint)
                 unitToSend.setDirection(direction)
                 unitsToSend[str(unitToSend)]= unitToSend.toJson()
 
+=======
+                unitToSend.setNewLocation(self._locationpoint)
+                unitToSend.setDirection(direction)
+                unitsToSend[str(unitToSend)]= unitToSend
+>>>>>>> Stashed changes
             retJson = {'status':True,'units':unitsToSend,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
         else:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
@@ -75,9 +94,13 @@ class SpawingStation:
         return len(self._spawningObjs)
 
     def __str__(self):
+<<<<<<< Updated upstream
         return self._type
 
     def locStr(self):
         return '{}:{}'.format(self._locationpoint[0],self._locationpoint[1])
     # def recieveUnitsBack(self,numUnits,direction):
     #     for
+=======
+        return self._type
+>>>>>>> Stashed changes

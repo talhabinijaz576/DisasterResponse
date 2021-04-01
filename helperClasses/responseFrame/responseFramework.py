@@ -32,9 +32,12 @@ class ResponseSender:
         self._timeElapsed = None
         self._startTime = None
         self.startTime()
+<<<<<<< Updated upstream
         self.unitsSend = None
         self._spawingRecorder = {}
         self._direction = None
+=======
+>>>>>>> Stashed changes
 
     def sendResponse(self):
         if self._startTime is None:
@@ -44,6 +47,7 @@ class ResponseSender:
         logger.info('Sending the units')
         unitsSend = []
         for responseObj in self._stationMap:
+<<<<<<< Updated upstream
             direction = responseObj._direction
             type, locationStr = responseObj._type, responseObj.locStr()
             if self.unitsSend is None:
@@ -137,6 +141,21 @@ class ResponseSender:
                     listOfUnits.append(unit.toJson())
 
         return listOfUnits
+=======
+            if responseObj.unitLeft() >0:
+                retJson = responseObj.recieveInfo(self._severity,self._location,numResponseRequired)
+                logger.info('sent {} units from {}'.format(numResponseRequired-retJson['numUnitsLeft'],responseObj))
+                if retJson['status']:
+                    unitsSend.extend(retJson['units'])
+                    if retJson['numUnitsLeft'] == 0:
+                        break
+                    else:
+                        numResponseRequired = retJson['numUnitsLeft']
+        logger.info('sent all units now monitoring the disaster and waiting for it to end,')
+
+        return unitsSend
+
+>>>>>>> Stashed changes
     def continousMonitoring(self):
         #TODO : update this function later.
         currentSeverity = self.monitorSeverity()
@@ -180,11 +199,14 @@ class ResponseSender:
         timeElapsedMins = self._timeElapsed/60
         currentSeverity = self._severity
         numReachedResponses = self._numResponsereached
+<<<<<<< Updated upstream
         for responseObj in self._stationMap:
             type, locationStr = responseObj._type, responseObj.locStr()
             responseWorkerState = self._spawingRecorder[type][locationStr]
             if "working" in responseWorkerState:
                 numReachedResponses += len(responseWorkerState["working"])
+=======
+>>>>>>> Stashed changes
         numResponseRequired = self.severitymap[self._severity]
         percResponseReached = (numReachedResponses/numResponseRequired)*100 # this is the efficiency of the system
         extraMinsRequired = ((100-percResponseReached)*self._fullTimeEfficiency)/100

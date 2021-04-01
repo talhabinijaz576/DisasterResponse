@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from pprint import pprint
 from django.utils import timezone
 from helperClasses.simulationClass.getVehicles import Routes
+<<<<<<< Updated upstream
 from helperClasses.responseFrame.responseFramework import ResponseSender
 from helperClasses.responseFrame.houses.SpawingStation import SpawingStation
 from helperClasses.responseFrame.responseClass.responseClasses import *
@@ -14,6 +16,10 @@ from control_room.models import Road, Shape, Disaster
 from simulation.simulation import CityMap, DisasterSimulation
 import logging,json
 import os
+=======
+from control_room.models import Road, Shape, Disaster
+import logging,json
+>>>>>>> Stashed changes
 
 
 
@@ -43,6 +49,7 @@ def ControlRoomHomeView(request):
     return response
 
 #logger = logging.getLogger(__name__)
+<<<<<<< Updated upstream
 try:
     routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
     route = Routes(routesPath)
@@ -78,6 +85,13 @@ def getObjectsFromDb(dispatchCenters):
         spw = SpawingStation(startingLocation=location,name=name,spawningObjects=listOfVehicles,direction=route)
         retSpawningObjects.append(spw)
     return retSpawningObjects
+=======
+routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+# routesPath = 'shapes.txt'
+route = Routes(routesPath)
+
+#TODO : initialise : SpawingStation objects from file SpawingStation.py
+>>>>>>> Stashed changes
 
 @login_required(login_url="/accounts/login/")
 def StartSimulation(request):
@@ -114,6 +128,10 @@ def StartSimulation(request):
         pprint(request.GET)
         if("startSimulation" in request.GET):
             # logger.info('got the vehicle request')
+<<<<<<< Updated upstream
+=======
+            vehicleInfo = route.getVehicleInformation()
+>>>>>>> Stashed changes
             returnList = []
 
             disasterObjs = Disaster.objects.filter(isActive=True)
