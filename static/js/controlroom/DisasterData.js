@@ -22,6 +22,8 @@ function addDisaster(){
 
 function postdisaster(resp)
 {
-    if(resp.status == "ok")
-        var mp = new L.Marker([document.getElementById("lat").value, document.getElementById("long").value], {icon: fire}).addTo(mymap);
+    if(resp.status == "ok"){
+        //var mp = new L.Marker([document.getElementById("lat").value, document.getElementById("long").value], {icon: fire}).addTo(mymap);
+        var mp = new L.Marker([document.getElementById("lat").value, document.getElementById("long").value], {icon: cssIcon}).addTo(mymap);
+    }
 }

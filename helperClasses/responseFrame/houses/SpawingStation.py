@@ -7,6 +7,18 @@ logger = logging.getLogger(__name__)
 class SpawingStation:
     """
     This class can be used as a sole entity which can act as a hospital or as a police station.
+    Below are the test cases for the class which should pass without fail !
+    >>> from helperClasses.responseFrame.responseClass.responseClasses import Firetruck
+    >>> location = (53.345863, -6.254423)
+    >>> capacity = 5
+    >>> listOfVehicles = [Firetruck(name="{}:{}".format(location,i),location=None) for i in range(capacity)]
+    >>> sStn = SpawingStation("Firestation1",startingLocation=location,spawningObjects=listOfVehicles)
+    >>> sStn.unitLeft()
+    5
+    >>> sStn.recieveInfo(8)
+    {'status': False, 'units': [], 'numUnitsLeft': 8}
+    >>> sStn.recieveInfo(4)
+    {'status': True, 'units': {'(53.345863, -6.254423):0': {'id': '(53.345863, -6.254423):0', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}, '(53.345863, -6.254423):1': {'id': '(53.345863, -6.254423):1', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}, '(53.345863, -6.254423):2': {'id': '(53.345863, -6.254423):2', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}, '(53.345863, -6.254423):3': {'id': '(53.345863, -6.254423):3', 'type': 'FireTruck', 'currentLocation': (53.345863, -6.254423), 'previousLocation': None}}, 'numUnitsLeft': -1}
     """
     def __init__(self,name,startingLocation,spawningObjects,direction=None):
         """
@@ -24,9 +36,6 @@ class SpawingStation:
         logger.info("initialising the spawning station for type {}".format(name))
 
     def recieveInfo(self,numberofUnitsRequired,direction=None,**kwargs):
-        logger.info("initialising the spawning station for type {}".format(name))
-
-    def recieveInfo(self,location,numberofUnitsRequired,direction,**kwargs):
         """
         function which should be called by the simulation software to send the responses to the location
         Args:
@@ -56,9 +65,6 @@ class SpawingStation:
                 unitToSend.setDirection(direction)
                 unitsToSend[str(unitToSend)]= unitToSend.toJson()
 
-                unitToSend.setNewLocation(self._locationpoint)
-                unitToSend.setDirection(direction)
-                unitsToSend[str(unitToSend)]= unitToSend
             retJson = {'status':True,'units':unitsToSend,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
         else:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
@@ -85,6 +91,12 @@ class SpawingStation:
 
     def locStr(self):
         return '{}:{}'.format(self._locationpoint[0],self._locationpoint[1])
+
+    def setDirection(self, direction):
+        self._direction = direction
     # def recieveUnitsBack(self,numUnits,direction):
     #     for
-        return self._type
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(verbose=True)
