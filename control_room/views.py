@@ -47,7 +47,7 @@ def ControlRoomHomeView(request):
     return response
 
 #logger = logging.getLogger(__name__)
-routesPath = '/home/yoda/Downloads/google_transit_dublinbus/shapes.txt'
+routesPath = 'helperClasses/simulationClass/shapes.txt'
 # routesPath = 'shapes.txt'
 route = Routes(routesPath)
 responseMap = {}
@@ -115,13 +115,17 @@ def StartSimulation(request):
             returnList = []
 
             disasterObjs = Disaster.objects.filter(isActive=True)
+            disasterCoords = []
             for disasterObj in disasterObjs:
 
                 lat = disasterObj.latitude
                 long = disasterObj.longitude
                 disaster_coordinates = (lat, long)
+                disasterCoords.append(disaster_coordinates)
                 city_map = CityMap(settings.G, police_stations_coordinates, hospitals_coordinates,
                                    firestations_coordinates)
+                if route.getCityMap() is None:
+                    route.setCityMap(city_map)
                 sim = DisasterSimulation(city_map, disaster_coordinates)
                 data = sim.run(policecars=10, firetrucks=10, ambulances=10)
                 idOfObj = disasterObj.id
@@ -159,6 +163,8 @@ def StartSimulation(request):
                     # call back some police cars
                 drivingBackList = responseObj.returnToStation()
                 returnList.extend(drivingBackList)
+            pprint("updating the disaster")
+            route.updateTheroutes(disasterCoords)
             pprint(returnList)
             vehicleInfo = route.getVehicleInformation()
             for i in vehicleInfo:
