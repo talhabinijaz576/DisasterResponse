@@ -1,7 +1,8 @@
 from helperClasses.responseFrame.responseClass.vehicle import Vehicle
 from helperClasses.simulationClass.getRoadsInformation import RoadInformation
 import pandas as pd
-from geopy.geocoders import Nominatim
+import reverse_geocoder as rg
+# from geopy.geocoders import Nominatim
 import logging
 
 logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s] - %(message)s', level=logging.DEBUG)
@@ -36,10 +37,10 @@ class Routes:
         self.roadInformation = RoadInformation()
         self.locationToRoadMap = {}
         self.roadInformation.extractHashMap()
-        self._geolocator = Nominatim(user_agent="geoapiExercises")
+        # self._geolocator = Nominatim(user_agent="geoapiExercises")
         self.disasterMap = {} # map used to monitor current disaster
 
-    def isDisasterInaWay(self,disasterLocation,startLocation,endLocation):
+    def isDisasterInaWay(self,disasterLocation,startLocation,endLocation,routeKey):
         # logger.info("*********Disasterlocation {}, startLocation {}****************".format(disasterLocation,startLocation))
         disasterX, disasterY = disasterLocation
         startX, startY = startLocation
@@ -49,41 +50,57 @@ class Routes:
         else:
             return False
 
+    def findDestination(self,disasterLocation,locationOfPoints):
+        for idx in range(1,len(locationOfPoints)):
+            startLocation = locationOfPoints[idx-1]
+            endLocation = locationOfPoints[idx]
+            temp = self.isDisasterInaWay(disasterLocation,startLocation,endLocation,None)
+            if not temp:
+                return endLocation,idx
+        return None,None
     def updateTheroutes(self,disasterLocation):
-        for routeKey in self.routes:
-            locationToUse = self.routes[routeKey][self.idx]
 
-            if len(disasterLocation) != 0:
+        for routeKey in self.routes:
+
+
+            if len(disasterLocation) != 0 and self.idx > 0:
 
                 if self.idx+1 >= len(self.routes[routeKey]):
                     continue
 
                 for key in self.disasterMap:
-                    if routeKey == self.disasterMap[key][1]:
+                    if routeKey == self.disasterMap[key][2]:
+                        logger.info("Route already Present hence not touching this.")
                         continue
-
-                destination = self.routes[routeKey][self.idx + 1]
+                destination = self.routes[routeKey][self.idx]
+                locationToUse = self.routes[routeKey][self.idx-1]
                 isDisasterPresent = False
+                disasterLocationPresent = None
                 for disasterLocationCoord in disasterLocation:
-                    tempRes = self.isDisasterInaWay(disasterLocationCoord, locationToUse, destination)
+                    tempRes = self.isDisasterInaWay(disasterLocationCoord, locationToUse, destination, routeKey)
                     isDisasterPresent = tempRes or isDisasterPresent
+                    if tempRes:
+                        disasterLocationPresent = disasterLocationCoord
+                        break
+
 
                 if isDisasterPresent:
-                    if self.idx != 0:
-                        origin = self.routes[routeKey][self.idx]
-                    else:
-                        origin = locationToUse
+                    destinationNew,idxTillRoute = self.findDestination(disasterLocationPresent,self.routes[routeKey][self.idx:])
                     roadName = self.getRoadName(locationToUse)
 
-                    self.cityMap.apply_congestion({roadName:100}) # apply congestion to the road
-                    route = self.cityMap.get_shortest_path(destination,origin)
+                    self.cityMap.apply_congestion({roadName:20}) # apply congestion to the road
+                    route = self.cityMap.get_shortest_path(destinationNew,locationToUse)
                     cordinates = [list(c) for c in route.cordinates]
 
                     self.disasterMap[(locationToUse[0],locationToUse[1])] = (self.idx,len(cordinates), routeKey)
 
-                    oldList = self.routes[routeKey][:self.idx]
+                    oldList = self.routes[routeKey][:idxTillRoute]
+                    # logger.info("#### len {}".format(len(oldList)))
+                    if len(oldList) >0:
+                        logger.info("#### Prev Cordirnates {}".format(oldList[-1]))
+                        logger.info("#### New coordinates {}".format(cordinates))
                     newList = oldList+cordinates
-                    newList.extend(self.routes[routeKey][self.idx:])
+                    newList.extend(self.routes[routeKey][idxTillRoute:])
                     self.routes[routeKey] = newList
 
 
@@ -95,13 +112,14 @@ class Routes:
         key = (locationToUse[0],locationToUse[1])
         if key not in self.locationToRoadMap:
 
-            positionToQry = "{},{}".format(locationToUse[0], locationToUse[1])
-            location = self._geolocator.reverse(positionToQry)
-            logger.info("got the roadname {} ofr {}".format(location,locationToUse))
-            if 'road' in location.raw['address']:
-                roadName = location.raw['address']['road']
-            else:
-                roadName = location.raw['address']['city_district']
+            # positionToQry = "{},{}".format(locationToUse[0], locationToUse[1])
+            location = rg.search(key)
+            # logger.info("got the roadname {} ofr {}".format(location,locationToUse))
+            roadName = location[0]['name']
+            # if 'road' in location.raw['address']:
+            #     roadName = location.raw['address']['road']
+            # else:
+            #     roadName = location.raw['address']['city_district']
             self.locationToRoadMap[key] = roadName
         return self.locationToRoadMap[key]
 
@@ -159,6 +177,20 @@ class Routes:
 
     def setCityMap(self,var):
         self.cityMap = var
+
+class Circle:
+    def __init__(self,centerX,centerY,radius=1.0):
+        self._x = centerX
+        self._y = centerY
+        self.radius = radius
+
+    def isInside(self,x,y):
+        d  = self.radius**2 - ((self._x-x)**2 + (self._y-y)**2)
+        if d>=0:
+            return True
+        else:
+            return False
+
 if __name__ == '__main__':
     import json
     baseDir = '/home/yoda/ML/DisasterResponse'

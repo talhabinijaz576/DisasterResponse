@@ -46,39 +46,44 @@ class DispatchCenter:
         return self.dispatch_type=="h"
         
     
-class PoliceStationInterface(DispatchCenter):
+class PoliceStation(DispatchCenter):
     
-    def __init__(self, policestation):
-        self.center = policestation
-        self.lat, self.long = policestation.latitude, policestation.longitude
-        self.name = policestation.name
+    def __init__(self, name, capacity, coordinates, vehicles_available=None):
+        self.lat, self.long = coordinates
+        self.name = name
         self.type = "p"
         self.vehicle_type = "PoliceCar"
-        self.capacity = policestation.capacity
-        self.vehicles_available = policestation.capacity
+        self.capacity = capacity
+        if(vehicles_available==None):
+            self.vehicles_available = capacity
+        else:
+            self.vehicles_available = vehicles_available
 
-
-class HospitalInterface(DispatchCenter):
+class Hospital(DispatchCenter):
     
-    def __init__(self, hospital):
-        self.center = hospital
-        self.lat, self.long = hospital.latitude, hospital.longitude
-        self.name = hospital.name
+    def __init__(self, name, capacity, coordinates, vehicles_available=None):
+        self.lat, self.long = coordinates
+        self.name = name
         self.type = "h"
         self.vehicle_type = "Ambulance"
-        self.capacity = hospital.capacity
-        self.vehicles_available = hospital.capacity
+        self.capacity = capacity
+        if(vehicles_available==None):
+            self.vehicles_available = capacity
+        else:
+            self.vehicles_available = vehicles_available
 
-class FireStationInterface(DispatchCenter):
+class FireStation(DispatchCenter):
     
-    def __init__(self, firestation):
-        self.center = firestation
-        self.lat, self.long = firestation.latitude, firestation.longitude
-        self.name = firestation.name
+    def __init__(self, name, capacity, coordinates, vehicles_available=None):
+        self.lat, self.long = coordinates
+        self.name = name
         self.type = "f"
         self.vehicle_type = "Firetruck"
-        self.capacity = firestation.capacity
-        self.vehicles_available = firestation.capacity
+        self.capacity = capacity
+        if(vehicles_available==None):
+            self.vehicles_available = capacity
+        else:
+            self.vehicles_available = vehicles_available
         
         
 class Route:
@@ -94,13 +99,13 @@ class Route:
 
 class CityMap:
     
-    def __init__(self, G):
+    def __init__(self, G, policestation_info, hospital_info, firestation_info):
         self.G = copy.deepcopy(G)
         self.apply_congestion({})
         
-        self.policestations = [PoliceStationInterface(center) for center in PoliceStation.objects.all()]
-        self.hospitals = [HospitalInterface(center) for center in Hospital.objects.all()]
-        self.firestations = [FireStationInterface(center) for center in FireStation.objects.all()]
+        self.policestations = [PoliceStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in policestation_info]
+        self.hospitals = [Hospital(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in hospital_info]
+        self.firestations = [FireStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in firestation_info]
         
         edges = list(G.edges(data=True))
         self.all_roads = [x[2].get('name') for x in edges]
