@@ -18,6 +18,9 @@ import networkx as nx
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+evacuation_files = os.path.join(BASE_DIR, "evacuation")
+if(not os.path.exists(evacuation_files)):
+    os.mkdir(evacuation_files)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -45,7 +48,8 @@ INSTALLED_APPS = [
     'simulation',
     'control_room',
     'home',
-    'manager'
+    'manager',
+    'evacuation_manager',
 ]
 
 MIDDLEWARE = [

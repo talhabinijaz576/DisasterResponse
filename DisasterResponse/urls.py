@@ -26,4 +26,5 @@ urlpatterns = [
     path('controlroom/', include("control_room.urls")),
     path('simulation/', include("simulation.urls")),
     path('manager/', include("manager.urls")),
+    path('evacuations/', include("evacuation_manager.urls")),
 ]

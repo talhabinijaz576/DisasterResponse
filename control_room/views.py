@@ -16,9 +16,7 @@ import logging,json
 import os
 logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s] - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-def getDefaultContext(request):
-    context = {}
-    return context
+
 
 
 

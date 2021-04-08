@@ -172,7 +172,23 @@
         <script src="{% static 'js/plugins/chartist.min.js' %}"></script>
         <script src="{% static 'js/plugins/chartist-plugin-legend.js' %}"></script>
       
-      
+        
+        {% if show_popup %}
+
+        <script>
+
+          Swal.fire({
+            type: '{{popup_type}}',
+            title: '{{popup_message}}',
+            showConfirmButton: false,
+          })
+
+        </script>
+        {% endif %}
+
       </body>
+
+
+
 </html>
 

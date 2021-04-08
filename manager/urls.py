@@ -6,5 +6,6 @@ urlpatterns = [
     path('hospitals', views.ManagerView, name='hospitals'),
     path('policestations', views.ManagerView, name='policestations'),
     path('firestations', views.ManagerView, name='firestations'),
+    path('evacuationpoints', views.ManagerView, name='evacuationpoints'),
     #path('transform', views.TransformView)
 ]

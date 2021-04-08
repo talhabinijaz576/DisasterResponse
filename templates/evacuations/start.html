@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+
+<div class="modal" id="addCenter" {% if show_center %} style="display: block;" {% endif %}>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form method="POST" enctype="multipart/form-data" id="center_form" name="center_form"> {% csrf_token %}
+
+        <input type="text" name="save_center" hidden>
+        <input type="text" name="center_sent" id="center_sent" value='{{center.name}}' hidden>
+        <input type="text" id="all_centers" value=';{{all_centers}};' hidden>
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="modal-title" id ="editCenterHeader">{% if show_center %} Edit {% else %} Add {% endif %} {{CenterType}}</h3>
+          <label style="color:red" id="error_label"></label>
+          <span class="close " data-dismiss="modal" id="addCenterClose">&times;</span>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group" id = "AccessKeyInfo">
+
+                <div class="col-md-12"  id = "center_name_div">
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Name</label>
+                        <input type="text" name="center_name" class="form-control" autocomplete="off" id="center_name" value='{{center.name}}'>
+                    </div>
+                </div>
+
+                <div class="row" style="padding-left: 15px;">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Latitude</label>
+                        <input type="text" name="latitude" class="form-control" autocomplete="off" id="latitude" value='{{center.latitude}}'>
+                    </div>
+                  </div>
+
+                  <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Longitude</label>
+                        <input type="text" name="longitude" class="form-control" autocomplete="off" id="longitude" value='{{center.longitude}}'>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-md-5">
+                  <div class="form-group">
+                      <label class="bmd-label-floating">Maximum Capacity</label>
+                      <input type="text" name="capacity" class="form-control" autocomplete="off" id="capacity" value='{{center.capacity}}'>
+                  </div>
+                </div>
+
+                <div class="col-md-5">
+                  <div class="form-group">
+                      <label class="bmd-label-floating">Available</label>
+                      <input type="text" name="available" class="form-control" autocomplete="off" id="available" value='{{center.vehicles_available}}'>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="editCenterButton" name="save_center", id="save_center" class="btn btn-outline-success" onclick="SubmitCenterForm();"> {% if show_center %} Save {% else %} Create {% endif %}  </button>
+        </div>
+      </form>
+    
+    </div>
+  </div>        
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" >
+
+                <div class="card-header card-header-primary table-div">
+                <h4 class="card-title table-title">{{CenterType}}</h4>
+                    <div>
+                      <button name="addCenterTrigger" id="addCenterTrigger" class="btn btn-white btn-round btn-just-icon btn-table">
+                          <i class="material-icons">add</i>
+                          <div class="ripple-container"></div>
+                      </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                        <th>Name</th>
+                        <th>Date Added</th>
+                        <th>Available</th>
+                        <th>Maximum Capacity</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        {% for record in records %}
+                            <tr id="row_{{record.0}}">
+                              <td>{{record.0|truncatechars:45}}</td>
+                              <td>{{record.1}}</td>
+                              <td>{{record.2}}</td>
+                              <td>{{record.3}}</td>
+                              <td class="td-actions text-right">
+                                  <div class="input-group no-border">
+                                    <form method="POST" id="center_action_{{record.0}}" name="center_form_{{record.0}}"> {% csrf_token %}
+                                        <button type="submit" name="reset_center" value="{{record.0}}" class="btn btn-link btn-sm" rel="tooltip" data-original-title="Reset Capacity">
+                                          <i class="material-icons">restart_alt</i>
+                                          <div class="ripple-container"></div>
+                                        </button>  
+                                        <button type="button" class="btn btn-link btn-sm" rel="tooltip" data-original-title="Return Capacity" onclick="ReturnToCenter('{{record.0}}');">
+                                          <i class="material-icons">undo</i>
+                                          <div class="ripple-container"></div>
+                                        </button>
+                                        <button type="submit" name="view_center" value="{{record.0}}" class="btn btn-link btn-sm" rel="tooltip" data-original-title="Edit Center">
+                                            <i class="material-icons">edit</i>
+                                            <div class="ripple-container"></div>
+                                        </button>
+                                        <button type="button" name="delete_center" value="{{record.0}}" class="btn btn-link btn-sm"  rel="tooltip" data-original-title="Delete Center" onclick="ConfirmDelete('{{record.0}}')">
+                                            <i class="material-icons">delete</i>
+                                            <div class="ripple-container"></div>
+                                        </button>
+                                    </form>
+                                  </div>
+                              </td>
+                            </tr>
+                        {% endfor %}
+                        
+                        </tbody>
+                    </table>
+
+                    </div>
+                    
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<form method="POST" enctype="multipart/form-data" id="DeleteForm" hidden> {% csrf_token %}
+  <input type="text" name="delete_center" hidden>
+  <input type="text" id="delete_form_name" name="center"  hidden>
+</form>
+
+<form method="POST" enctype="multipart/form-data" id="ReturnForm" hidden> {% csrf_token %}
+  <input type="text" name="return_center" hidden>
+  <input type="text" id="return_center_name" name="center_name" hidden>
+  <input type="text" id="return_n_center" name="n_return" hidden>
+</form>
+
+<script src="{% static 'js/manager/manager.js' %}"></script>
+
+<script>
+
+
+function ResetForm(){
+  document.getElementById("editCenterHeader").innerText = "Add {{CenterType}}";
+  document.getElementById("editCenterButton").innerText = "Create";
+  document.getElementById("center_name").value = "";
+  document.getElementById("latitude").value = "";
+  document.getElementById("longitude").value = "";
+  document.getElementById("capacity").value = "";
+  document.getElementById("available").value = "";
+  document.getElementById("center_sent").value = "";
+  //document.getElementById("").value = "";
+}
+
+document.getElementById("addCenterTrigger").onclick = (function (){
+  document.getElementById("addCenter").style.display = "block";
+});
+
+document.getElementById("addCenterClose").onclick = (function (){
+  document.getElementById("addCenter").style.display = "None";
+  ResetForm();
+});
+
+
+function ReturnToCenter(center){
+  Swal.fire({
+    input: 'text',
+    title: 'Return Capacity',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Return'
+  }).then((result) => {
+    if (result.value) {
+      var n_center = result.value;
+      //console.log(n_center);
+      document.getElementById("return_center_name").value = center;
+      document.getElementById("return_n_center").value = n_center;
+      //console.log(document.getElementById("return_center_name").value);
+      //console.log(document.getElementById("return_n_center").value);
+      document.getElementById("ReturnForm").submit();
+    }
+  })
+}
+
+function ConfirmDelete(center){
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "do you want to delete "+center,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    console.log(result);
+    if (result.value==true) {
+      document.getElementById("delete_form_name").value = center;
+      $("#row_"+center).remove();
+      SubmitFormAJAX("DeleteForm")
+      Swal.fire(
+        'Deleted!',
+        center + ' has been deleted.',
+        'success'
+      )
+    }
+  })
+}
+
+
+function SubmitCenterForm(){
+  document.getElementById("center_form").submit();
+}
+
+</script>
+
+
+      
+{% endblock %}

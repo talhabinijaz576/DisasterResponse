@@ -37,6 +37,17 @@ class PoliceStation(models.Model):
     vehicles_available = models.IntegerField()
 
 
+class EvacuationPoint(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(unique = False, max_length = 50, default='')
+    date_modified = models.DateTimeField(default=timezone.now)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    capacity = models.IntegerField()
+    vehicles_available = models.IntegerField()
+
+
 class Road(models.Model):
 
     id = models.AutoField(primary_key=True)
