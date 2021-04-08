@@ -175,7 +175,7 @@ def StartSimulation(request):
             for i in vehicleInfo:
                 returnList.append(vehicleInfo[i].toJson())
 
-            response = json.dumps({"status":"ok","routes":returnList})
+            response = json.dumps({"status":"ok","routes":returnList,"disaster":disasterReturn})
             # pprint('inside get')
             return HttpResponse(response, content_type="application/json")
         # GET LOGIC GOES HERE
