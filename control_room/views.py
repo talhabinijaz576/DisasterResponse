@@ -117,6 +117,7 @@ def StartSimulation(request):
 
             disasterObjs = Disaster.objects.filter(isActive=True)
             disasterCoords = []
+            disasterReturn = []
             for disasterObj in disasterObjs:
 
                 lat = disasterObj.latitude
@@ -145,13 +146,16 @@ def StartSimulation(request):
 
                 returnList.extend(responseMap[idOfObj].sendResponse())
                 logger.info("monitoring responses now")
-                updatedCurrentSeverity = responseMap[idOfObj].monitorSeverity()
+                updatedCurrentSeverity, timeRemaining = responseMap[idOfObj].monitorSeverity()
                 responseObj = responseMap[idOfObj]
+                disasterReturn.append({"coordinates": disaster_coordinates, "severity": updatedCurrentSeverity,
+                                       "timeRemaining":timeRemaining})
                 if currentSeverity is None:
                     listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
                     returnList.extend(listOfunits)
                 if updatedCurrentSeverity != currentSeverity:
                     logger.info("****!severity changed!*** from {} to {}".format(currentSeverity,updatedCurrentSeverity))
+
                     if currentSeverity == "easy":
                         upIntensity = 1
                     elif currentSeverity == "medium":

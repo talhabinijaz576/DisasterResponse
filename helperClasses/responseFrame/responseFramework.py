@@ -248,4 +248,4 @@ class ResponseSender:
             else:
                 currentSeverity = None
 
-        return currentSeverity
+        return currentSeverity,timeRemaining
