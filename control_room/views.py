@@ -130,13 +130,14 @@ def StartSimulation(request):
                 sim = DisasterSimulation(city_map, disaster_coordinates)
                 data = sim.run(policecars=10, firetrucks=10, ambulances=10)
 
-                events = sim.ApplyEvents(data["dispatch_centers"])
-                events_str = ";".join(events)
-                event = DisasterEvent.objects.create(latitude = lat, longitude = long, events=events_str, size=size)
-                event.name = "Disaster"+str(event.id)
-                event.save()
-                fig = sim.GetSimulationImage(data["dispatch_centers"])
-                fig.write_image(event.image())
+                # if(len(DisasterEvent.objects.filter(latitude = lat, longitude = long))==0):
+                #    events = sim.ApplyEvents(data["dispatch_centers"])
+                #    events_str = ";".join(events)
+                #    event = DisasterEvent.objects.create(latitude = lat, longitude = long, events=events_str, size=1)
+                #    event.name = "Disaster"+str(event.id)
+                #    event.save()
+                #    fig = sim.GetSimulationImage(data["dispatch_centers"])
+                #    fig.write_image(event.image())
 
                 # logger.info("Data from simulation")
                 # logger.info(data)

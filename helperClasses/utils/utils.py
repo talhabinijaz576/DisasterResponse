@@ -14,6 +14,7 @@ def getNavItems(tab):
 
     nav_items = { 
                  "Simulation" : [[False, "/controlroom/startSimulation", "play_arrow"]],
+                 "Disasters" : [[False, "/manager/disasters", "assignment_late"]],
                  "Evacuations": [ [False, "/evacuations/start", "account_balance"], 
                                     {"Start": [False, "/evacuations/start", "SE"], 
                                      "View Evacuations": [False, "/evacuations/view", "HS"],
