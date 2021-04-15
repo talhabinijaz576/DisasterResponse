@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from pprint import pprint
 from django.utils import timezone
 from helperClasses.simulationClass.getVehicles import Routes
+from evacuation_manager.models import EvacuationEvent, DisasterEvent
 from helperClasses.responseFrame.responseFramework import ResponseSender
 from helperClasses.responseFrame.houses.SpawingStation import SpawingStation
 from helperClasses.responseFrame.responseClass.responseClasses import *
@@ -128,6 +129,15 @@ def StartSimulation(request):
                     route.setCityMap(city_map)
                 sim = DisasterSimulation(city_map, disaster_coordinates)
                 data = sim.run(policecars=10, firetrucks=10, ambulances=10)
+
+                events = sim.ApplyEvents(data["dispatch_centers"])
+                events_str = ";".join(events)
+                event = DisasterEvent.objects.create(latitude = lat, longitude = long, events=events_str, size=size)
+                event.name = "Disaster"+str(event.id)
+                event.save()
+                fig = sim.GetSimulationImage(data["dispatch_centers"])
+                fig.write_image(event.image())
+
                 # logger.info("Data from simulation")
                 # logger.info(data)
                 idOfObj = disasterObj.id
