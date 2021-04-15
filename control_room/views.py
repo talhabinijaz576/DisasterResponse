@@ -151,7 +151,7 @@ def StartSimulation(request):
                 updatedCurrentSeverity, timeRemaining = responseMap[idOfObj].monitorSeverity()
                 responseObj = responseMap[idOfObj]
                 disasterReturn.append({"coordinates": disaster_coordinates, "severity": updatedCurrentSeverity,
-                                       "timeRemaining":timeRemaining})
+                                       "timeRemaining":timeRemaining,"type":disasterObj.type})
                 if currentSeverity is None:
                     listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
                     returnList.extend(listOfunits)
