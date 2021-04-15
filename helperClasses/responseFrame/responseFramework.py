@@ -23,7 +23,8 @@ class ResponseSender:
         """
 
         #TODO : remove the severity map to some outer file
-        self.severitymap = {'easy':3,'medium':6,'hard':10}
+        self.severitymap = {'easy': {"policestation":1,"firestation":1,"hospital":1},'medium':
+        {"policestation":2,"firestation":2,"hospital":2},'hard':{"policestation":4,"firestation":4,"hospital":4}}
         self._severityList = {0:'easy',1:'medium',2:'hard'}
         self._location = location
         self._type = type
@@ -39,18 +40,29 @@ class ResponseSender:
         self.unitsSend = None
         self._spawingRecorder = {}
         self._direction = None
+        self.updatedNumResponses = {}
 
     def sendResponse(self):
         if self._startTime is None:
             self.startTime()
+        mapNumResponseRequired = self.severitymap[self._severity]
 
-        numResponseRequired = self.severitymap[self._severity]
         logger.info('Sending the units')
         unitsSend = []
         for responseObj in self._stationMap:
+
             direction = responseObj._direction
             type, locationStr = responseObj._type, responseObj.locStr()
             if self.unitsSend is None:
+                typeofHelp = None
+                for key in mapNumResponseRequired:
+                    if key in str(responseObj).lower():
+                        typeofHelp = key
+                        break
+                if typeofHelp in self.updatedNumResponses:
+                    numResponseRequired = self.updatedNumResponses[typeofHelp]
+                else:
+                    numResponseRequired = mapNumResponseRequired[typeofHelp]
                 if responseObj.unitLeft() >0 and numResponseRequired > 0:
                     retJson = responseObj.recieveInfo(numResponseRequired,direction) # dictionary of vehicles with there path
 
@@ -70,6 +82,7 @@ class ResponseSender:
                             break
                         else:
                             numResponseRequired = retJson['numUnitsLeft']
+                            self.updatedNumResponses[typeofHelp] = numResponseRequired
             else:
                 useThisStation = self.isStationWorking(type,locationStr)
                 if useThisStation:
@@ -232,7 +245,10 @@ class ResponseSender:
             responseWorkerState = self._spawingRecorder[type][locationStr]
             if "working" in responseWorkerState:
                 numReachedResponses += len(responseWorkerState["working"])
-        numResponseRequired = self.severitymap[self._severity]
+        numResponseRequired = 0
+        for typeOfVehicle in self.severitymap[self._severity]:
+            numResponseRequired += self.severitymap[self._severity][typeOfVehicle]
+
         percResponseReached = (numReachedResponses/numResponseRequired)*100 # this is the efficiency of the system
         extraMinsRequired = ((100-percResponseReached)*self._fullTimeEfficiency)/100
         timeRequiredToReduceSeverity = self._fullTimeEfficiency+extraMinsRequired

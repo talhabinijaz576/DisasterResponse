@@ -128,6 +128,8 @@ def StartSimulation(request):
                     route.setCityMap(city_map)
                 sim = DisasterSimulation(city_map, disaster_coordinates)
                 data = sim.run(policecars=10, firetrucks=10, ambulances=10)
+                # logger.info("Data from simulation")
+                # logger.info(data)
                 idOfObj = disasterObj.id
                 intensity = disasterObj.intensity
                 currentSeverity = "easy"
@@ -143,6 +145,8 @@ def StartSimulation(request):
                                                           type = disasterObj.type,stationMap=stationMap,severity=currentSeverity)
 
                 returnList.extend(responseMap[idOfObj].sendResponse())
+                logger.info("Current response from services")
+                logger.info(returnList)
                 logger.info("monitoring responses now")
                 updatedCurrentSeverity, timeRemaining = responseMap[idOfObj].monitorSeverity()
                 responseObj = responseMap[idOfObj]
