@@ -13,7 +13,7 @@ def getDefaultContext(tab="Simulation"):
 def getNavItems(tab):
 
     nav_items = { 
-                 "Simulation" : [[False, "/controlroom/home", "play_arrow"]],
+                 "Simulation" : [[False, "/controlroom/startSimulation", "play_arrow"]],
                  "Evacuations": [ [False, "/evacuations/start", "account_balance"], 
                                     {"Start": [False, "/evacuations/start", "SE"], 
                                      "View Evacuations": [False, "/evacuations/view", "HS"],

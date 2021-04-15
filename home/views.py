@@ -9,7 +9,7 @@ def index(request):
     if(request.user.is_superuser):
         return redirect('/admin/')
     if(request.user.user_type=="CONTROLROOM"):
-        return redirect('/controlroom/home')
+        return redirect('/controlroom/startSimulation')
     else:
         return redirect('/accounts/login/')
 
