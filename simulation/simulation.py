@@ -3,8 +3,9 @@ import networkx as nx
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
+from pprint import pprint
 import copy
-from control_room.models import PoliceStation, Hospital, FireStation
+from control_room.models import PoliceStation, Hospital, FireStation, EvacuationPoint
 
 
 class DispatchCenter:
@@ -17,6 +18,16 @@ class DispatchCenter:
     vehicle_type = ""
     center = None
     
+    def __init__(self, model):
+        self.lat = model.latitude 
+        self.long = model.longitude
+        self.name = model.name
+        self.capacity = model.capacity
+        self.model = model
+        self.vehicles_available = model.vehicles_available
+        print("Model Set")
+
+
     def reset(self):
         self.vehicles_available = self.capacity
         self.center.vehicles_available =  self.capacity 
@@ -26,15 +37,15 @@ class DispatchCenter:
         if(self.vehicles_available < n ):
             raise Exception("Not enough vehicles")
         self.vehicles_available -= n 
-        self.center.vehicles_available -= n 
-        self.center.save()
+        self.model.vehicles_available -= n 
+        self.model.save()
         
     def returnVehicles(self, n):
         if(self.vehicles_available + n > self.capacity):
             raise Exception("Cannot exceed total capacity")
         self.vehicles_available += n 
-        self.center.vehicles_available += n 
-        self.center.save()
+        self.model.vehicles_available += n 
+        self.model.save()
         
     def isPoliceStation(self):
         return self.dispatch_type=="p"
@@ -46,44 +57,33 @@ class DispatchCenter:
         return self.dispatch_type=="h"
         
     
-class PoliceStation(DispatchCenter):
+class PoliceStationInterface(DispatchCenter):
     
-    def __init__(self, name, capacity, coordinates, vehicles_available=None):
-        self.lat, self.long = coordinates
-        self.name = name
+    def __init__(self, model):
+        super().__init__(model)
         self.type = "p"
-        self.vehicle_type = "PoliceCar"
-        self.capacity = capacity
-        if(vehicles_available==None):
-            self.vehicles_available = capacity
-        else:
-            self.vehicles_available = vehicles_available
-
-class Hospital(DispatchCenter):
+        self.vehicle_type = "police car"
+        
+class HospitalInterface(DispatchCenter):
     
-    def __init__(self, name, capacity, coordinates, vehicles_available=None):
-        self.lat, self.long = coordinates
-        self.name = name
+    def __init__(self, model):
+        super().__init__(model)
         self.type = "h"
-        self.vehicle_type = "Ambulance"
-        self.capacity = capacity
-        if(vehicles_available==None):
-            self.vehicles_available = capacity
-        else:
-            self.vehicles_available = vehicles_available
+        self.vehicle_type = "ambulance"
 
-class FireStation(DispatchCenter):
+class FireStationInterface(DispatchCenter):
     
-    def __init__(self, name, capacity, coordinates, vehicles_available=None):
-        self.lat, self.long = coordinates
-        self.name = name
+    def __init__(self, model):
+        super().__init__(model)
         self.type = "f"
-        self.vehicle_type = "Firetruck"
-        self.capacity = capacity
-        if(vehicles_available==None):
-            self.vehicles_available = capacity
-        else:
-            self.vehicles_available = vehicles_available
+        self.vehicle_type = "firetruck"
+
+
+class EvacuationPointInterface(DispatchCenter):
+    
+    def __init__(self, model):
+        super().__init__(model)
+        self.type = "e"
         
         
 class Route:
@@ -103,19 +103,26 @@ class CityMap:
         self.G = copy.deepcopy(G)
         self.apply_congestion({})
         
-        if(policestation_info!=None):
-            self.policestations = [PoliceStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in policestation_info]
-        else:
-            self.policestations = []
-        if(policestation_info!=None):
-            self.hospitals = [Hospital(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in hospital_info]
-        else:
-            self.hospitals = []
-        if(firestation_info!=None):
-            self.firestations = [FireStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in firestation_info]
-        else:
-            self.firestations = []
-            
+        #if(policestation_info!=None):
+        #    self.policestations = [PoliceStationInterface(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in policestation_info]
+        #else:
+        #    self.policestations = [PoliceStationInterface(point.name, point.capacity (point.latitude, point.longitude)) for point in PoliceStation.objects.all()]
+        #if(policestation_info!=None):
+        #    self.hospitals = [HospitalInterface(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in hospital_info]
+        #else:
+        #    self.hospitals = [HospitalInterface(point.name, point.capacity (point.latitude, point.longitude)) for point in Hospital.objects.all()]
+        #if(firestation_info!=None):
+        #    self.firestations = [FireStationInterface(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in firestation_info]
+        #else:
+        #    self.firestations = [FireStationInterface(point.name, point.capacity (point.latitude, point.longitude)) for point in FireStation.objects.all()]
+
+
+        self.policestations = [PoliceStationInterface(point) for point in PoliceStation.objects.all()]
+        self.hospitals = [HospitalInterface(point) for point in Hospital.objects.all()]
+        self.firestations = [FireStationInterface(point) for point in FireStation.objects.all()]
+        self.evacuation_points = [EvacuationPointInterface(point) for point in EvacuationPoint.objects.all()]
+
+
         edges = list(G.edges(data=True))
         self.all_roads = [x[2].get('name') for x in edges]
         self.edges = pd.DataFrame(np.array(edges), columns = ["Node1", "Node2", "Data"])
@@ -156,7 +163,7 @@ class CityMap:
         long_center = np.mean(long)
         
         fig.update_layout(mapbox_style="stamen-terrain", mapbox_center_lat = 30, mapbox_center_lon=-80)
-        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0},mapbox = { 'center': {'lat': lat_center, 'lon': long_center}, 'zoom': 13})
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, mapbox = { 'center': {'lat': lat_center, 'lon': long_center}, 'zoom': 13})
         fig.show()
 
     def find_edge(self, node1, node2):
@@ -221,6 +228,51 @@ class DisasterSimulation:
     def __init__(self, city_map, disaster_coordinates):
         self.city_map = city_map
         self.disaster_cordinates = disaster_coordinates
+
+
+    def GetSimulationImage(self, data):
+        
+        lat = float(self.disaster_cordinates[0])
+        long = float(self.disaster_cordinates[1])
+
+        fig = go.Figure(go.Scattermapbox(name="Disaster", mode = "markers", lon = [long], lat = [lat], marker = {'size': 24, 'color':"black"}))
+        #go.Scattermapbox(name = "Path", mode = "lines", lon = long, lat = lat, marker = {'size': 10}, line = dict(width = 4.5, color = 'blue'))
+        #fig.add_trace(go.Scattermapbox(name = policestation.name, mode = "markers", lon = [policestation.long], lat = [policestation.lat], marker = {'size': 12, 'color':"blue"}))
+        #   
+        
+        colors = ["red", "blue", "orange", "purple", "green", "yellow"]
+        i = 0
+        for record in data:
+            interface = record["interface"]
+            #print("Record: ", interface.name, interface.vehicles_available, record["n_vehicles"])
+            route = record["route"]
+            lats = [x[0] for x in route]
+            longs = [x[1] for x in route]
+            fig.add_trace(go.Scattermapbox(name="Route ("+interface.name+")" , mode = "lines", lon = longs, lat = lats, marker = {'size': 10}, line = dict(width = 4.5, color = colors[i])))
+            fig.add_trace(go.Scattermapbox(name=interface.name, mode = "markers", lon = [interface.long], lat = [interface.lat], marker = {'size': 20}, line = dict(width = 4.5, color = colors[i])))
+
+            i = i+1 if (i+1) < len(colors) else 0
+        #fig.add_trace(go.Scattermapbox(name = "Disaster", mode = "markers", lon = self.disaster_cordinates[1], lat = self.disaster_cordinates[0], marker = {'size': 14, 'color':"black"}))
+        
+        fig.add_trace(go.Scattermapbox(name = "Disaster", mode = "markers", lon = [long], lat = [lat], marker = {'size': 24, 'color':"black"}))
+        fig.update_layout(mapbox_style="stamen-terrain", mapbox_center_lat = 30, mapbox_center_lon=-80)
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, mapbox = { 'center': {'lat': lat, 'lon': long}, 'zoom': 13})
+        
+        return fig
+
+    def ApplyEvents(self, data):
+        events = []
+        for record in data:
+            interface = record["interface"]
+            interface.dispatchVehicles(int(record["n_vehicles"]))
+            if(interface.type == "e"):
+                event = "Evacuated {} people to evaucation center at {}".format(record["n_vehicles"], interface.name)
+            else:
+                plural = "s" if int(record["n_vehicles"]) > 1 else ""
+                event = "Dispatched {} {}{} from {}".format(record["n_vehicles"], interface.vehicle_type, plural, interface.name)
+            events.append(event)
+
+        return events
         
     def GetVehicleData(self, dispatch_centers, vehicles_needed = 10):
         vehicle_i = 1
@@ -253,6 +305,7 @@ class DisasterSimulation:
             vehicles_needed = vehicles_needed - n_vehicles
             if(n_vehicles>0):
                 dispatch_centers.append({"name": dispatch_center.name,
+                                         "interface": dispatch_center,
                                          "location": [dispatch_center.lat, dispatch_center.long],
                                          "n_vehicles": n_vehicles,
                                          "distance": route.length,
@@ -266,7 +319,7 @@ class DisasterSimulation:
         return data
     
     
-    def run(self, policecars=0, firetrucks=0, ambulances=0):
+    def run(self, policecars=0, firetrucks=0, ambulances=0, evacuations=0):
         print("*******************")
         print("Running Simulation")
         print("*******************")
@@ -274,9 +327,11 @@ class DisasterSimulation:
         hospital_dispatch = self.GetVehicleData(self.city_map.hospitals, vehicles_needed = ambulances)
         police_dispatch = self.GetVehicleData(self.city_map.policestations, vehicles_needed = policecars)
         firestation_dispatch = self.GetVehicleData(self.city_map.firestations, vehicles_needed = firetrucks)
+        evacuations = self.GetVehicleData(self.city_map.evacuation_points, vehicles_needed = evacuations)
         
         data = {"disaster_cordinates": self.disaster_cordinates,
-                "dispatch_centers": police_dispatch["dispatch_centers"] + hospital_dispatch["dispatch_centers"] + firestation_dispatch["dispatch_centers"], 
-                "vehicles": police_dispatch["vehicles"] + hospital_dispatch["vehicles"] + firestation_dispatch["vehicles"]}
+                "dispatch_centers": police_dispatch["dispatch_centers"] + hospital_dispatch["dispatch_centers"] + firestation_dispatch["dispatch_centers"] + evacuations["dispatch_centers"], 
+                "vehicles": police_dispatch["vehicles"] + hospital_dispatch["vehicles"] + firestation_dispatch["vehicles"] + evacuations["vehicles"]}
         
+
         return data
