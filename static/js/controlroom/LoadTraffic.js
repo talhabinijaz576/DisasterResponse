@@ -51,7 +51,7 @@ function responseSimulation(unobj) {
                     var animatedMarker = L.animatedMarker(line.getLatLngs(), { icon: police });
                 else if(obj[i].type == "Ambulance")
                     var animatedMarker = L.animatedMarker(line.getLatLngs(), { icon: amb });
-                else if(obj[i].type == "Firetruck")
+                else if(obj[i].type == "FireTruck")
                     var animatedMarker = L.animatedMarker(line.getLatLngs(), { icon: fire });
                 else 
                     var animatedMarker = L.animatedMarker(line.getLatLngs(), { icon: greenIcon });
