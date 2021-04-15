@@ -76,6 +76,29 @@ def getObjectsFromDb(dispatchCenters):
         retSpawningObjects.append(spw)
     return retSpawningObjects
 
+def getResponseMap(sevirity,disasterType):
+
+    vehiclesMap = {
+        "fire" : {'easy': {"policestation": 1, "firestation": 2, "hospital": 1}, 'medium':
+                            {"policestation": 2, "firestation": 4, "hospital": 2},
+                        'hard': {"policestation": 4, "firestation": 8, "hospital": 4}},
+        "flood": {'easy': {"policestation": 2, "firestation": 1, "hospital": 4}, 'medium':
+                            {"policestation": 4, "firestation": 2, "hospital": 5},
+                        'hard': {"policestation": 8, "firestation": 4, "hospital": 6}},
+        "accident":{'easy': {"policestation": 5, "firestation": 0, "hospital": 1}, 'medium':
+                            {"policestation": 8, "firestation": 0, "hospital": 2},
+                        'hard': {"policestation": 10, "firestation": 0, "hospital": 4}},
+        "earthquake":{'easy': {"policestation": 1, "firestation": 2, "hospital": 1}, 'medium':
+                            {"policestation": 2, "firestation": 4, "hospital": 2},
+                        'hard': {"policestation": 4, "firestation": 8, "hospital": 4}},
+    }
+
+    # severitymap = {'easy': {"policestation": 1, "firestation": 1, "hospital": 1}, 'medium':
+    #     {"policestation": 2, "firestation": 2, "hospital": 2},
+    #                     'hard': {"policestation": 4, "firestation": 4, "hospital": 4}}
+
+    return vehiclesMap[disasterType][sevirity], vehiclesMap[disasterType]
+
 @login_required(login_url="/accounts/login/")
 def StartSimulation(request):
     html_template = "controlroom/controlroom.html"
@@ -126,8 +149,6 @@ def StartSimulation(request):
                                    firestations_coordinates)
                 if route.getCityMap() is None:
                     route.setCityMap(city_map)
-                sim = DisasterSimulation(city_map, disaster_coordinates)
-                data = sim.run(policecars=10, firetrucks=10, ambulances=10)
                 # logger.info("Data from simulation")
                 # logger.info(data)
                 idOfObj = disasterObj.id
@@ -139,12 +160,19 @@ def StartSimulation(request):
                     currentSeverity = "hard"
 
                 if idOfObj not in responseMap:
+                    vehicles,sevirityMap = getResponseMap(currentSeverity,str(disasterObj.type).lower())
+                    sim = DisasterSimulation(city_map, disaster_coordinates)
+
+                    data = sim.run(policecars=vehicles["policestation"], firetrucks=vehicles["firestation"],
+                                   ambulances=vehicles["hospital"])
                     stationMap = getObjectsFromDb(dispatchCenters=data['dispatch_centers'])
                     logger.info("Adding new disaster")
-                    responseMap[idOfObj] = ResponseSender(location=(disasterObj.latitude,disasterObj.longitude),
+                    responseMap[idOfObj] = ResponseSender(location=(disasterObj.latitude,disasterObj.longitude),sevirityMap=sevirityMap,
                                                           type = disasterObj.type,stationMap=stationMap,severity=currentSeverity)
 
                 returnList.extend(responseMap[idOfObj].sendResponse())
+                # logger.info("Return list")
+                # logger.info(returnList)
                 logger.info("Current response from services")
                 logger.info(returnList)
                 logger.info("monitoring responses now")

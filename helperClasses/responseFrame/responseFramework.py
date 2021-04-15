@@ -13,7 +13,7 @@ class ResponseSender:
     there is a disaster, if there is send the relevant support and diverge traffic, and also monitor the severity of the disaster
     """
 
-    def __init__(self,location,type,stationMap,severity='medium'):
+    def __init__(self,location,type,stationMap,sevirityMap,severity='medium'):
         """
         initialise the response sender for a disaster at the location
         Args:
@@ -23,8 +23,7 @@ class ResponseSender:
         """
 
         #TODO : remove the severity map to some outer file
-        self.severitymap = {'easy': {"policestation":1,"firestation":1,"hospital":1},'medium':
-        {"policestation":2,"firestation":2,"hospital":2},'hard':{"policestation":4,"firestation":4,"hospital":4}}
+        self.severitymap = sevirityMap
         self._severityList = {0:'easy',1:'medium',2:'hard'}
         self._location = location
         self._type = type

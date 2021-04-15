@@ -54,7 +54,7 @@ class SpawingStation:
         logger.info("In station {} having {} units required units {}".format(
             self._type,self.unitLeft(),numberofUnitsRequired
         ))
-        if self.unitLeft() > numberofUnitsRequired:
+        if self.unitLeft() >= numberofUnitsRequired:
             #TODO : update lat long according to new trafic simulation
             # lat,long = getLatAndLong('',location,self._locationpoint)
             unitsToSend = {}
@@ -66,6 +66,17 @@ class SpawingStation:
                 unitsToSend[str(unitToSend)]= unitToSend.toJson()
 
             retJson = {'status':True,'units':unitsToSend,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
+        elif self.unitLeft() < numberofUnitsRequired and self.unitLeft() !=0:
+            unitsToSend = {}
+            for idx in range(0, self.unitLeft()):
+                unitToSend = self._spawningObjs.pop(0)  # always removing the first element
+                logger.info("unit to send {}".format(unitsToSend))
+                unitToSend.setNewLocation(self._locationpoint)
+                unitToSend.setDirection(direction)
+                unitsToSend[str(unitToSend)] = unitToSend.toJson()
+
+            retJson = {'status': True, 'units': unitsToSend,
+                       'numUnitsLeft': self.unitLeft()-numberofUnitsRequired}
         else:
             retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
         return retJson
