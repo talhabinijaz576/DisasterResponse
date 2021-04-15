@@ -87,6 +87,14 @@ def EvacuationHistoryView(request):
 	return EventViewerView(request, context, model)
 
 
+def DisasterHistoryView(request):
+	context = getDefaultContext("Disasters")
+	context["heading"] = "Disasters"
+	model = DisasterEvent
+
+	return EventViewerView(request, context, model)
+
+
 def EventViewerView(request, context, model):
 
 	html_template = 'evacuations/view.html'

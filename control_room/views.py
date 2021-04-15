@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from pprint import pprint
 from django.utils import timezone
 from helperClasses.simulationClass.getVehicles import Routes
+from evacuation_manager.models import EvacuationEvent, DisasterEvent
 from helperClasses.responseFrame.responseFramework import ResponseSender
 from helperClasses.responseFrame.houses.SpawingStation import SpawingStation
 from helperClasses.responseFrame.responseClass.responseClasses import *
