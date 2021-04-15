@@ -12,7 +12,11 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
   <script src="{% static 'js/controlroom/AnimatedMarker.js'%}"></script>
   <script src="{% static 'js/controlroom/LoadMap.js'%}"></script>
   <script src="{% static 'js/controlroom/LoadTraffic.js'%}"></script>
@@ -22,6 +26,8 @@
   <script>
     var greenIcon = new LeafIcon({ iconUrl: "{% static 'images/green.jpg'%}" });
     var fire = new DisasterIcon({ iconUrl: "{% static 'images/red.png'%}" });
+    var amb = new DisasterIcon({ iconUrl: "{% static 'images/orange.png'%}" });
+    var police = new DisasterIcon({ iconUrl: "{% static 'images/blue.png'%}" });
   </script>
   <style>
     #mapid {
@@ -82,6 +88,36 @@
           -webkit-animation-iteration-count: infinite; 
           /*opacity: 0.0*/
       }
+
+      .gps_ring_water {	
+        border: 3px solid rgb(38, 86, 243);
+         -webkit-border-radius: 30px;
+         height: 18px;
+         width: 18px;		
+          -webkit-animation: pulsate 1s ease-out;
+          -webkit-animation-iteration-count: infinite; 
+          /*opacity: 0.0*/
+      }
+
+      .gps_ring_ground {	
+        border: 3px solid rgb(47, 50, 58);
+         -webkit-border-radius: 30px;
+         height: 18px;
+         width: 18px;		
+          -webkit-animation: pulsate 1s ease-out;
+          -webkit-animation-iteration-count: infinite; 
+          /*opacity: 0.0*/
+      }
+
+      .gps_ring_acc {	
+        border: 3px solid rgb(200, 235, 43);
+         -webkit-border-radius: 30px;
+         height: 18px;
+         width: 18px;		
+          -webkit-animation: pulsate 1s ease-out;
+          -webkit-animation-iteration-count: infinite; 
+          /*opacity: 0.0*/
+      }
       
       @-webkit-keyframes pulsate {
             0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
@@ -106,9 +142,9 @@
               <select name=disaster-type id="disaster-type">
                 <option>Select </option>
                 <option class="red" value="Fire">Fire </option>
-                <option class="blue" value="Floods">Floods</option>
-                <option class="grey" value="Earthquakes">Earthquakes</option>
-                <option class="skyblue" value="Tsunamis">Accident</option>
+                <option class="blue" value="Flood">Flood</option>
+                <option class="grey" value="Earthquake">Earthquake</option>
+                <option class="skyblue" value="Accident">Accident</option>
               </select>
             </td>
             <td>Intensity:
@@ -135,7 +171,7 @@
             </td>
 
           </tr>
-          <tr>
+          <tr style="display:none;">
             <td>Location: </td>
             <td><input type="text" id="loc" name="loc"></td>
           </tr>

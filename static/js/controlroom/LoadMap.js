@@ -1,4 +1,6 @@
 var mymap;
+var oms;
+var clusterMarkers = L.markerClusterGroup();
 function traffic_simulate() {
     mymap = L.map('mapid', {   // Then add it here..
         maxZoom: 19,
@@ -8,6 +10,7 @@ function traffic_simulate() {
         maxZoom: 19,
         attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     }).addTo(mymap);
+    oms = new OverlappingMarkerSpiderfier(mymap);
     //mymap.setMaxBounds(bounds);
     //L.marker([53.3498, -6.2603], {icon: greenIcon}).addTo(mymap).bindPopup("I am a green leaf.");
 

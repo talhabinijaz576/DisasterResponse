@@ -34,3 +34,30 @@ var cssIcon = L.divIcon({
     ,iconSize: [22,22]
     // ,iconAnchor: [11,11]
   });
+
+  var cssIconFlood = L.divIcon({
+    // Specify a class name we can refer to in CSS.
+    className: 'css-icon',
+    html: '<div class="gps_ring_water"></div>'
+    // Set marker width and height
+    ,iconSize: [22,22]
+    // ,iconAnchor: [11,11]
+  });
+
+  var cssIconQuake = L.divIcon({
+    // Specify a class name we can refer to in CSS.
+    className: 'css-icon',
+    html: '<div class="gps_ring_ground"></div>'
+    // Set marker width and height
+    ,iconSize: [22,22]
+    // ,iconAnchor: [11,11]
+  });
+
+  var cssIconAcc = L.divIcon({
+    // Specify a class name we can refer to in CSS.
+    className: 'css-icon',
+    html: '<div class="gps_ring_acc"></div>'
+    // Set marker width and height
+    ,iconSize: [22,22]
+    // ,iconAnchor: [11,11]
+  });
