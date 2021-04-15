@@ -153,8 +153,9 @@ def StartSimulation(request):
                 disasterReturn.append({"coordinates": disaster_coordinates, "severity": updatedCurrentSeverity,
                                        "timeRemaining":timeRemaining,"type":disasterObj.type})
                 if currentSeverity is None:
-                    listOfunits = responseObj.sendBackUnits(currentSeverity, None, None)
-                    returnList.extend(listOfunits)
+                    responseObj.setReverseDirection(currentSeverity, None, None)
+                    # listOfunits = responseObj.returnToStation()
+                    # returnList.extend(listOfunits)
                 if updatedCurrentSeverity != currentSeverity:
                     logger.info("****!severity changed!*** from {} to {}".format(currentSeverity,updatedCurrentSeverity))
 
@@ -167,6 +168,8 @@ def StartSimulation(request):
                     disasterObj.intensity = upIntensity
                     # disasterObj.save()
                     responseObj.setReverseDirection(currentSeverity, None, None)
+                    # responseObj.setReverseDirection(currentSeverity, None, None)
+                    # listOfunits = responseObj.returnToStation()
                     # call back some police cars
                 drivingBackList = responseObj.returnToStation()
                 returnList.extend(drivingBackList)

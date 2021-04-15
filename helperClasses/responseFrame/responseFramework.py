@@ -131,6 +131,12 @@ class ResponseSender:
                 useThisStation = True
         return useThisStation
 
+    def getNumResponseReq(self,sevirity):
+        numResponseRequired = 0
+        for typeOfVehicle in self.severitymap[sevirity]:
+            numResponseRequired += self.severitymap[sevirity][typeOfVehicle]
+        return numResponseRequired
+
     def setReverseDirection(self,severity,spawningObjs=None,direction=None):
         """
         this function is called when the severity of the disaster is reduced or its is being completly mitigated
@@ -138,13 +144,24 @@ class ResponseSender:
         spawningObjs: new sorted list of police station, if None previously used list is used.
         direction: way back to stn
         """
+
         if severity is not None:
             oldNumResponseRequired = self.severitymap[self._severity]
             newNumresponseRequired = self.severitymap[severity]
-            numUnitsToSendBack = oldNumResponseRequired - newNumresponseRequired
+            mapNumUnitsToSendBack = {}
+            for key in oldNumResponseRequired:
+                oldNumResponse = oldNumResponseRequired[key]
+                updatedNumResponse = newNumresponseRequired[key]
+                if oldNumResponse-updatedNumResponse == 0:
+                    unitstoSend = updatedNumResponse
+                else:
+                    unitstoSend = oldNumResponse-updatedNumResponse
+                mapNumUnitsToSendBack[key] = unitstoSend
+            # numUnitsToSendBack = oldNumResponseRequired - newNumresponseRequired
         else:
-            numUnitsToSendBack = self.severitymap[severity]
-
+            logger.info("Sending all units back")
+            mapNumUnitsToSendBack = self.severitymap[severity]
+        keysName = list(mapNumUnitsToSendBack.keys())
         if spawningObjs is None:
             spawingStnObjs = self._stationMap
         else:
@@ -153,24 +170,38 @@ class ResponseSender:
         for responseObj in spawingStnObjs:
             if sentAllUnits:
                 break
+
+            stnToUse = None
+            for stnName in keysName:
+                if stnName in str(responseObj).lower():
+                    stnToUse = stnName
+                    break
+
+            numUnitsToSendBack = mapNumUnitsToSendBack[str(stnToUse)]
+            logger.info("Sending {} units back".format(numUnitsToSendBack))
             type, locationStr = responseObj._type, responseObj.locStr()
             stnWorking = self.isStationWorking(type,locationStr)
+            # logger.info("Station status for returing {}".format(stnWorking))
             if stnWorking:
                 if direction is None:
                     directiontoWork = responseObj._direction[::-1]
                 else:
                     directiontoWork = direction
                 responseObj.setDirection(directiontoWork)
-                self._spawingRecorder[type][locationStr]['drivingBackPtr'] = 0
+                if "drivingBackPtr" not in self._spawingRecorder[type][locationStr]:
+                    self._spawingRecorder[type][locationStr]['drivingBackPtr'] = 0
                 if 'drivingBack' not in self._spawingRecorder[type][locationStr]:
                     self._spawingRecorder[type][locationStr]['drivingBack'] = []
+                    logger.info("Setting drivingback with {}".format(self._spawingRecorder[type][locationStr]['working'][:numUnitsToSendBack]))
                     self._spawingRecorder[type][locationStr]['drivingBack'] = self._spawingRecorder[type][locationStr]['working'][:numUnitsToSendBack]
-                    self._spawingRecorder[type][locationStr]['working'] = self._spawingRecorder[type][locationStr]['working'][:numUnitsToSendBack]
+                    self._spawingRecorder[type][locationStr]['working'] = self._spawingRecorder[type][locationStr]['working'][numUnitsToSendBack:]
                 if len(self._spawingRecorder[type][locationStr]['drivingBack']) < numUnitsToSendBack:
+                    logger.info("Setting drivingback with {}".format(
+                        self._spawingRecorder[type][locationStr]['working'][:numUnitsToSendBack]))
                     self._spawingRecorder[type][locationStr]['drivingBack'].extend(self._spawingRecorder[type][locationStr][
                                                                                   'working'][:numUnitsToSendBack])
                     self._spawingRecorder[type][locationStr]['working'] = self._spawingRecorder[type][locationStr][
-                                                                              'working'][:numUnitsToSendBack]
+                                                                              'working'][numUnitsToSendBack:]
     def returnToStation(self):
 
         unitsSend = []
@@ -185,6 +216,7 @@ class ResponseSender:
                     currentLocationPtr = self._spawingRecorder[type][locationStr]['drivingBackPtr']
                     logger.info("Number of driving unit for location {} are {}".format(locationStr, len(drivingunits)))
                     for drivingunit in drivingunits:
+                        logger.info("Sending unit {} to its station".format(drivingunit))
                         # print(unit)
                         # unitInformation = workingunits[workingunit]
                         logger.info("updating information for unit {}".format(drivingunit))
