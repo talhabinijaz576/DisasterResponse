@@ -108,9 +108,9 @@ def StartSimulation(request):
         return HttpResponse(response, content_type="application/json")
 
     elif (request.GET):
-        pprint(request.GET)
+        logger.info(request.GET)
         if("startSimulation" in request.GET):
-            # logger.info('got the vehicle request')
+            logger.info('got the vehicle request')
             returnList = []
 
             disasterObjs = Disaster.objects.filter(isActive=True)
@@ -166,9 +166,9 @@ def StartSimulation(request):
                     # call back some police cars
                 drivingBackList = responseObj.returnToStation()
                 returnList.extend(drivingBackList)
-            pprint("updating the disaster")
+            logger.info("updating the disaster")
             route.updateTheroutes(disasterCoords)
-            pprint(returnList)
+            logger.info(returnList)
             vehicleInfo = route.getVehicleInformation()
             for i in vehicleInfo:
                 returnList.append(vehicleInfo[i].toJson())
