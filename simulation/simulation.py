@@ -99,14 +99,23 @@ class Route:
 
 class CityMap:
     
-    def __init__(self, G, policestation_info, hospital_info, firestation_info):
+    def __init__(self, G, policestation_info=None, hospital_info=None, firestation_info=None):
         self.G = copy.deepcopy(G)
         self.apply_congestion({})
         
-        self.policestations = [PoliceStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in policestation_info]
-        self.hospitals = [Hospital(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in hospital_info]
-        self.firestations = [FireStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in firestation_info]
-        
+        if(policestation_info!=None):
+            self.policestations = [PoliceStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in policestation_info]
+        else:
+            self.policestations = []
+        if(policestation_info!=None):
+            self.hospitals = [Hospital(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in hospital_info]
+        else:
+            self.hospitals = []
+        if(firestation_info!=None):
+            self.firestations = [FireStation(x[1], x[2], x[0], (x[3] if len(x)>3 else None)) for x in firestation_info]
+        else:
+            self.firestations = []
+            
         edges = list(G.edges(data=True))
         self.all_roads = [x[2].get('name') for x in edges]
         self.edges = pd.DataFrame(np.array(edges), columns = ["Node1", "Node2", "Data"])

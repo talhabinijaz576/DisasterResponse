@@ -20,14 +20,27 @@ def StartEvacuationView(request):
 
 
 	if (request.POST):
-		pprint(request.POST)
+		#pprint(request.POST)
 
+		if("start_evacuation" in request.POST):
+
+			lat = request.POST["lat"]
+			long = request.POST["long"]
+			size = request.POST["size"]
+			evacuation = StartEvacuation(lat, long, size)
+			
 		#return HttpResponseRedirect(request.get_full_path())
         #return HttpResponse({})
 	
 	response = render(request, template_name = html_template, context=context)
 	return response
 
+
+
+def StartEvacuation(lat, long, size):
+	print(lat, long, size)
+	
+	return None
 
 
 

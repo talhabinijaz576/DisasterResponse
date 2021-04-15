@@ -19,4 +19,6 @@ class Evacuation(models.Model):
     is_running = models.BooleanField(default=True)
 
     def image(self):
-        image_path = os.path.join(settings.evacuation_files, str(self.id)+".png")
+        image_path = os.path.join(settings.files, "evacuation_", str(self.id)+".png")
+        return
+
