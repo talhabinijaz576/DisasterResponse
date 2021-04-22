@@ -161,6 +161,8 @@ def StartSimulation(request):
                     currentSeverity = "hard"
 
                 if idOfObj not in responseMap:
+                    logger.info("Getting the vehicles and severity map for disaster type {} with sevirity {}"
+                                .format(str(disasterObj.type).lower(),currentSeverity))
                     vehicles,sevirityMap = getResponseMap(currentSeverity,str(disasterObj.type).lower())
                     sim = DisasterSimulation(city_map, disaster_coordinates)
 
