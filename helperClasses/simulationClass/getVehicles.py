@@ -42,19 +42,21 @@ class Routes:
 
     def isDisasterInaWay(self,disasterLocation,startLocation,endLocation,routeKey):
         # logger.info("*********Disasterlocation {}, startLocation {}****************".format(disasterLocation,startLocation))
-        disasterX, disasterY = disasterLocation
-        disasterKey = (disasterLocation[0], disasterLocation[1])
-        if disasterKey not in self.disasterMap:
-            self.disasterMap[disasterKey] = (Circle(disasterX, disasterY), disasterLocation, routeKey)
-        circleObjDisaster = self.disasterMap[disasterKey][0]
-        return circleObjDisaster.isInside(endLocation[0], endLocation[1])
         # disasterX, disasterY = disasterLocation
-        # startX, startY = startLocation
-        # endX, endY = endLocation
-        # if startX<= disasterX <= endX or startY <= disasterY <=endY:
-        #     return True
-        # else:
-        #     return False
+        # disasterKey = (disasterLocation[0], disasterLocation[1])
+        # circleObjDisaster = Circle(disasterX, disasterY)
+        # if circleObjDisaster.isInside(endLocation[0], endLocation[1]):
+        #     if disasterKey not in self.disasterMap:
+        #         self.disasterMap[disasterKey] = (Circle(disasterX, disasterY), disasterLocation, routeKey)
+        #
+        # return circleObjDisaster.isInside(endLocation[0], endLocation[1])
+        disasterX, disasterY = disasterLocation
+        startX, startY = startLocation
+        endX, endY = endLocation
+        if startX<= disasterX <= endX or startY <= disasterY <=endY:
+            return True
+        else:
+            return False
 
     def findDestination(self,disasterLocation,locationOfPoints, routeKey):
         for idx in range(1,len(locationOfPoints)):
@@ -65,7 +67,7 @@ class Routes:
                 return endLocation,idx
         return locationOfPoints[1],1
     def updateTheroutes(self,disasterLocation):
-
+        logger.info("in update the routes")
         for routeKey in self.routes:
 
             if len(disasterLocation) != 0 and self.idx > 0:
@@ -91,7 +93,7 @@ class Routes:
 
 
                 if isDisasterPresent:
-
+                    logger.info("found the disaster at location {}".format(disasterLocationPresent))
                     destinationNew,idxTillRoute = self.findDestination(disasterLocationPresent,self.routes[routeKey][self.idx:],routeKey)
                     roadName = self.getRoadName(locationToUse)
 
@@ -99,7 +101,7 @@ class Routes:
                     route = self.cityMap.get_shortest_path(destinationNew,locationToUse)
                     cordinates = [list(c) for c in route.cordinates]
 
-                    # self.disasterMap[(locationToUse[0],locationToUse[1])] = (self.idx,len(cordinates), routeKey)
+                    self.disasterMap[(locationToUse[0],locationToUse[1])] = (self.idx,len(cordinates), routeKey)
 
                     oldList = self.routes[routeKey][:idxTillRoute]
                     # logger.info("#### len {}".format(len(oldList)))
