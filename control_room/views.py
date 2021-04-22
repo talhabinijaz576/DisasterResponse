@@ -166,6 +166,15 @@ def StartSimulation(request):
 
                     data = sim.run(policecars=vehicles["policestation"], firetrucks=vehicles["firestation"],
                                    ambulances=vehicles["hospital"])
+
+                    events = sim.ApplyEvents(data["dispatch_centers"])
+                    events_str = ";".join(events)
+                    event = DisasterEvent.objects.create(latitude = lat, longitude = long, events=events_str, size=1)
+                    event.name = "DisasterEvent"+str(event.id)
+                    event.save()
+
+                    fig = sim.GetSimulationImage(data["dispatch_centers"])
+                    fig.write_image(event.image())
                     stationMap = getObjectsFromDb(dispatchCenters=data['dispatch_centers'])
                     logger.info("Adding new disaster")
                     for i in stationMap:

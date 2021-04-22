@@ -109,11 +109,20 @@ def EventViewerView(request, context, model):
 			event_name = request.POST["view_image"]
 			return ShowImage(event_name, model)
 
+		if("stop_event" in request.POST):
+			event_name = request.POST["stop_event"]
+			StopEvent(event_name, model)
+
+
 	if (request.GET):
 
 		if("view_event" in request.GET):
 			event_name = request.GET["view_event"]
 			context = ShowEvent(event_name, context, model)
+		
+		if("stop_event" in request.GET):
+			event_name = request.GET["stop_event"]
+			StopEvent(event_name, model)
 
 		
 
@@ -134,12 +143,16 @@ def EventViewerView(request, context, model):
 	return response
 
 
-def DeleteEvent(request, model):
+def StopEvent(event_name, model):
 	errors = []
 	messages = []
-	center = request.POST.get('center', "")
 	try:
-		model.objects.get(name = center).delete()
+		event = model.objects.get(name = event_name)
+		if(event.is_running):
+			event.is_running = False
+			event.date_ended = timezone.now()
+			event.save()
+			messages.append(event_name+" ended")
 	except:
 		pass
 
