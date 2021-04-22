@@ -24,24 +24,33 @@ class Routes:
         """
         self.routes = {}
         self.cityMap = cityMap
+        self.vehicles = {}
         if routes is None:
             self.restart = 0
         else:
-            dataFrameObj = pd.read_csv(routes,sep=',')
+            #dataFrameObj = pd.read_csv(routes,sep=',')
             #dataFrameObj['routeId'] = dataFrameObj['shape_id'].str.split('.',expand=True)[0]
-            dataFrameObj['routeId'] = dataFrameObj['shape_id']
+            #dataFrameObj['routeId'] = dataFrameObj['shape_id']
             # dataFrameObj = dataFrameObj.assign(routId=lambda x: (x['shape_id'].split('.')[0]))
+
+            dataFrameObj = pd.read_csv(routes, sep=',')
+            dataFrameObj = dataFrameObj[['shape_id', 'shape_pt_lat', 'shape_pt_lon']]
+            dataFrameObj['routeId'] = dataFrameObj['shape_id']
+
             self._df = dataFrameObj
-            for idx,row in self._df.iterrows():
-                routeID = row['routeId']
-                lat = row['shape_pt_lat']
-                long = row['shape_pt_lon']
-                if routeID not in self.routes:
-                    self.routes[routeID] = []
-                self.routes[routeID].append([lat,long])
-            self.restart = len(self.routes[routeID])
-            pass
-        self.vehicles = {}
+
+            unique_routes = set(dataFrameObj['shape_id'])
+
+            for shape in unique_routes:
+                self.routes[shape] = dataFrameObj[dataFrameObj['shape_id'] == shape][['shape_pt_lat', 'shape_pt_lon']].values.tolist()
+
+            self.routes_length = {}
+            for key in self.routes.keys():
+                self.routes_length[key] = len(self.routes[key])
+
+            self.restart = len(self.routes[shape])
+
+
         self.idx = 0 # index of start array
         self.roadInformation = RoadInformation()
         self.locationToRoadMap = {}
@@ -146,16 +155,29 @@ class Routes:
         """
         :param disasterLocation: list of coordinates points where the disaster has occured, None if no disaster has occured
         """
-        for routeKey in self.routes:
-            locationToUse = self.routes[routeKey][self.idx]
+        #for routeKey in self.routes:
+        #    locationToUse = self.routes[routeKey][self.idx]
+        #    if routeKey not in self.vehicles:
+        #        self.vehicles[routeKey] = Vehicle(id=routeKey,typeOfVehicle="bus",currentLocation=locationToUse)
+        #    else:
+        #        self.vehicles[routeKey].setNewLocation(locationToUse)
+
+        for routeKey in self.routes.keys():
+            if (self.idx // self.routes_length[routeKey]) % 2 == 0:
+                index = self.idx - self.routes_length[routeKey] * (self.idx // self.routes_length[routeKey])
+            else:
+                index = self.routes_length[routeKey] - (self.idx - self.routes_length[routeKey] * (self.idx // self.routes_length[routeKey])) - 1
+
+            locationToUse = self.routes[routeKey][index]
+
             if routeKey not in self.vehicles:
-                self.vehicles[routeKey] = Vehicle(id=routeKey,typeOfVehicle="bus",currentLocation=locationToUse)
+                self.vehicles[routeKey] = Vehicle(id=routeKey, typeOfVehicle="bus", currentLocation=locationToUse)
             else:
                 self.vehicles[routeKey].setNewLocation(locationToUse)
 
         self.idx +=1
-        if self.idx >=self.restart-2:
-            self.idx = 0
+        #if self.idx >=self.restart-2:
+        #    self.idx = 0
         return self.vehicles
 
     def getRoutes(self):
