@@ -20,11 +20,15 @@ class ResponseSender:
             severity: severity of the disaster default is medium
             location: location coords of the disaster
             type: type of disaster
+        >>> from simulation.simulation import CityMap, DisasterSimulation
         >>> location=(53.3480407862403,-6.25937461853027)
-        >>> sevirityMap={"policestation": 1, "firestation": 2, "hospital": 1}
+        >>> vehiclesMap = {"policestation": 1, "firestation": 2, "hospital": 1}
+        >>> sevirityMap={'easy': {"policestation": 1, "firestation": 2, "hospital": 1}, 'medium':{"policestation": 2, "firestation": 4, "hospital": 2},'hard': {"policestation": 4, "firestation": 8, "hospital": 4}}
         >>> type = "Fire"
         >>> stationMap=stationMap
         >>> severity="eazy"
+        >>> sim = DisasterSimulation(city_map, location)
+        >>> data = sim.run(policecars=vehiclesMap["policestation"], firetrucks=vehiclesMap["firestation"],ambulances=vehiclesMap["hospital"])
         >>> resObj =
         """
 

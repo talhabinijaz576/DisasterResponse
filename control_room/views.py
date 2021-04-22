@@ -208,7 +208,7 @@ def StartSimulation(request):
                     else:
                         upIntensity = 8
                     disasterObj.intensity = upIntensity
-                    # disasterObj.save()
+                    disasterObj.save()
                     responseObj.setReverseDirection(currentSeverity, None, None)
                     # responseObj.setReverseDirection(currentSeverity, None, None)
                     # listOfunits = responseObj.returnToStation()
