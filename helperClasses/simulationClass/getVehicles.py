@@ -7,11 +7,20 @@ import logging
 
 logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s] - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
 class Routes:
     def __init__(self,routes=None,cityMap = None):
         """
         :param routes : route files of the buses
         :param cityMap : city map object from simulation/simulation.py, used to determine different path if their is a disaster
+        >>> routesPath = 'shapes.txt'
+        >>> disasterLocation = [53.3480407862403,-6.25937461853027]
+        >>> startLocation = [53.3480407862309,-6.25937461853027]
+        >>> endLocation = [53.3480407862406,-6.25937461853028]
+        >>> route = Routes(routesPath)
+        >>> route.updateTheroutes(disasterLocation)
+        >>> route.isDisasterInaWay(disasterLocation,startLocation,endLocation,None)
+        True
         """
         self.routes = {}
         self.cityMap = cityMap
@@ -66,6 +75,7 @@ class Routes:
             if not temp:
                 return endLocation,idx
         return locationOfPoints[1],1
+
     def updateTheroutes(self,disasterLocation):
         logger.info("in update the routes")
         for routeKey in self.routes:
@@ -201,13 +211,15 @@ class Circle:
             return False
 
 if __name__ == '__main__':
-    import json
-    baseDir = '/home/yoda/ML/DisasterResponse'
-    pathofCSv = baseDir+'/helperClasses/simulationClass/shapes.txt'
-
-    r = Routes(pathofCSv)
-    _ = r.getVehicleInformation()
-    streetCongestion = r.getStreetCongestion()
-    with open("sample.json", "w") as outfile:
-        json.dump(streetCongestion, outfile)
+    # import json
+    # baseDir = '/home/yoda/ML/DisasterResponse'
+    # pathofCSv = baseDir+'/helperClasses/simulationClass/shapes.txt'
+    #
+    # r = Routes(pathofCSv)
+    # _ = r.getVehicleInformation()
+    # streetCongestion = r.getStreetCongestion()
+    # with open("sample.json", "w") as outfile:
+    #     json.dump(streetCongestion, outfile)
+    import doctest
+    doctest.testmod(verbose=True)
     pass

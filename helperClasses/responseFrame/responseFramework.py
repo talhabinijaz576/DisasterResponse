@@ -20,6 +20,12 @@ class ResponseSender:
             severity: severity of the disaster default is medium
             location: location coords of the disaster
             type: type of disaster
+        >>> location=(53.3480407862403,-6.25937461853027)
+        >>> sevirityMap={"policestation": 1, "firestation": 2, "hospital": 1}
+        >>> type = "Fire"
+        >>> stationMap=stationMap
+        >>> severity="eazy"
+        >>> resObj =
         """
 
         #TODO : remove the severity map to some outer file

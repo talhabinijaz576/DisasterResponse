@@ -168,6 +168,8 @@ def StartSimulation(request):
                                    ambulances=vehicles["hospital"])
                     stationMap = getObjectsFromDb(dispatchCenters=data['dispatch_centers'])
                     logger.info("Adding new disaster")
+                    for i in stationMap:
+                        print()
                     responseMap[idOfObj] = ResponseSender(location=(disasterObj.latitude,disasterObj.longitude),sevirityMap=sevirityMap,
                                                           type = disasterObj.type,stationMap=stationMap,severity=currentSeverity)
 
