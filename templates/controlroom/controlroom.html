@@ -126,7 +126,7 @@
       }
       </style>
   <meta charset="ISO-8859-1">
-  <title>Insert title here</title>
+  <title>Smart Disaster Response</title>
 </head>
 
 <body onload="traffic_simulate();">
@@ -177,18 +177,53 @@
           </tr>
         </table>
       </fieldset>
-      <fieldset>
-        <legend>Addition Data</legend>
-
-      </fieldset>
-      <input type="button" value="Add Disaster" onclick="addDisaster();">
+      <input type="button" value="Add Disaster" onclick="addDisaster();" id="addDisaster">
     </form>
   </div>
   <form id="start_simulation_form" method="GET">
     <input type="text" name="startSimulation" hidden>
   </form>
   <br><br>
-  <div id="mapid"></div>
+  <div id="mapid" ></div>
+  <div id="qunit" style="display: none;"></div>
+    <div id="qunit-fixture" style="display: none;"></div>
+    <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+    <script>
+      var numTests = 0;
+        var failedTests = 0;
+	  QUnit.testDone(function( details ) {
+            // If any previous messages in console, clear them
+            console.clear();
+            // Increment number of tests run
+            numTests++;
+            // If any assertions have failed, increment number of failed tests
+            if (details.failed > 0)
+                failedTests++;
+            var passed = numTests - failedTests;
+            if(failedTests > 0)
+            {
+              document.getElementById("qunit").style.display = "block";
+              document.getElementById("qunit-fixture").style.display = "block";
+              document.getElementById("mapid").style.display = "none";
+              document.getElementById("disaster-data").style.display = "none";
+            }
+            // Output to console.
+            console.log( 'Passed Tests: '+passed+'\nFailed Tests: '+failedTests+'\nTotal Tests: '+numTests);
+        });
+      test('Input type', function(assert) {
+        
+        assert.equal(document.getElementById("disaster-type").type, "select-one", "disaster-type should be as select-one");
+        assert.equal(document.getElementById("intensityvalue").type, "number", "intensityvalue should be as number");
+        assert.equal(document.getElementById("lat").type, "number", "lat should be as number");
+        assert.equal(document.getElementById("long").type, "number", "long should be as number");
+        assert.equal(document.getElementById("casualtiesvalue").type, "number", "casualtiesvalue should be as number");
+        assert.equal(document.getElementById("casualties").type, "range", "casualties should be as range");
+        assert.equal(document.getElementById("intensity").type, "range", "intensity should be as range");
+        assert.equal(document.getElementById("addDisaster").type, "button", "addDisaster should be as button");
+        
+      }); 
+      
+      </script>
 </body>
 
 </html>
