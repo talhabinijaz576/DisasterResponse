@@ -15,6 +15,8 @@ After running the server, navigate to following link in your web browser to acce
 http://127.0.0.1:8000/
 ```
 
-For user account, the django administration portal can be used. We already created a test user for you to test the application. You can logon to the web application using the following credentials:
+We use the django administration portal for general administration such as the creation and management of user accounts. We already created a test user for you to test the application. 
+You can logon to the web application using the following credentials:
+
 Username: controlroom
 Password: controlroom
