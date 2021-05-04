@@ -3,9 +3,9 @@ ASE project for group 10
 This is the project repository for the city disaster response application for group 10. It is a web application built in the python web framework, django.
 
 First, you need to install the dependencies using the following command.
-``
-pip install -r requirements.txt
-``
+```
+python -m pip install -r requirements.txt
+```
 Then, you can run the web application on your local machine using the following command.
 ```
 python manage.py runserver
